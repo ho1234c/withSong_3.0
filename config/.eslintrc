@@ -1,0 +1,27 @@
+{
+  "extends": "airbnb-base",
+  "plugins": ["react"],  
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "linebreak-style": ["error", "windows"],
+    "arrow-parens": ["error", "as-needed"],
+    "no-console": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["off",{ "aspects": ["invalidHref"] }],
+    "global-require": "off",
+    "import/no-dynamic-require": "off",
+    "no-unused-vars": ["error", { "vars": "all", "args": "none" }],
+    "class-methods-use-this": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  }
+}

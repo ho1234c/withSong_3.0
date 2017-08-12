@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+
+# env
+*.env
+
+# js
+bundle.*.js
+vendor.js
+
