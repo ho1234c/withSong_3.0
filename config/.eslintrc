@@ -9,7 +9,8 @@
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "rules": {
     "linebreak-style": ["error", "windows"],
@@ -22,6 +23,8 @@
     "no-unused-vars": ["error", { "vars": "all", "args": "none" }],
     "class-methods-use-this": "off",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "no-use-before-define": ["error", { "functions": false, "classes": false }],
+    "no-param-reassign": "off"
   }
 }

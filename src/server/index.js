@@ -20,3 +20,5 @@ app.use(serve('public'));
 app.use(router.routes(), router.allowedMethods());
 
 app.listen(CONFIG.INFO.PORT, () => { console.log(`server start on ${CONFIG.INFO.PORT} port.`); });
+
+module.exports = app;
