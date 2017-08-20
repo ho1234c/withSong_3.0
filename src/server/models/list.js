@@ -1,4 +1,4 @@
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const List = sequelize.define('List',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -6,23 +6,23 @@ export default (sequelize, DataTypes) => {
       detail: { type: DataTypes.STRING, allowNull: false, defaultValue: 'No description' },
       like: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       songInfo: { type: DataTypes.TEXT, allowNull: false },
-      thumbnail: { type: DataTypes.STRING, defaultValue: 'default.png' },
+      thumbnail: { type: DataTypes.STRING, defaultValue: 'default.png' }
     },
     {
       classMethods: {
         associate(models) {
           List.belongsTo(models.User, {
-            foreignKey: 'makerId',
+            foreignKey: 'makerId'
           });
           List.belongsToMany(models.User, {
             as: 'favor',
-            through: 'UserListFavor',
+            through: 'UserListFavor'
           });
           List.hasMany(models.Comment, {
-            foreignKey: 'listId',
+            foreignKey: 'listId'
           });
-        },
-      },
+        }
+      }
     },
   );
   return List;

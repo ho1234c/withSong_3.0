@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
     host: DATABASE.POSTGRES.DB_HOST,
     port: DATABASE.POSTGRES.POSTGRES_PORT,
     dialect: 'postgres',
-    logging: false,
+    logging: false
   },
 );
 
@@ -35,4 +35,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export default db;
+module.exports = db;

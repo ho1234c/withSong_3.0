@@ -1,27 +1,26 @@
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       content: { type: DataTypes.STRING, allowNull: false },
-      like: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+      like: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 }
     },
     {
       classMethods: {
         associate(models) {
           Comment.belongsTo(models.User, {
-            foreignKey: 'writerId',
+            foreignKey: 'writerId'
           });
           Comment.belongsTo(models.List, {
-            foreignKey: 'listId',
+            foreignKey: 'listId'
           });
           Comment.belongsToMany(models.User, {
             as: 'userFavor',
-            through: 'UserCommentFavor',
+            through: 'UserCommentFavor'
           });
-        },
-      },
+        }
+      }
     },
   );
   return Comment;
 };
-

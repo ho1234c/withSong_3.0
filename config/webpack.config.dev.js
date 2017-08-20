@@ -38,7 +38,11 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ["env", "react"]
+          presets: [
+            "node8",
+            "react",
+            "stage-2"
+          ]
         }
       },
       // {

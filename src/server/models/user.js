@@ -1,19 +1,19 @@
 const bcrypt = require('bcrypt');
 
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       email: { type: DataTypes.STRING, allowNull: false },
       nickname: { type: DataTypes.STRING, allowNull: false },
       password: { type: DataTypes.VIRTUAL, allowNull: true },
-      password_hash: { type: DataTypes.STRING },
+      password_hash: { type: DataTypes.STRING }
     },
     {
       hooks: {
         beforeBulkCreate: hashPasswordHook,
         beforeCreate: hashPasswordHook,
-        beforeUpdate: hashPasswordHook,
+        beforeUpdate: hashPasswordHook
       },
       instanceMethods: {
         authenticate(password, callback) {
@@ -23,32 +23,32 @@ export default (sequelize, DataTypes) => {
             }
             callback(null, isMatch);
           });
-        },
+        }
       },
       classMethods: {
         associate(models) {
           User.belongsToMany(models.List, {
             as: 'listFavor',
-            through: 'UserListFavor',
+            through: 'UserListFavor'
           });
           User.belongsToMany(models.Comment, {
             as: 'commentFavor',
-            through: 'UserCommentFavor',
+            through: 'UserCommentFavor'
           });
           User.hasMany(models.List, {
-            foreignKey: 'makerId',
+            foreignKey: 'makerId'
           });
           User.hasMany(models.Comment, {
-            foreignKey: 'writerId',
+            foreignKey: 'writerId'
           });
-        },
-      },
+        }
+      }
     },
   );
   return User;
 };
 
-async function hashPasswordHook(userList, options, callback) {
+async function hashPasswordHook(userList, options) {
   userList = Array.isArray(userList) ? userList : [userList];
 
   await Promise.all(userList.map(async user => {
@@ -60,8 +60,6 @@ async function hashPasswordHook(userList, options, callback) {
     }
     user.set('password_hash', hash);
   }));
-
-  callback(null, options);
 }
 
 async function hashPromise(password, salt = 10) {

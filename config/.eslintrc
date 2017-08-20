@@ -25,6 +25,7 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "no-use-before-define": ["error", { "functions": false, "classes": false }],
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "comma-dangle": ["error", "never"]
   }
 }

@@ -6,8 +6,8 @@ const INFO = {
   CWD: process.cwd(),
   DOMAIN: env.DOMAIN || 'localhost',
   PATH: {
-    PUBLIC: `${process.cwd()}/public`,
-  },
+    PUBLIC: `${process.cwd()}/public`
+  }
 };
 
 const DATABASE = {
@@ -16,24 +16,24 @@ const DATABASE = {
     POSTGRES_PORT: env.POSTGRES_PORT,
     POSTGRES_DB: env.POSTGRES_DB,
     POSTGRES_USER: env.POSTGRES_USER,
-    POSTGRES_PASSWORD: env.POSTGRES_PASSWORD,
+    POSTGRES_PASSWORD: env.POSTGRES_PASSWORD
   },
   REDIS: {
     REDIS_SECRETKEY: env.REDIS_SECRETKEY,
     REDIS_HOST: env.REDIS_HOST,
-    PORT: env.REDIS_PORT,
-  },
+    PORT: env.REDIS_PORT
+  }
 };
 
 const API = {
   YOUTUBE: {
     KEY: env.YOUTUBE_KEY,
-    URL: env.YOUTUBE_URL,
+    URL: env.YOUTUBE_URL
   },
   FACEBOOK: {
     CLIENT_ID: env.FACEBOOK_CLIENT_ID,
-    CLIENT_SECRET: env.FACEBOOK_CLIENT_SECRET,
-  },
+    CLIENT_SECRET: env.FACEBOOK_CLIENT_SECRET
+  }
 };
 
 const config = { INFO, DATABASE, API };
