@@ -1,10 +1,17 @@
 @import 'config.css';
 
 #header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-background);
   justify-content: space-between;
   align-items: center;
   height: 5rem;
   padding: 1.2rem;
+  transition: transform .25s ease-in-out;
 
   & i {
     font-size: 1.6rem;
@@ -35,7 +42,6 @@
   }
 
   & #header-button {
-    
     & i{
       margin: 0 1rem;
     }

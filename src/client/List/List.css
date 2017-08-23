@@ -1,3 +1,8 @@
-#listContainer{
+#listContainer {
   align-self: center;
+}
+
+section {
+  justify-content: center;
+  padding-top: 5rem;
 }

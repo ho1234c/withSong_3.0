@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       instanceMethods: {
         authenticate(password, callback) {
           bcrypt.compare(password, this.password_hash, (err, isMatch) => {
-            if (err) {
+            if(err) {
               callback(err);
             }
             callback(null, isMatch);
@@ -55,7 +55,7 @@ async function hashPasswordHook(userList, options) {
     const pwd = user.get('password');
     let hash = null;
 
-    if (pwd) {
+    if(pwd) {
       hash = await hashPromise(pwd, 10);
     }
     user.set('password_hash', hash);
@@ -65,7 +65,7 @@ async function hashPasswordHook(userList, options) {
 async function hashPromise(password, salt = 10) {
   return new Promise((resolve, reject) => {
     bcrypt.hash(password, salt, (err, hash) => {
-      if (err) return reject(err);
+      if(err) return reject(err);
       return resolve(hash);
     });
   });

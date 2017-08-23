@@ -1,19 +1,39 @@
-import React, { Component } from 'react';
-import './Header.css';
+import React, { Component } from'react';
+import{ connect } from'react-redux';
+import{ header } from'./HeaderActions';
+import'./Header.css';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.lastPos = 0; // for detecting scroll direction
+    // this.tranStyle = { transform: 'transformY(0%)' };
+    this.tranStyle = { background: '#111' };
+  }
+
   componentDidMount() {
+    this.handleScroll = this.handleScroll.bind(this);
+
     window.addEventListener('scroll', this.handleScroll);
   }
 
   handleScroll() {
-    console.log('test');
+    const currentPos = window.pageYOffset;
+
+    if(currentPos > this.lastPos) {
+      this.props.scroll('up');
+    } else{
+      this.props.scroll('down');
+    }
+
+    this.lastPos = currentPos;
   }
 
-
   render() {
-    return (
-      <div id="header">
+    const { isShow } = this.props.header;
+    console.log(isShow);
+    return(
+      <div id="header" style={{ transform: isShow ? 'translateY(0)' : 'translateY(-100%)' }}>
         <div id="header-logo">로고</div>
         <div id="header-search">
           <i className="fa fa-search" aria-hidden="true"></i>
@@ -28,4 +48,11 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default connect(
+  state => ({
+    header: state.headerReducer
+  }),
+  dispatch => ({
+    scroll: direction => dispatch(header.scroll(direction))
+  })
+)(Header);

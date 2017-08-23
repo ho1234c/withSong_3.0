@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Bricks from 'bricks.js';
-import ListItem from './ListItem';
-import { getList } from './ListActions';
-import { getLists } from './ListReducer';
-import './List.css';
+import React, { Component } from'react';
+import{ connect } from'react-redux';
+import Bricks from'bricks.js';
+import ListItem from'./ListItem';
+import{ getList } from'./ListActions';
+import'./List.css';
 
 class Lists extends Component {
   componentDidMount() {
@@ -21,7 +20,7 @@ class Lists extends Component {
     });
 
     instance.resize(true).pack();
-    console.log(this.props.getListRequest(3));
+    console.log(this.props.getListRequest('test', 3));
   }
 
   render() {
@@ -32,19 +31,19 @@ class Lists extends Component {
       height: `${((Math.random() * 200) + 200)}px`
     }));
 
-    return (
-      <div id="listContainer">
-        {fakeData.map((data, key) => <div key={key} style={fakeBox[key]}><ListItem /></div>)}
-      </div>
+    return(
+      <section>
+        <div id="listContainer">
+          {fakeData.map((data, key) => <div key={key} style={fakeBox[key]}><ListItem /></div>)}
+        </div>
+      </section>
     );
   }
 }
 
 export default connect(
-  state => ({
-    lists: getLists(state)
-  }),
+  state => ({}),
   dispatch => ({
-    getListRequest: payload => dispatch(getList.request(payload))
+    getListRequest: (word, num) => dispatch(getList.request(word, num))
   })
 )(Lists);

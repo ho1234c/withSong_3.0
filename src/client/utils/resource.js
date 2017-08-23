@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from'axios';
 
 const resource = (() => ({
   get: async (url, params) => { await axios({ method: 'get', params, url }); },
