@@ -45,10 +45,32 @@ module.exports = {
           ]
         }
       },
-      // {
-      //   test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-      //   loader: 'file-loader?name=fonts/[name].[ext]'
-      // },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('postcss-import')({ path: './config' }),
+                require('postcss-url')(),
+                require('postcss-cssnext')()
+              ]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader?name=fonts/[name].[ext]'
+      },
     ]
   },
   devtool: "eval",

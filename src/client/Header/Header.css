@@ -1,0 +1,43 @@
+@import 'config.css';
+
+#header {
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  padding: 1.2rem;
+
+  & i {
+    font-size: 1.6rem;
+    color: var(--color-main-gray3);    
+  }
+
+  & #header-search {
+    width: 24rem;
+    height: 2.5rem;
+    align-items: center;
+
+    & input {
+      flex: 1;
+      height: 100%;
+      padding-left: 3rem;
+      background-color: var(--color-main-gray1);
+      border: none;
+    }
+
+    & input:focus {
+      outline: none;
+    }
+
+    & i {
+      position: absolute;
+      padding-left: .5rem;
+    }
+  }
+
+  & #header-button {
+    
+    & i{
+      margin: 0 1rem;
+    }
+  }
+}
