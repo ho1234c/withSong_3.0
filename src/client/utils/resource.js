@@ -1,8 +1,14 @@
-import axios from'axios';
+import axios from 'axios';
 
 const resource = (() => ({
-  get: async (url, params) => { await axios({ method: 'get', params, url }); },
-  post: async (url, data) => { await axios({ method: 'post', url, data }); }
+  get: async (url, params) => {
+    const res = await axios({ method: 'get', params, url });
+    return res;
+  },
+  post: async (url, data) => {
+    const res = await axios({ method: 'post', url, data });
+    return res;
+  }
 }))();
 
 export default resource;

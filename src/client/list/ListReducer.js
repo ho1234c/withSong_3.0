@@ -1,4 +1,4 @@
-import* as ActionTypes from'./ListActions';
+import * as ActionTypes from './ListActions';
 
 const listState = {
   lists: [],
@@ -20,7 +20,7 @@ export default (state = listState, action) => {
       return{
         ...state,
         isLoading: false,
-        lists: action.lists
+        lists: action.payload.response
       };
     case ActionTypes.LIST_FAILURE:
       return{

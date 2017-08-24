@@ -15,36 +15,21 @@ module.exports = (sequelize, DataTypes) => {
         beforeCreate: hashPasswordHook,
         beforeUpdate: hashPasswordHook
       },
-      instanceMethods: {
-        authenticate(password, callback) {
-          bcrypt.compare(password, this.password_hash, (err, isMatch) => {
-            if(err) {
-              callback(err);
-            }
-            callback(null, isMatch);
-          });
-        }
-      },
-      classMethods: {
-        associate(models) {
-          User.belongsToMany(models.List, {
-            as: 'listFavor',
-            through: 'UserListFavor'
-          });
-          User.belongsToMany(models.Comment, {
-            as: 'commentFavor',
-            through: 'UserCommentFavor'
-          });
-          User.hasMany(models.List, {
-            foreignKey: 'makerId'
-          });
-          User.hasMany(models.Comment, {
-            foreignKey: 'writerId'
-          });
-        }
-      }
     },
   );
+
+  User.associate = function(models) {
+    User.belongsToMany(models.List, { as: 'listFavor', through: 'UserListFavor' });
+    User.belongsToMany(models.Comment, { as: 'commentFavor', through: 'UserCommentFavor' });
+    User.hasMany(models.List, { foreignKey: 'makerId' });
+    User.hasMany(models.Comment, { foreignKey: 'writerId' });
+  }
+  User.prototype.authenticate = function(password, callback){
+    bcrypt.compare(password, this.password_hash,
+      (err, isMatch) => {
+            err ? callback(err) : callback(null, isMatch);
+      });
+  }
   return User;
 };
 

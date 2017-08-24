@@ -28,7 +28,16 @@
     "no-param-reassign": "off",
     "comma-dangle": ["error", "never"],
     "import/prefer-default-export": "off",
-    "keyword-spacing": ["error", { "before": true, "after": false, "overrides": { "this": { "before": true }, "const": { "after": true } } }],
+    "keyword-spacing": ["error", { 
+      "before": true, 
+      "after": false, 
+      "overrides": { 
+        "this": { "before": true }, 
+        "const": { "after": true },
+        "import": { "after": true },
+        "from": { "after": true } 
+        } 
+      }],
     "no-underscore-dangle": "off"
   }
 }

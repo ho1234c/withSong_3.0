@@ -1,4 +1,4 @@
-import* as ActionTypes from'./HeaderActions';
+import * as ActionTypes from './HeaderActions';
 
 const headerState = {
   isShow: true,

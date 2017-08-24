@@ -1,6 +1,6 @@
-import{ delay } from'redux-saga';
-import{ take, call, put } from'redux-saga/effects';
-import* as actions from'./HeaderActions';
+import { delay } from 'redux-saga';
+import { take, call, put } from 'redux-saga/effects';
+import * as actions from './HeaderActions';
 
 function* toggle(action) {
   if(action.payload.direction === 'down') {

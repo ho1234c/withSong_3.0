@@ -7,23 +7,13 @@ module.exports = (sequelize, DataTypes) => {
       like: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       songInfo: { type: DataTypes.TEXT, allowNull: false },
       thumbnail: { type: DataTypes.STRING, defaultValue: 'default.png' }
-    },
-    {
-      classMethods: {
-        associate(models) {
-          List.belongsTo(models.User, {
-            foreignKey: 'makerId'
-          });
-          List.belongsToMany(models.User, {
-            as: 'favor',
-            through: 'UserListFavor'
-          });
-          List.hasMany(models.Comment, {
-            foreignKey: 'listId'
-          });
-        }
-      }
-    },
+    }
   );
+
+  List.associate = function(models) {
+    List.belongsTo(models.User, { foreignKey: 'makerId', as: 'maker' });
+    List.belongsToMany(models.User, { as: 'favor', through: 'UserListFavor' });
+    List.hasMany(models.Comment, { foreignKey: 'listId' });
+  }
   return List;
 };

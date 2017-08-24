@@ -1,9 +1,9 @@
-import React, { Component } from'react';
-import{ connect } from'react-redux';
-import Bricks from'bricks.js';
-import ListItem from'./ListItem';
-import{ getList } from'./ListActions';
-import'./List.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Bricks from 'bricks.js';
+import ListItem from './ListItem';
+import { getList } from './ListActions';
+import './List.css';
 
 class Lists extends Component {
   componentDidMount() {
@@ -34,7 +34,7 @@ class Lists extends Component {
     return(
       <section>
         <div id="listContainer">
-          {fakeData.map((data, key) => <div key={key} style={fakeBox[key]}><ListItem /></div>)}
+          { fakeData.map((data, key) => <div key={key} style={fakeBox[key]}><ListItem /></div>) }
         </div>
       </section>
     );
@@ -42,7 +42,9 @@ class Lists extends Component {
 }
 
 export default connect(
-  state => ({}),
+  state => ({
+    list: state.listReducer
+  }),
   dispatch => ({
     getListRequest: (word, num) => dispatch(getList.request(word, num))
   })

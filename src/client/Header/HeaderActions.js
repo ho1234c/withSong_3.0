@@ -1,4 +1,4 @@
-import createActions from'../Utils/createAction';
+import createActions from '../Utils/createAction';
 
 export const HEADER_SCROLL = 'HEADER_SCROLL';
 export const HEADER_SHOW = 'HEADER_SHOW';
