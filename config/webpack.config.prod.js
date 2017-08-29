@@ -44,6 +44,9 @@ module.exports = {
       name: "vendor",
       filename: "vendor.js",
       minChunks: module => module.context && module.context.indexOf("node_modules") !== -1
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
 }

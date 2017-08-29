@@ -1,3 +1,9 @@
+/* Spinner override */
+.sk-fade-in {
+  animation: sk-fade-in .7s;
+}
+/********************/
+
 #listContainer {
   align-self: center;
 }
@@ -23,4 +29,9 @@ section {
   .masonry-container {
     width: 1180px;
   }
+}
+
+#spinner{
+  position: fixed;
+  top: 40%;
 }

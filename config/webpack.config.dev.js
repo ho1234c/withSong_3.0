@@ -80,6 +80,9 @@ module.exports = {
       filename: '../public/index.html',
       template: path.resolve(__dirname, '../public/index.html'),
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
     // new webpack.optimize.UglifyJsPlugin({
     //   ecma: 8,
     //   sourceMap: true,

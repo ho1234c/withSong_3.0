@@ -19,8 +19,9 @@ class Header extends Component {
 
   handleScroll() {
     const currentPos = window.pageYOffset;
+    const headerHeight = document.querySelector('#header').offsetHeight;
 
-    if(currentPos > this.lastPos) {
+    if(currentPos < headerHeight || currentPos > this.lastPos) {
       this.props.scroll('up');
     } else{
       this.props.scroll('down');

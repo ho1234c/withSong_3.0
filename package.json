@@ -31,6 +31,7 @@
     "react-dom": "^15.6.1",
     "react-masonry-component": "^5.0.7",
     "react-redux": "^5.0.6",
+    "react-spinkit": "^3.0.0",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-saga": "^0.15.6",

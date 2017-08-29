@@ -31,7 +31,7 @@ export const authModal = {
 export const changeSearchInput = word => createActions(CHANGE_SEARCH_INPUT, { word });
 
 export const search = {
-  request: (word, num) => createActions(SEARCH_REQUEST, { word, num }),
+  request: () => createActions(SEARCH_REQUEST),
   success: response => createActions(SEARCH_SUCCESS, { response }),
   failure: error => createActions(SEARCH_FAILURE, { error })
 };

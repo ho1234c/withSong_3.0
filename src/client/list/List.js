@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Masonry from 'react-masonry-component';
+import Spinner from 'react-spinkit';
 import ListItem from './ListItem';
 import { getList } from './ListActions';
 import './List.css';
@@ -18,12 +19,15 @@ class List extends Component {
   }
 
   componentDidMount() {
-    this.props.getListRequest('test', 3);
+    this.props.getListRequest('', 20);
   }
 
   render() {
-    const { list } = this.props;
-    // const isEmpty = list.songs.length === 0;
+    const { list, isLoadingBySearch } = this.props;
+
+    if(isLoadingBySearch || list.songs.lengh === 0) {
+      return <section><Spinner name="line-scale" id="spinner"/></section>;
+    }
 
     return (
       <section>
@@ -37,7 +41,8 @@ class List extends Component {
 
 export default connect(
   state => ({
-    list: state.listReducer
+    list: state.listReducer,
+    isLoadingBySearch: state.headerReducer.isLoading
   }),
   dispatch => ({
     getListRequest: (word, num) => dispatch(getList.request(word, num))
