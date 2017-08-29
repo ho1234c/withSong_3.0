@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { fetchList } from './ListService';
+import { fetchList } from '../services/fetch';
 import * as actions from './ListActions';
 
 function* getList(action) {

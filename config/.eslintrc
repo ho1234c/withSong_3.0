@@ -35,7 +35,8 @@
         "this": { "before": true }, 
         "const": { "after": true },
         "import": { "after": true },
-        "from": { "after": true } 
+        "from": { "after": true },
+        "return": { "after": true }
         } 
       }],
     "no-underscore-dangle": "off"

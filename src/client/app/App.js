@@ -18,7 +18,7 @@ sagaMiddleware.run(rootSaga);
 
 class App extends React.Component {
   render() {
-    return(
+    return (
       <Provider store={ store }>
         <div id="container">
           <Header />

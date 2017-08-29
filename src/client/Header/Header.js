@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { header } from './HeaderActions';
+import { header, changeSearchInput } from './HeaderActions';
 import './Header.css';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.lastPos = 0; // for detecting scroll direction
-    // this.tranStyle = { transform: 'transformY(0%)' };
     this.tranStyle = { background: '#111' };
+
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
     this.handleScroll = this.handleScroll.bind(this);
-
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -29,15 +29,19 @@ class Header extends Component {
     this.lastPos = currentPos;
   }
 
+  search(e) {
+    this.props.changeSearchInput(e.target.value);
+  }
+
   render() {
     const { isShow } = this.props.header;
-    console.log(isShow);
-    return(
+
+    return (
       <div id="header" style={{ transform: isShow ? 'translateY(0)' : 'translateY(-100%)' }}>
         <div id="header-logo">로고</div>
         <div id="header-search">
           <i className="fa fa-search" aria-hidden="true"></i>
-          <input name="search" placeholder="검색하기" />
+          <input name="search" placeholder="검색하기" onChange={this.search} />
         </div>
         <div id="header-button">
           <i className="fa fa-user-circle" aria-hidden="true"></i>
@@ -53,6 +57,7 @@ export default connect(
     header: state.headerReducer
   }),
   dispatch => ({
-    scroll: direction => dispatch(header.scroll(direction))
+    scroll: direction => dispatch(header.scroll(direction)),
+    changeSearchInput: word => dispatch(changeSearchInput(word))
   })
 )(Header);

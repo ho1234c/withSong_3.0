@@ -7,7 +7,6 @@ const router = Router({
 });
 
 router.get('/', async ctx => {
-  // console.log('test');
   // const html = fs.readFileSync('./public/index.html', 'utf8');
   const scope = '';
   const word = '';
@@ -15,16 +14,16 @@ router.get('/', async ctx => {
     {
       // where: { name: { $ilike: `%${scope == 'listname' ? word : ''}%` } },
       attributes: ['id', 'name', 'detail', 'like', 'createdAt', 'thumbnail'],
-      // order: [[order, 'DESC']],
+      order: [[db.Sequelize.fn('RANDOM')]],
       // offset: count,
-      limit: 10,
+      // limit: 10,
       include: {
         model: db.User,
         as: 'maker',
         where: {
-          nickname: { $ilike: `%${scope === 'nickname' ? word : ''}%` } 
+          nickname: { $ilike: `%${scope === 'nickname' ? word : ''}%` }
         },
-        attributes: ['id', 'nickname'] 
+        attributes: ['id', 'nickname']
       }
     });
   // console.log(list);

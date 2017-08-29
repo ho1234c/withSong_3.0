@@ -1,4 +1,4 @@
-import resource from '../Utils/resource';
+import resource from '../utils/resource';
 
 export function fetchList(params) {
   return resource.get('/api/list', params);

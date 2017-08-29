@@ -6,3 +6,21 @@ section {
   justify-content: center;
   padding-top: 5rem;
 }
+
+@media (min-width: 560px){
+  .masonry-container {
+    width: 560px;
+  }
+}
+
+@media (min-width: 920px){
+  .masonry-container {
+    width: 880px;
+  }
+}
+
+@media (min-width: 1280px){
+  .masonry-container {
+    width: 1180px;
+  }
+}

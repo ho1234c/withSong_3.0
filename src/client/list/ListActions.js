@@ -1,4 +1,4 @@
-import createActions from '../Utils/createAction';
+import createActions from '../utils/createAction';
 
 export const LIST_REQUEST = 'LIST_REQUEST';
 export const LIST_SUCCESS = 'LIST_SUCCESS';

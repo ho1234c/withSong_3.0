@@ -1,0 +1,36 @@
+@import 'config.css';
+
+.masonry-item {
+  width: 280px;
+  margin-bottom: 3rem;
+  flex-direction: column;
+  background-color: var(--color-white);
+  box-shadow: 0px 3px 5px #888888;
+  border-radius: 3px;
+  overflow: hidden;
+
+  & .list-header {
+    padding: 5px;
+    justify-content: space-between;
+
+    & .name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 5px 8px;
+    }
+
+    & .created {
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+  }
+
+  & .thumbnail {
+    flex-direction: column;
+  }
+
+  & img {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}

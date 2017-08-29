@@ -14,22 +14,26 @@ module.exports = (sequelize, DataTypes) => {
         beforeBulkCreate: hashPasswordHook,
         beforeCreate: hashPasswordHook,
         beforeUpdate: hashPasswordHook
-      },
+      }
     },
   );
 
-  User.associate = function(models) {
+  User.associate = models => {
     User.belongsToMany(models.List, { as: 'listFavor', through: 'UserListFavor' });
     User.belongsToMany(models.Comment, { as: 'commentFavor', through: 'UserCommentFavor' });
     User.hasMany(models.List, { foreignKey: 'makerId' });
     User.hasMany(models.Comment, { foreignKey: 'writerId' });
-  }
-  User.prototype.authenticate = function(password, callback){
+  };
+  User.prototype.authenticate = (password, callback) => {
     bcrypt.compare(password, this.password_hash,
       (err, isMatch) => {
-            err ? callback(err) : callback(null, isMatch);
+        if(err) {
+          callback(err);
+        } else{
+          callback(null, isMatch);
+        }
       });
-  }
+  };
   return User;
 };
 

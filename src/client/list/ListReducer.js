@@ -1,29 +1,25 @@
 import * as ActionTypes from './ListActions';
 
 const listState = {
-  lists: [],
+  songs: [],
   isLoading: false
 };
-
-export function getLists(state) {
-  return state.lists;
-}
 
 export default (state = listState, action) => {
   switch(action.type) {
     case ActionTypes.LIST_REQUEST:
-      return{
+      return {
         ...state,
         isLoading: true
       };
     case ActionTypes.LIST_SUCCESS:
-      return{
+      return {
         ...state,
         isLoading: false,
-        lists: action.payload.response
+        songs: action.payload.response
       };
     case ActionTypes.LIST_FAILURE:
-      return{
+      return {
         ...state,
         isLoading: false
       };
