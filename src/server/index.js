@@ -21,10 +21,10 @@ app.use(serve('public'));
 app.use(router.routes(), router.allowedMethods());
 
 (async () => {
-  try{
+  try {
     await db.sequelize.sync();
     console.log('Success to database syncronize');
-  } catch(err) {
+  }catch(err) {
     console.log('Fail to database syncronize \n', `${err.name} : ${err.message}`);
   }
 })();

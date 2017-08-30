@@ -13,17 +13,17 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    this.handleScroll = this.handleScroll.bind(this);
-    window.addEventListener('scroll', this.handleScroll);
+    this._handleScroll = this._handleScroll.bind(this);
+    window.addEventListener('scroll', this._handleScroll);
   }
 
-  handleScroll() {
+  _handleScroll() {
     const currentPos = window.pageYOffset;
     const headerHeight = document.querySelector('#header').offsetHeight;
 
     if(currentPos < headerHeight || currentPos > this.lastPos) {
       this.props.scroll('up');
-    } else{
+    }else {
       this.props.scroll('down');
     }
 

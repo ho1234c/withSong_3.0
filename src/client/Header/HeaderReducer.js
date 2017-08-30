@@ -25,18 +25,12 @@ export default (state = headerState, action) => {
         ...state,
         word: action.payload.word
       };
-    case ActionTypes.SEARCH_REQUEST:
+    case ActionTypes.SEARCH_START:
       return {
         ...state,
         isLoading: true
       };
-    case ActionTypes.SEARCH_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        songs: action.payload.response
-      };
-    case ActionTypes.SEARCH_FAILURE:
+    case ActionTypes.SEARCH_END:
       return {
         ...state,
         isLoading: false

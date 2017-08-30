@@ -32,12 +32,14 @@
       "before": true, 
       "after": false, 
       "overrides": { 
-        "this": { "before": true }, 
-        "const": { "after": true },
-        "import": { "after": true },
-        "from": { "after": true },
-        "return": { "after": true }
-        } 
+          "const": { "after": true },
+          "import": { "after": true },
+          "from": { "after": true },
+          "return": { "after": true },
+          "try": { "after": true },
+          "catch": { "before": false },
+          "else": { "before": false, "after": true }
+        }
       }],
     "no-underscore-dangle": "off"
   }

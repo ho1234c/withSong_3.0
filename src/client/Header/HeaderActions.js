@@ -8,9 +8,8 @@ export const LIST_CLOSE = 'LIST_CLOSE';
 export const AUTH_OPEN = 'AUTH_OPEN';
 export const AUTH_CLOSE = 'AUTH_CLOSE';
 export const CHANGE_SEARCH_INPUT = 'CHANGE_SEARCH_INPUT';
-export const SEARCH_REQUEST = 'SEARCH_REQUEST';
-export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
-export const SEARCH_FAILURE = 'SEARCH_FAILURE';
+export const SEARCH_START = 'SEARCH_START';
+export const SEARCH_END = 'SEARCH_END';
 
 export const header = {
   scroll: direction => createActions(HEADER_SCROLL, { direction }),
@@ -31,7 +30,6 @@ export const authModal = {
 export const changeSearchInput = word => createActions(CHANGE_SEARCH_INPUT, { word });
 
 export const search = {
-  request: () => createActions(SEARCH_REQUEST),
-  success: response => createActions(SEARCH_SUCCESS, { response }),
-  failure: error => createActions(SEARCH_FAILURE, { error })
+  start: () => createActions(SEARCH_START),
+  end: () => createActions(SEARCH_END)
 };

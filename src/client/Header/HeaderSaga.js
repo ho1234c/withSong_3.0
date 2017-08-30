@@ -2,12 +2,11 @@ import { delay } from 'redux-saga';
 import { take, call, put, takeLatest } from 'redux-saga/effects';
 import * as actions from './HeaderActions';
 import { getList } from '../List/ListActions';
-// import { fetchList } from '../services/fetch';
 
 function* toggle(action) {
   if(action.payload.direction === 'down') {
     yield put(actions.header.show());
-  } else{
+  }else {
     yield put(actions.header.hide());
   }
   yield delay(300);
@@ -15,15 +14,9 @@ function* toggle(action) {
 
 function* search(action) {
   yield delay(1000); // pending for user input
-  console.log(action.payload);
+  yield put(actions.search.start());
   yield put(getList.request(action.payload.word));
-  // try{
-  //   yield put(actions.search.request());
-  //   const response = yield call(fetchList, action.payload);
-  //   yield put(actions.search.success(response.data));
-  // } catch(error) {
-  //   yield put(actions.search.failure(error));
-  // }
+  yield put(actions.search.end());
 }
 
 export function* watchScroll() {

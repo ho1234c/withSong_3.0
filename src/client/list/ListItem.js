@@ -4,6 +4,15 @@ import moment from 'moment';
 import './ListItem.css';
 
 class ListItem extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.getSong(this.props.song.id);
+  }
+
   render() {
     const { song } = this.props;
     const { name, detail, maker } = song;
@@ -11,7 +20,7 @@ class ListItem extends Component {
     const createdAt = moment(song.createdAt).format('ll');
 
     return (
-      <div className="masonry-item">
+      <div className="masonry-item" onClick={this.handleClick}>
         <div className="thumbnail">
           <img src={path.join('thumbnails', thumbnail.src)}/></div>
         <div className="list-header">

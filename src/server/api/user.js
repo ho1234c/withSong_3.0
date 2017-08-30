@@ -8,10 +8,10 @@ const router = Router({
 router.get('/create', async ctx => {
   let res;
 
-  try{
+  try {
     res = await db.User.create({ email: 'test@test.com', nickname: 'test', password: 'test' });
     console.log('test');
-  } catch(error) {
+  }catch(error) {
     console.log(error);
   }
   ctx.body = res;
@@ -19,10 +19,10 @@ router.get('/create', async ctx => {
 
 router.get('/destroy', async ctx => {
   let res;
-  try{
+  try {
     const user = await db.User.find({ email: 'test@test.com' });
     await user.destroy();
-  } catch(error) {
+  }catch(error) {
     res = error;
   }
 

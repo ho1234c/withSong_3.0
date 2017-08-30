@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       (err, isMatch) => {
         if(err) {
           callback(err);
-        } else{
+        }else {
           callback(null, isMatch);
         }
       });

@@ -22,17 +22,29 @@ class List extends Component {
     this.props.getListRequest('', 20);
   }
 
+  getSong(id) {
+    console.log(id);
+  }
+
   render() {
     const { list, isLoadingBySearch } = this.props;
 
-    if(isLoadingBySearch || list.songs.lengh === 0) {
-      return <section><Spinner name="line-scale" id="spinner"/></section>;
+    if(isLoadingBySearch) {
+      return <section>
+        <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="spinner"/>
+      </section>;
+    }
+
+    if(list.songs.length === 0) {
+      return <section>
+        <div className="notfound">검색 결과가 없습니다.</div>
+      </section>;
     }
 
     return (
       <section>
         <Masonry className="masonry-container" options={this.state.masonryOptions}>
-          {list.songs.map((song, key) => <ListItem key={key} song={song}/>)}
+          {list.songs.map((song, key) => <ListItem key={key} song={song} getSong={this.getSong}/>)}
         </Masonry>
       </section>
     );

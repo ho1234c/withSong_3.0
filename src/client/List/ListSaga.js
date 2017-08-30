@@ -3,10 +3,10 @@ import { fetchList } from '../services/fetch';
 import * as actions from './ListActions';
 
 function* getList(action) {
-  try{
+  try {
     const response = yield call(fetchList, action.payload);
     yield put(actions.getList.success(response.data));
-  } catch(error) {
+  }catch(error) {
     yield put(actions.getList.failure(error));
   }
 }

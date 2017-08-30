@@ -7,14 +7,14 @@ const router = Router({
 });
 
 router.get('/', async ctx => {
-  const { word, num } = ctx.query;
+  const { word, num = 10 } = ctx.query;
   const list = await db.List.findAll(
     {
       where: { name: { $ilike: `%${word}%` } },
       attributes: ['id', 'name', 'detail', 'like', 'createdAt', 'thumbnail'],
       order: [db.Sequelize.fn('RANDOM')],
       // offset: count,
-      // limit: 10,
+      limit: num,
       include: {
         model: db.User,
         as: 'maker',
@@ -23,6 +23,11 @@ router.get('/', async ctx => {
     });
 
   ctx.body = list;
+});
+
+router.get('/detail/:id', async ctx => {
+  const { id } = ctx.params;
+  console.log(id);
 });
 
 module.exports = router;
