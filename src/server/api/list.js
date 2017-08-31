@@ -25,9 +25,17 @@ router.get('/', async ctx => {
   ctx.body = list;
 });
 
-router.get('/detail/:id', async ctx => {
-  const { id } = ctx.params;
-  console.log(id);
+router.get('/song', async ctx => {
+  const { id } = ctx.query;
+
+  const song = await db.List.findOne(
+    {
+      where: { id },
+      attributes: ['songInfo', 'like', 'name', 'createdAt']
+    });
+
+  song.songInfo = JSON.parse(song.songInfo);
+  ctx.body = song;
 });
 
 module.exports = router;

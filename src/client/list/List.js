@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Masonry from 'react-masonry-component';
 import Spinner from 'react-spinkit';
+import Modal from 'react-modal';
+import { getList, getSong } from './ListActions';
 import ListItem from './ListItem';
-import { getList } from './ListActions';
+import ListSong from './ListSong';
 import './List.css';
 
 class List extends Component {
@@ -14,8 +16,12 @@ class List extends Component {
       masonryOptions: {
         itemSelector: '.masonry-item',
         gutter: 20
-      }
+      },
+      modalIsOpen: false
     };
+
+    this.getSong = this.getSong.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
@@ -23,29 +29,54 @@ class List extends Component {
   }
 
   getSong(id) {
-    console.log(id);
+    this.setState({
+      ...this.state,
+      modalIsOpen: true
+    });
+
+    this.props.getSongRequest(id);
+  }
+
+  handleCloseModal() {
+    this.setState({
+      ...this.state,
+      modalIsOpen: false
+    });
   }
 
   render() {
     const { list, isLoadingBySearch } = this.props;
+    const { songs } = list.modal;
 
     if(isLoadingBySearch) {
       return <section>
-        <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="spinner"/>
+        <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="spinner" />
       </section>;
     }
 
-    if(list.songs.length === 0) {
+    if(list.lists.length === 0) {
       return <section>
         <div className="notfound">검색 결과가 없습니다.</div>
       </section>;
     }
 
+    const modalContent = (list.modal.isLoading || list.modal.songs.length === 0) ?
+      <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" /> :
+      <ListSong list={songs} handleCloseModal={this.handleCloseModal}/>;
+
     return (
       <section>
         <Masonry className="masonry-container" options={this.state.masonryOptions}>
-          {list.songs.map((song, key) => <ListItem key={key} song={song} getSong={this.getSong}/>)}
+          {list.lists.map((song, key) => <ListItem key={key} song={song} getSong={this.getSong} />)}
         </Masonry>
+        <Modal isOpen={this.state.modalIsOpen}
+          shouldCloseOnOverlayClick={true}
+          onRequestClose={this.handleCloseModal}
+          contentLabel="Modal"
+          className="song-modal"
+          overlayClassName="overlay">
+          {modalContent}
+        </Modal>
       </section>
     );
   }
@@ -53,10 +84,11 @@ class List extends Component {
 
 export default connect(
   state => ({
-    list: state.listReducer,
-    isLoadingBySearch: state.headerReducer.isLoading
+    list: state.list,
+    isLoadingBySearch: state.header.isLoading
   }),
   dispatch => ({
-    getListRequest: (word, num) => dispatch(getList.request(word, num))
+    getListRequest: (word, num) => dispatch(getList.request(word, num)),
+    getSongRequest: id => dispatch(getSong.request(id))
   })
 )(List);

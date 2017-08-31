@@ -55,7 +55,7 @@ class Header extends Component {
 
 export default connect(
   state => ({
-    header: state.headerReducer
+    header: state.header
   }),
   dispatch => ({
     scroll: direction => dispatch(header.scroll(direction)),

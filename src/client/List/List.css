@@ -7,31 +7,55 @@ section {
   padding-top: 5rem;
 }
 
-@media (max-width: 639px){
+@media (max-width: 639px) {
   .masonry-container {
     width: 280px;
   }
 }
 
-@media (min-width: 640px){
+@media (min-width: 640px) {
   .masonry-container {
     width: 600px;
   }
 }
 
-@media (min-width: 920px){
+@media (min-width: 920px) {
   .masonry-container {
     width: 880px;
   }
 }
 
-@media (min-width: 1280px){
+@media (min-width: 1280px) {
   .masonry-container {
     width: 1180px;
   }
 }
 
-.spinner{
+.spinner {
   position: fixed;
   top: 40%;
+}
+
+.song-modal {
+  position: absolute;
+  z-index: 30;
+  top: 40px;
+  width: 400px;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  outline: none;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.75);
 }

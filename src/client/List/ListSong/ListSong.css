@@ -1,0 +1,56 @@
+@import 'config.css';
+
+.list-song {
+  flex-direction: column;
+  width: 400px;
+
+  & .list-song-header {
+    padding: 5px 10px;
+    align-items: center;
+
+    & .list-song-header-name {
+      font-size: 1.2rem;
+    }
+
+    & .list-song-header-created {
+      margin: 0 20px 0 auto;
+    }
+
+    & .list-song-header-close {
+      font-size: 2rem;
+      color: var(--color-main-gray1);
+    }
+  }
+
+  & .list-song-body {
+    flex-direction: column;
+    padding: 5px 0px;
+
+    & .list-song-body-component {
+      padding: 5px 10px;
+
+      & .list-song-body-thumbnail{
+        border-radius: 4px;
+        flex-shrink: 0;
+        overflow: hidden;
+        
+        & img {
+          width: 80px;
+          height: 60px;
+        }
+      }
+
+      & .list-song-body-title {
+        width: 100%;
+        padding: 10px;
+        align-items: center;
+      }
+    }
+  }
+  
+  & .list-song-bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--color-main-gray1);
+  }
+}
