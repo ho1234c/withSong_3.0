@@ -2,7 +2,7 @@ import { call, put, select, take, takeEvery } from 'redux-saga/effects';
 import { fetchList, fetchSong } from '../services/fetch';
 import * as listActions from './ListActions';
 import * as videoActions from '../Video/VideoActions';
-import { isPlaying } from './ListReducer';
+import { isPlaying, getPlayingListId } from './ListReducer';
 
 function* getList(action) {
   try {
@@ -14,11 +14,15 @@ function* getList(action) {
 }
 
 function* getSong(action) {
-  try {
-    const response = yield call(fetchSong, action.payload);
-    yield put(listActions.getSong.success(response.data));
-  }catch(error) {
-    yield put(listActions.getSong.failure(error));
+  const nowPlayingListId = yield select(getPlayingListId);
+
+  if(nowPlayingListId !== action.payload.id) {
+    try {
+      const response = yield call(fetchSong, action.payload);
+      yield put(listActions.getSong.success(response.data));
+    }catch(error) {
+      yield put(listActions.getSong.failure(error));
+    }
   }
 }
 

@@ -31,7 +31,7 @@ router.get('/song', async ctx => {
   const song = await db.List.findOne(
     {
       where: { id },
-      attributes: ['songInfo', 'like', 'name', 'createdAt']
+      attributes: ['id', 'songInfo', 'like', 'name', 'createdAt']
     });
 
   song.songInfo = JSON.parse(song.songInfo);

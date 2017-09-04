@@ -1,13 +1,16 @@
 import * as ActionTypes from './ListActions';
 
+/* 
+For highlighting, I need a unique value to distinguish the data.
+'key' property is for guarantee of songs data integrity. 
+*/
 const listState = {
   lists: [],
   isLoading: false,
   play: {
     isPlaying: false,
     videoId: '',
-    key: '' /* For highlighting, I need a unique value to distinguish the data.
-               this property is for guarantee of songs data integrity. */
+    key: ''
   },
   modal: {
     isLoading: false,
@@ -17,6 +20,10 @@ const listState = {
 
 export function isPlaying(state) {
   return state.play.isPlaying;
+}
+
+export function getPlayingListId(state) {
+  return state.list.modal.songs.id;
 }
 
 export default (state = listState, action) => {
@@ -39,7 +46,12 @@ export default (state = listState, action) => {
         ...state,
         isLoading: false
       };
-    case ActionTypes.SONG_REQUEST:
+    case ActionTypes.SONG_REQUEST: {
+      const { songs } = state.modal;
+
+      if(songs && songs.id === action.payload.id) {
+        return state;
+      }
       return {
         ...state,
         modal: {
@@ -47,6 +59,7 @@ export default (state = listState, action) => {
           isLoading: true
         }
       };
+    }
     case ActionTypes.SONG_SUCCESS:
       return {
         ...state,

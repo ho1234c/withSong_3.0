@@ -13,10 +13,8 @@ class Body extends Component {
   render() {
     const { songInfo } = this.props;
 
-    const components = songInfo.map(song => {
-      console.log(song);
-      console.log(`list-song-body-component${song.isNowPlaying ? ' nowPlaying' : ''}`);
-      return <div key={song.key} className={`list-song-body-component${(song.isNowPlaying ? ' nowPlaying' : '')}`}
+    const components = songInfo.map(song =>
+      (<div key={song.key} className={`list-song-body-component${(song.isNowPlaying ? ' nowPlaying' : '')}`}
         onClick={() => this.handleClick(song.videoId, song.key)}>
         <div className="list-song-body-thumbnail">
           <img src={song.snippet.thumbnails.default.url} />
@@ -24,8 +22,7 @@ class Body extends Component {
         <div className="list-song-body-title">
           {song.snippet.title}
         </div>
-      </div>;
-    }
+      </div>)
     );
 
     return (
