@@ -36,17 +36,24 @@ section {
   top: 40%;
 }
 
+.modal-spinner{
+  align-items: center;
+}
+
 .song-modal {
   position: absolute;
   z-index: 30;
   top: 40px;
   width: 400px;
+  min-height: 400px;
+  overflow: auto;
   border: 1px solid #ccc;
   background: #fff;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: 4px;
   outline: none;
+  justify-content: center;
 }
 
 .overlay {

@@ -10,6 +10,7 @@
 
     & .list-song-header-name {
       font-size: 1.2rem;
+      font-weight: bold;
     }
 
     & .list-song-header-created {
@@ -18,6 +19,7 @@
 
     & .list-song-header-close {
       font-size: 2rem;
+      cursor: pointer;
       color: var(--color-main-gray1);
     }
   }
@@ -25,9 +27,12 @@
   & .list-song-body {
     flex-direction: column;
     padding: 5px 0px;
+    max-height: 400px;
+    overflow: auto;
 
     & .list-song-body-component {
       padding: 5px 10px;
+      flex-shrink: 0;
 
       & .list-song-body-thumbnail{
         border-radius: 4px;
@@ -45,6 +50,30 @@
         padding: 10px;
         align-items: center;
       }
+    }
+
+    & .nowPlaying {
+      background-color: var(--color-main-gray1);
+    }
+  }
+
+  & .list-song-footer {
+    padding: 10px;
+    margin-top: auto;
+    align-items: center;
+
+    & .list-song-footer-like {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    & .list-song-footer-favorite {
+      color: var(--color-main-theme);
+      font-weight: bold;
+    }
+
+    & .list-song-footer-length {
+      font-weight: bold;
     }
   }
   

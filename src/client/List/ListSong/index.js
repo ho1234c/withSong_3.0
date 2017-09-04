@@ -7,13 +7,14 @@ import './ListSong.css';
 class ListSong extends Component {
   render() {
     const { name, createdAt, like, songInfo } = this.props.list;
+    const { handleCloseModal, playSong } = this.props;
 
     return (
       <div className="list-song">
-        <Header name={name} createdAt={createdAt}/>
+        <Header name={name} createdAt={createdAt} handleCloseModal={handleCloseModal}/>
         <div className="list-song-bar"></div>
-        <Body songInfo={songInfo} />
-        <Footer like={like} />
+        <Body songInfo={songInfo} playSong={playSong}/>
+        <Footer like={like} length={songInfo.length}/>
         <div className="list-song-comment"></div>
       </div>
     );

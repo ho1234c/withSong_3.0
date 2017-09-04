@@ -1,5 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
-import { watchGetList, watchGetSong } from '../List/ListSaga';
+import { watchGetList, watchGetSong, nextPlayFlow, watchPlaySong } from '../List/ListSaga';
 import { watchScroll, watchSearch } from '../Header/HeaderSaga';
 
 export default function* rootSaga() {
@@ -7,6 +7,8 @@ export default function* rootSaga() {
     fork(watchGetList),
     fork(watchGetSong),
     fork(watchScroll),
-    fork(watchSearch)
+    fork(watchSearch),
+    fork(nextPlayFlow),
+    fork(watchPlaySong)
   ]);
 }

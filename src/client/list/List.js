@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Masonry from 'react-masonry-component';
 import Spinner from 'react-spinkit';
 import Modal from 'react-modal';
-import { getList, getSong } from './ListActions';
+import { getList, getSong, play } from './ListActions';
 import ListItem from './ListItem';
 import ListSong from './ListSong';
 import './List.css';
@@ -45,7 +45,7 @@ class List extends Component {
   }
 
   render() {
-    const { list, isLoadingBySearch } = this.props;
+    const { list, isLoadingBySearch, playSong } = this.props;
     const { songs } = list.modal;
 
     if(isLoadingBySearch) {
@@ -61,13 +61,14 @@ class List extends Component {
     }
 
     const modalContent = (list.modal.isLoading || list.modal.songs.length === 0) ?
-      <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" /> :
-      <ListSong list={songs} handleCloseModal={this.handleCloseModal}/>;
+      <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="modal-spinner"/> :
+      <ListSong list={songs} handleCloseModal={this.handleCloseModal} playSong={playSong}/>;
 
     return (
       <section>
         <Masonry className="masonry-container" options={this.state.masonryOptions}>
-          {list.lists.map((song, key) => <ListItem key={key} song={song} getSong={this.getSong} />)}
+          {list.lists.map((song, key) => <ListItem key={key}
+            song={song} getSong={this.getSong} handleCloseModal={this.handleCloseModal}/>)}
         </Masonry>
         <Modal isOpen={this.state.modalIsOpen}
           shouldCloseOnOverlayClick={true}
@@ -89,6 +90,7 @@ export default connect(
   }),
   dispatch => ({
     getListRequest: (word, num) => dispatch(getList.request(word, num)),
-    getSongRequest: id => dispatch(getSong.request(id))
+    getSongRequest: id => dispatch(getSong.request(id)),
+    playSong: (videoId, key) => dispatch(play.start(videoId, key))
   })
 )(List);

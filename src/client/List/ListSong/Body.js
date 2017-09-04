@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
 
 class Body extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(videoId, key) {
+    this.props.playSong(videoId, key);
+  }
+
   render() {
     const { songInfo } = this.props;
-    console.log(songInfo);
-    const components = songInfo.map((song, key) =>
-      <div key={key} className="list-song-body-component">
+
+    const components = songInfo.map(song => {
+      console.log(song);
+      console.log(`list-song-body-component${song.isNowPlaying ? ' nowPlaying' : ''}`);
+      return <div key={song.key} className={`list-song-body-component${(song.isNowPlaying ? ' nowPlaying' : '')}`}
+        onClick={() => this.handleClick(song.videoId, song.key)}>
         <div className="list-song-body-thumbnail">
           <img src={song.snippet.thumbnails.default.url} />
         </div>
         <div className="list-song-body-title">
           {song.snippet.title}
         </div>
-      </div>
+      </div>;
+    }
     );
 
     return (
