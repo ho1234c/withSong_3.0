@@ -17,11 +17,11 @@ export const getList = {
 
 export const getSong = {
   request: id => createActions(SONG_REQUEST, { id }),
-  success: response => createActions(SONG_SUCCESS, { response }),
+  success: (response, isRetain) => createActions(SONG_SUCCESS, { response, isRetain }),
   failure: error => createActions(SONG_FAILURE, { error })
 };
 
 export const play = {
-  start: (videoId, key) => createActions(PLAY_START, { videoId, key }),
+  start: (videoId, key, listId) => createActions(PLAY_START, { videoId, key, listId }),
   stop: () => createActions(PLAY_STOP)
 };

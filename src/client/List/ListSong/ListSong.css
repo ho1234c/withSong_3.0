@@ -26,7 +26,6 @@
 
   & .list-song-body {
     flex-direction: column;
-    padding: 5px 0px;
     max-height: 400px;
     overflow: auto;
 

@@ -16,6 +16,10 @@ class Video extends Component {
 
     const { videoId, videoEnd } = this.props;
 
+    if(!videoId) {
+      return <div></div>;
+    }
+
     return (
       <div id="video-container">
         <Youtube videoId={videoId} className="youtube" opts={opts} onEnd={videoEnd}/>

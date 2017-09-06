@@ -91,6 +91,6 @@ export default connect(
   dispatch => ({
     getListRequest: (word, num) => dispatch(getList.request(word, num)),
     getSongRequest: id => dispatch(getSong.request(id)),
-    playSong: (videoId, key) => dispatch(play.start(videoId, key))
+    playSong: (videoId, key, listId) => dispatch(play.start(videoId, key, listId))
   })
 )(List);

@@ -7,7 +7,7 @@ class Body extends Component {
   }
 
   handleClick(videoId, key) {
-    this.props.playSong(videoId, key);
+    this.props.handlePlay(videoId, key);
   }
 
   render() {

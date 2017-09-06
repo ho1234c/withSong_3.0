@@ -9,7 +9,6 @@ function* toggle(action) {
   }else {
     yield put(actions.header.hide());
   }
-  yield delay(300);
 }
 
 function* search(action) {

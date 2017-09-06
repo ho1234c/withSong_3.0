@@ -2,11 +2,12 @@ import { call, put, select, take, takeEvery } from 'redux-saga/effects';
 import { fetchList, fetchSong } from '../services/fetch';
 import * as listActions from './ListActions';
 import * as videoActions from '../Video/VideoActions';
-import { isPlaying, getPlayingListId } from './ListReducer';
+import { isPlaying, getPlayingVideo, getNextVideo } from './ListReducer';
 
 function* getList(action) {
   try {
     const response = yield call(fetchList, action.payload);
+
     yield put(listActions.getList.success(response.data));
   }catch(error) {
     yield put(listActions.getList.failure(error));
@@ -14,15 +15,15 @@ function* getList(action) {
 }
 
 function* getSong(action) {
-  const nowPlayingListId = yield select(getPlayingListId);
+  const playingVideo = yield select(getPlayingVideo);
+  const isRetain = playingVideo.listId === action.payload.id ? playingVideo : '';
 
-  if(nowPlayingListId !== action.payload.id) {
-    try {
-      const response = yield call(fetchSong, action.payload);
-      yield put(listActions.getSong.success(response.data));
-    }catch(error) {
-      yield put(listActions.getSong.failure(error));
-    }
+  try {
+    const response = yield call(fetchSong, action.payload);
+
+    yield put(listActions.getSong.success(response.data, isRetain));
+  }catch(error) {
+    yield put(listActions.getSong.failure(error));
   }
 }
 
@@ -33,14 +34,17 @@ function* playSong(action) {
 export function* nextPlayFlow() {
   while(true) {
     yield take(videoActions.VIDEO_END);
-    const playing = select(isPlaying);
+    const playing = yield select(isPlaying);
 
     if(playing) {
-      const nextVideoId = 'b1kQvZhQ6_M'; // todo: logic for get next video id and key
-      const nextVideoKey = '1';
+      const { videoId, key } = yield select(getNextVideo);
 
-      yield put(listActions.play.start(nextVideoId, nextVideoKey));
-      yield put(videoActions.video.change(nextVideoId));
+      if(videoId && key) {
+        yield put(listActions.play.start(videoId, key));
+        yield put(videoActions.video.change(videoId));
+      }else {
+        yield put(listActions.play.stop());
+      }
     }
   }
 }

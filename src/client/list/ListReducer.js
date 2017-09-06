@@ -1,7 +1,7 @@
 import * as ActionTypes from './ListActions';
 
 /* 
-For highlighting, I need a unique value to distinguish the data.
+For highlighting and find next playing video, I need a unique value to distinguish the data.
 'key' property is for guarantee of songs data integrity. 
 */
 const listState = {
@@ -10,6 +10,7 @@ const listState = {
   play: {
     isPlaying: false,
     videoId: '',
+    listId: '',
     key: ''
   },
   modal: {
@@ -19,11 +20,23 @@ const listState = {
 };
 
 export function isPlaying(state) {
-  return state.play.isPlaying;
+  return state.list.play.isPlaying;
 }
 
-export function getPlayingListId(state) {
-  return state.list.modal.songs.id;
+export function getPlayingVideo(state) {
+  return state.list.play;
+}
+
+export function getNextVideo(state) {
+  const { play, modal } = state.list;
+  const preKey = play.key;
+  const songInfo = modal.songs.songInfo;
+
+  if(preKey === songInfo.length - 1) {
+    return false;
+  }
+
+  return songInfo.find(song => song.key === preKey + 1);
 }
 
 export default (state = listState, action) => {
@@ -46,12 +59,7 @@ export default (state = listState, action) => {
         ...state,
         isLoading: false
       };
-    case ActionTypes.SONG_REQUEST: {
-      const { songs } = state.modal;
-
-      if(songs && songs.id === action.payload.id) {
-        return state;
-      }
+    case ActionTypes.SONG_REQUEST:
       return {
         ...state,
         modal: {
@@ -59,7 +67,6 @@ export default (state = listState, action) => {
           isLoading: true
         }
       };
-    }
     case ActionTypes.SONG_SUCCESS:
       return {
         ...state,
@@ -68,7 +75,11 @@ export default (state = listState, action) => {
           songs: {
             ...data.response,
             songInfo: data.response.songInfo.map(
-              (song, key) => ({ ...song, key, isNowPlaying: false })
+              (song, key) => ({
+                ...song,
+                key,
+                isNowPlaying: data.isRetain ? (data.isRetain.key === key) : false
+              })
             )
           }
         }
@@ -87,6 +98,7 @@ export default (state = listState, action) => {
         play: {
           isPlaying: true,
           videoId: data.videoId,
+          listId: data.listId || state.play.listId,
           key: data.key
         },
         modal: {

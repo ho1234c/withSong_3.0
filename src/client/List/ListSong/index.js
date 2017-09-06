@@ -5,15 +5,26 @@ import Footer from './Footer';
 import './ListSong.css';
 
 class ListSong extends Component {
+  constructor(props) {
+    super(props);
+    this.handlePlay = this.handlePlay.bind(this);
+  }
+
+  handlePlay(...params) {
+    const { list, playSong } = this.props;
+
+    playSong(...params, list.id);
+  }
+
   render() {
     const { name, createdAt, like, songInfo } = this.props.list;
-    const { handleCloseModal, playSong } = this.props;
+    const { handleCloseModal } = this.props;
 
     return (
       <div className="list-song">
         <Header name={name} createdAt={createdAt} handleCloseModal={handleCloseModal}/>
         <div className="list-song-bar"></div>
-        <Body songInfo={songInfo} playSong={playSong}/>
+        <Body songInfo={songInfo} handlePlay={this.handlePlay}/>
         <Footer like={like} length={songInfo.length}/>
         <div className="list-song-comment"></div>
       </div>
