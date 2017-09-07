@@ -1,4 +1,5 @@
 import * as ActionTypes from './ListActions';
+import changeState from '../utils/changeState';
 
 /* 
 For highlighting and find next playing video, I need a unique value to distinguish the data.
@@ -72,16 +73,14 @@ export default (state = listState, action) => {
         ...state,
         modal: {
           isLoading: false,
-          songs: {
-            ...data.response,
-            songInfo: data.response.songInfo.map(
-              (song, key) => ({
-                ...song,
+          songs: changeState(data.response, 'songInfo',
+            (song, key) => (
+              { ...song,
                 key,
                 isNowPlaying: data.isRetain ? (data.isRetain.key === key) : false
-              })
+              }
             )
-          }
+          )
         }
       };
     case ActionTypes.SONG_FAILURE:
@@ -103,16 +102,14 @@ export default (state = listState, action) => {
         },
         modal: {
           ...state.modal,
-          songs: {
-            ...state.modal.songs,
-            songInfo: state.modal.songs.songInfo.map(
-              (song, key) => (
-                { ...song,
-                  isNowPlaying: (song.videoId === data.videoId && song.key === data.key)
-                }
-              )
+          songs: changeState(state.modal.songs, 'songInfo',
+            (song, key) => (
+              { ...song,
+                key,
+                isNowPlaying: (song.videoId === data.videoId && song.key === data.key)
+              }
             )
-          }
+          )
         }
       };
     case ActionTypes.PLAY_STOP:

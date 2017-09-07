@@ -1,5 +1,5 @@
 import { call, put, select, take, takeEvery } from 'redux-saga/effects';
-import { fetchList, fetchSong } from '../services/fetch';
+import { fetchList, fetchSong } from '../utils/fetch';
 import * as listActions from './ListActions';
 import * as videoActions from '../Video/VideoActions';
 import { isPlaying, getPlayingVideo, getNextVideo } from './ListReducer';
