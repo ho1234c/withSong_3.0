@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Masonry from 'react-masonry-component';
 import Spinner from 'react-spinkit';
 import Modal from 'react-modal';
-import { getList, getSong, play } from './ListActions';
+import { getList, getSong, play, listModalClose } from './ListActions';
 import ListItem from './ListItem';
 import ListModal from './ListModal';
 import './List.css';
@@ -16,8 +16,7 @@ class List extends Component {
       masonryOptions: {
         itemSelector: '.masonry-item',
         gutter: 20
-      },
-      modalIsOpen: false
+      }
     };
 
     this.getSong = this.getSong.bind(this);
@@ -29,24 +28,16 @@ class List extends Component {
   }
 
   getSong(id) {
-    this.setState({
-      ...this.state,
-      modalIsOpen: true
-    });
-
     this.props.getSongRequest(id);
   }
 
   handleCloseModal() {
-    this.setState({
-      ...this.state,
-      modalIsOpen: false
-    });
+    this.props.listModalClose();
   }
 
   render() {
     const { list, isLoadingBySearch, playSong } = this.props;
-    const { songs } = list.modal;
+    const { songs, isOpen, isLoading } = list.modal;
 
     if(isLoadingBySearch) {
       return <section>
@@ -60,7 +51,7 @@ class List extends Component {
       </section>;
     }
 
-    const modalContent = (list.modal.isLoading || list.modal.songs.length === 0) ?
+    const modalContent = (isLoading || songs.length === 0) ?
       <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="modal-spinner"/> :
       <ListModal list={songs} handleCloseModal={this.handleCloseModal} playSong={playSong}/>;
 
@@ -70,7 +61,7 @@ class List extends Component {
           {list.lists.map((song, key) => <ListItem key={key}
             song={song} getSong={this.getSong} handleCloseModal={this.handleCloseModal}/>)}
         </Masonry>
-        <Modal isOpen={this.state.modalIsOpen} shouldCloseOnOverlayClick={true}
+        <Modal isOpen={isOpen} shouldCloseOnOverlayClick={true}
           onRequestClose={this.handleCloseModal} contentLabel="Modal"
           className="song-modal" overlayClassName="overlay">
           {modalContent}
@@ -88,6 +79,7 @@ export default connect(
   dispatch => ({
     getListRequest: (word, num) => dispatch(getList.request(word, num)),
     getSongRequest: id => dispatch(getSong.request(id)),
-    playSong: (videoId, key, listId) => dispatch(play.start(videoId, key, listId))
+    playSong: (videoId, key, listId) => dispatch(play.start(videoId, key, listId)),
+    listModalClose: () => dispatch(listModalClose())
   })
 )(List);

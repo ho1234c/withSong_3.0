@@ -35,8 +35,9 @@ class PlayerListItem extends Component {
     const thumbnail = JSON.parse(list.thumbnail);
 
     return (
-      <div className={`${bodyClass}${list.isNowPlaying ? ' nowSelected' : ''}`}
-        onClick={() => this.handleClick(list.id)}>
+      <div className={`${bodyClass}${list.select ? ' nowSelected' : ''}`}
+        onClick={() => this.handleClick(list.id)}
+        onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
         <div className="player-list-thumbnail">
           <img src={path.join('thumbnails', thumbnail.src)} />
         </div>

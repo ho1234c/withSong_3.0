@@ -15,6 +15,7 @@ const initialState = {
     key: ''
   },
   modal: {
+    isOpen: false,
     isLoading: false,
     songs: {}
   }
@@ -45,6 +46,7 @@ export default (state = initialState, action) => {
         ...state,
         modal: {
           ...state.modal,
+          isOpen: true,
           isLoading: true
         }
       };
@@ -52,6 +54,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         modal: {
+          ...state.modal,
           isLoading: false,
           songs: changeState(data.response, 'songInfo',
             (song, key) => (
@@ -67,6 +70,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         modal: {
+          ...state.modal,
           songs: [],
           isLoading: false
         }
@@ -96,6 +100,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         play: initialState.play
+      };
+    case ActionTypes.LIST_CLOSE:
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          isOpen: false
+        }
       };
     default:
       return state;

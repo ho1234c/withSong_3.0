@@ -19,8 +19,12 @@ body * {
   display: flex;
 }
 
-.modal-spinner{
+.modal-spinner {
   align-items: center;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
 }
 
 .overlay {

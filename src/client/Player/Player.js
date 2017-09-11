@@ -21,7 +21,7 @@ class Player extends Component {
   }
 
   handleCloseModal() {
-    this.props.playerModal.close();
+    this.props.playerModalClose();
   }
 
   getSong(id) {
@@ -58,9 +58,6 @@ export default connect(
     getListRequest: id => dispatch(getList.request(id)),
     getSongRequest: id => dispatch(getSong.request(id)),
     playSong: (videoId, key) => dispatch(play.start(videoId, key)),
-    playerModal: {
-      open: () => dispatch(playerModal.open()),
-      close: () => dispatch(playerModal.close())
-    }
+    playerModalClose: () => dispatch(playerModal.close())
   })
 )(Player);

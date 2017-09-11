@@ -20,7 +20,7 @@ class ListModalHeader extends Component {
 
 ListModalHeader.propTypes = {
   name: PropTypes.string,
-  createdAt: PropTypes.object,
+  createdAt: PropTypes.string,
   handleCloseModal: PropTypes.func
 };
 

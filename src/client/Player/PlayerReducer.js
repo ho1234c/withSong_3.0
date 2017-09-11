@@ -50,6 +50,7 @@ export default (state = initialState, action) => {
     case ActionTypes.SONG_REQUEST:
       return {
         ...state,
+        lists: state.lists.map(list => ({ ...list, select: list.id === data.id })),
         song: {
           ...state.song,
           isLoading: true

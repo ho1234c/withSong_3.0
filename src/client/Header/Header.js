@@ -32,7 +32,7 @@ class Header extends Component {
   }
 
   handleOpenModal() {
-    this.props.playerModal.open();
+    this.props.playerModalOpen();
   }
 
   search(e) {
@@ -65,9 +65,6 @@ export default connect(
   dispatch => ({
     scroll: direction => dispatch(header.scroll(direction)),
     changeSearchInput: word => dispatch(changeSearchInput(word)),
-    playerModal: {
-      open: () => dispatch(playerModal.open()),
-      close: () => dispatch(playerModal.close())
-    }
+    playerModalOpen: () => dispatch(playerModal.open())
   })
 )(Header);

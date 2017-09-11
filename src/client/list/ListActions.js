@@ -8,6 +8,7 @@ export const SONG_SUCCESS = 'list/SONG_SUCCESS';
 export const SONG_FAILURE = 'list/SONG_FAILURE';
 export const PLAY_START = 'list/PLAY_START';
 export const PLAY_STOP = 'list/PLAY_STOP';
+export const LIST_CLOSE = 'list/LIST_CLOSE';
 
 export const getList = {
   request: (word, num) => createActions(LIST_REQUEST, { word, num }),
@@ -25,3 +26,5 @@ export const play = {
   start: (videoId, key, listId) => createActions(PLAY_START, { videoId, key, listId }),
   stop: () => createActions(PLAY_STOP)
 };
+
+export const listModalClose = () => createActions(LIST_CLOSE);
