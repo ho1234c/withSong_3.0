@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { header, changeSearchInput } from './HeaderActions';
+import { playerModal } from '../Player/PlayerActions';
 import './Header.css';
 
 class Header extends Component {
@@ -10,6 +11,7 @@ class Header extends Component {
     this.tranStyle = { background: '#111' };
 
     this.search = this.search.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +31,10 @@ class Header extends Component {
     this.lastPos = currentPos;
   }
 
+  handleOpenModal() {
+    this.props.playerModal.open();
+  }
+
   search(e) {
     this.props.changeSearchInput(e.target.value);
   }
@@ -45,7 +51,7 @@ class Header extends Component {
         </div>
         <div id="header-button">
           <i className="fa fa-user-circle" aria-hidden="true"></i>
-          <i className="fa fa-outdent" aria-hidden="true"></i>
+          <i className="fa fa-outdent" aria-hidden="true" onClick={this.handleOpenModal}></i>
         </div>
       </div>
     );
@@ -58,6 +64,10 @@ export default connect(
   }),
   dispatch => ({
     scroll: direction => dispatch(header.scroll(direction)),
-    changeSearchInput: word => dispatch(changeSearchInput(word))
+    changeSearchInput: word => dispatch(changeSearchInput(word)),
+    playerModal: {
+      open: () => dispatch(playerModal.open()),
+      close: () => dispatch(playerModal.close())
+    }
   })
 )(Header);

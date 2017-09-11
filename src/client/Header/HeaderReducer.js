@@ -1,14 +1,12 @@
 import * as ActionTypes from './HeaderActions';
 
-const headerState = {
+const initialState = {
   isShow: true,
   word: '',
-  isLoading: false,
-  listModal: { isLoading: false, isShow: false },
-  authModal: { isShow: false }
+  isLoading: false
 };
 
-export default (state = headerState, action) => {
+export default (state = initialState, action) => {
   switch(action.type) {
     case ActionTypes.HEADER_HIDE:
       return {

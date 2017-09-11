@@ -5,7 +5,7 @@ import Spinner from 'react-spinkit';
 import Modal from 'react-modal';
 import { getList, getSong, play } from './ListActions';
 import ListItem from './ListItem';
-import ListSong from './ListSong';
+import ListModal from './ListModal';
 import './List.css';
 
 class List extends Component {
@@ -50,7 +50,7 @@ class List extends Component {
 
     if(isLoadingBySearch) {
       return <section>
-        <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="spinner" />
+        <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="list-spinner" />
       </section>;
     }
 
@@ -62,7 +62,7 @@ class List extends Component {
 
     const modalContent = (list.modal.isLoading || list.modal.songs.length === 0) ?
       <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="modal-spinner"/> :
-      <ListSong list={songs} handleCloseModal={this.handleCloseModal} playSong={playSong}/>;
+      <ListModal list={songs} handleCloseModal={this.handleCloseModal} playSong={playSong}/>;
 
     return (
       <section>
@@ -70,12 +70,9 @@ class List extends Component {
           {list.lists.map((song, key) => <ListItem key={key}
             song={song} getSong={this.getSong} handleCloseModal={this.handleCloseModal}/>)}
         </Masonry>
-        <Modal isOpen={this.state.modalIsOpen}
-          shouldCloseOnOverlayClick={true}
-          onRequestClose={this.handleCloseModal}
-          contentLabel="Modal"
-          className="song-modal"
-          overlayClassName="overlay">
+        <Modal isOpen={this.state.modalIsOpen} shouldCloseOnOverlayClick={true}
+          onRequestClose={this.handleCloseModal} contentLabel="Modal"
+          className="song-modal" overlayClassName="overlay">
           {modalContent}
         </Modal>
       </section>

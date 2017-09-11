@@ -7,7 +7,7 @@ const router = Router({
 });
 
 router.get('/', async ctx => {
-  const { word, num = 10 } = ctx.query;
+  const { word = '', num = 10 } = ctx.query;
   const list = await db.List.findAll(
     {
       where: { name: { $ilike: `%${word}%` } },

@@ -1,13 +1,13 @@
 import createActions from '../utils/createAction';
 
-export const LIST_REQUEST = 'LIST_REQUEST';
-export const LIST_SUCCESS = 'LIST_SUCCESS';
-export const LIST_FAILURE = 'LIST_FAILURE';
-export const SONG_REQUEST = 'SONG_REQUEST';
-export const SONG_SUCCESS = 'SONG_SUCCESS';
-export const SONG_FAILURE = 'SONG_FAILURE';
-export const PLAY_START = 'PLAY_START';
-export const PLAY_STOP = 'PLAY_STOP';
+export const LIST_REQUEST = 'list/LIST_REQUEST';
+export const LIST_SUCCESS = 'list/LIST_SUCCESS';
+export const LIST_FAILURE = 'list/LIST_FAILURE';
+export const SONG_REQUEST = 'list/SONG_REQUEST';
+export const SONG_SUCCESS = 'list/SONG_SUCCESS';
+export const SONG_FAILURE = 'list/SONG_FAILURE';
+export const PLAY_START = 'list/PLAY_START';
+export const PLAY_STOP = 'list/PLAY_STOP';
 
 export const getList = {
   request: (word, num) => createActions(LIST_REQUEST, { word, num }),

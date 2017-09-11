@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga';
-import { take, call, put, takeLatest } from 'redux-saga/effects';
+import { take, call, put, takeLatest, fork } from 'redux-saga/effects';
 import * as actions from './HeaderActions';
 import { getList } from '../List/ListActions';
 
@@ -18,7 +18,7 @@ function* search(action) {
   yield put(actions.search.end());
 }
 
-export function* watchScroll() {
+function* watchScroll() {
   while(true) {
     const action = yield take(actions.HEADER_SCROLL);
     /* blocking */
@@ -26,6 +26,11 @@ export function* watchScroll() {
   }
 }
 
-export function* watchSearch() {
+function* watchSearch() {
   yield takeLatest(actions.CHANGE_SEARCH_INPUT, search);
 }
+
+export const headerSaga = [
+  fork(watchScroll),
+  fork(watchSearch)
+];

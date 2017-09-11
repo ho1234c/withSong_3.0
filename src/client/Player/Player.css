@@ -1,0 +1,74 @@
+@import 'config.css';
+
+.player {
+  flex-direction: column;
+  width: 800px;
+  height: 700px;
+
+  & .player-header {
+  padding: 5px 10px;
+  align-items: center;
+
+  & .player-header-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+  & .player-header-close {
+      font-size: 2rem;
+      margin: 0 0 0 auto;
+      cursor: pointer;
+      color: var(--color-main-gray1);
+    }
+  }
+
+  & .player-body-container {
+    flex-direction: row;
+
+    & .player-body-left {
+      flex-direction: column;
+
+      & .player-list {
+        flex-direction: column;
+        overflow: auto;
+        width: 400px;
+        max-height: 300px;
+
+        & .player-list-component {
+          min-height: 55px;
+
+          & .player-list-thumbnail {
+
+            & img {
+              width: 60px;
+              height: 45px;
+            }
+          }
+        }
+      }
+    }
+
+    & .player-body-right {
+      
+        & .player-song {
+          flex-direction: column;
+        }
+    }
+  }
+}
+
+.player-modal {
+  position: absolute;
+  z-index: 30;
+  top: 70px;
+  width: 800px;
+  height: 700px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  outline: none;
+  justify-content: center;
+}

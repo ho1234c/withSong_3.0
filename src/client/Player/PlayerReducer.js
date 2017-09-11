@@ -1,22 +1,19 @@
-import * as ActionTypes from './ListActions';
+import * as ActionTypes from './PlayerActions';
 import changeState from '../utils/changeState';
 
-/* 
-For highlighting and find next playing video, I need a unique value to distinguish the data.
-'key' property is for guarantee of songs data integrity. 
-*/
 const initialState = {
-  lists: [],
+  isOpen: false,
   isLoading: false,
+  lists: [],
+  song: {
+    isLoading: false,
+    songs: {}
+  },
   play: {
     isPlaying: false,
     videoId: '',
     listId: '',
     key: ''
-  },
-  modal: {
-    isLoading: false,
-    songs: {}
   }
 };
 
@@ -24,6 +21,16 @@ export default (state = initialState, action) => {
   const data = action.payload;
 
   switch(action.type) {
+    case ActionTypes.PLAYER_OPEN:
+      return {
+        ...state,
+        isOpen: true
+      };
+    case ActionTypes.PLAYER_CLOSE:
+      return {
+        ...state,
+        isOpen: false
+      };
     case ActionTypes.LIST_REQUEST:
       return {
         ...state,
@@ -43,15 +50,15 @@ export default (state = initialState, action) => {
     case ActionTypes.SONG_REQUEST:
       return {
         ...state,
-        modal: {
-          ...state.modal,
+        song: {
+          ...state.song,
           isLoading: true
         }
       };
     case ActionTypes.SONG_SUCCESS:
       return {
         ...state,
-        modal: {
+        song: {
           isLoading: false,
           songs: changeState(data.response, 'songInfo',
             (song, key) => (
@@ -63,24 +70,16 @@ export default (state = initialState, action) => {
           )
         }
       };
-    case ActionTypes.SONG_FAILURE:
-      return {
-        ...state,
-        modal: {
-          songs: [],
-          isLoading: false
-        }
-      };
     case ActionTypes.PLAY_START:
       return {
         ...state,
         play: {
           isPlaying: true,
           videoId: data.videoId,
-          listId: data.listId || state.play.listId, // if play in same list, don't change it.
+          listId: data.listId || state.play.listId,
           key: data.key
         },
-        modal: {
+        song: {
           ...state.modal,
           songs: changeState(state.modal.songs, 'songInfo',
             (song, key) => (

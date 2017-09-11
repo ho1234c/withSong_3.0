@@ -1,8 +1,8 @@
-import { call, put, select, take, takeEvery } from 'redux-saga/effects';
+import { call, put, select, take, takeEvery, fork } from 'redux-saga/effects';
 import { fetchList, fetchSong } from '../utils/fetch';
 import * as listActions from './ListActions';
 import * as videoActions from '../Video/VideoActions';
-import { isPlaying, getPlayingVideo, getNextVideo } from './ListReducer';
+import { list } from '../utils/selector';
 
 function* getList(action) {
   try {
@@ -15,7 +15,7 @@ function* getList(action) {
 }
 
 function* getSong(action) {
-  const playingVideo = yield select(getPlayingVideo);
+  const playingVideo = yield select(list.getPlayingVideo);
   const isRetain = playingVideo.listId === action.payload.id ? playingVideo : '';
 
   try {
@@ -31,13 +31,13 @@ function* playSong(action) {
   yield put(videoActions.video.change(action.payload.videoId));
 }
 
-export function* nextPlayFlow() {
+function* nextPlayFlow() {
   while(true) {
     yield take(videoActions.VIDEO_END);
-    const playing = yield select(isPlaying);
+    const playing = yield select(list.isPlaying);
 
     if(playing) {
-      const { videoId, key } = yield select(getNextVideo);
+      const { videoId, key } = yield select(list.getNextVideo);
 
       if(videoId && key) {
         yield put(listActions.play.start(videoId, key));
@@ -49,15 +49,21 @@ export function* nextPlayFlow() {
   }
 }
 
-export function* watchGetList() {
+function* watchGetList() {
   yield takeEvery(listActions.LIST_REQUEST, getList);
 }
 
-export function* watchGetSong() {
+function* watchGetSong() {
   yield takeEvery(listActions.SONG_REQUEST, getSong);
 }
 
-export function* watchPlaySong() {
+function* watchPlaySong() {
   yield takeEvery(listActions.PLAY_START, playSong);
 }
 
+export const listSaga = [
+  fork(watchGetList),
+  fork(watchGetSong),
+  fork(watchPlaySong),
+  fork(nextPlayFlow)
+];

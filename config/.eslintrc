@@ -41,6 +41,7 @@
           "else": { "before": false, "after": true }
         }
       }],
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off"
   }
 }

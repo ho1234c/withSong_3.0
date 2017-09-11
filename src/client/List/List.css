@@ -31,19 +31,15 @@ section {
   }
 }
 
-.spinner {
+.list-spinner {
   position: fixed;
   top: 40%;
-}
-
-.modal-spinner{
-  align-items: center;
 }
 
 .song-modal {
   position: absolute;
   z-index: 30;
-  top: 40px;
+  top: 70px;
   width: 400px;
   min-height: 400px;
   overflow: auto;
@@ -54,15 +50,4 @@ section {
   border-radius: 4px;
   outline: none;
   justify-content: center;
-}
-
-.overlay {
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.75);
 }

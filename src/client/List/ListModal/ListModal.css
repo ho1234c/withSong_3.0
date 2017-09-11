@@ -1,39 +1,39 @@
 @import 'config.css';
 
-.list-song {
+.list-modal {
   flex-direction: column;
   width: 400px;
 
-  & .list-song-header {
+  & .list-modal-header {
     padding: 5px 10px;
     align-items: center;
 
-    & .list-song-header-name {
+    & .list-modal-header-name {
       font-size: 1.2rem;
       font-weight: bold;
     }
 
-    & .list-song-header-created {
+    & .list-modal-header-created {
       margin: 0 20px 0 auto;
     }
 
-    & .list-song-header-close {
+    & .list-modal-header-close {
       font-size: 2rem;
       cursor: pointer;
       color: var(--color-main-gray1);
     }
   }
 
-  & .list-song-body {
+  & .list-modal-body {
     flex-direction: column;
     max-height: 400px;
     overflow: auto;
 
-    & .list-song-body-component {
+    & .list-modal-body-component {
       padding: 5px 10px;
       flex-shrink: 0;
 
-      & .list-song-body-thumbnail{
+      & .list-modal-body-thumbnail{
         border-radius: 4px;
         flex-shrink: 0;
         overflow: hidden;
@@ -44,7 +44,7 @@
         }
       }
 
-      & .list-song-body-title {
+      & .list-modal-body-title {
         width: 100%;
         padding: 10px;
         align-items: center;
@@ -54,29 +54,34 @@
     & .nowPlaying {
       background-color: var(--color-main-gray1);
     }
+
+    & .hover {
+      background-color: var(--color-main-gray1);
+      cursor: pointer;
+    }
   }
 
-  & .list-song-footer {
+  & .list-modal-footer {
     padding: 10px;
     margin-top: auto;
     align-items: center;
 
-    & .list-song-footer-like {
+    & .list-modal-footer-like {
       margin-left: auto;
       margin-right: auto;
     }
 
-    & .list-song-footer-favorite {
+    & .list-modal-footer-favorite {
       color: var(--color-main-theme);
       font-weight: bold;
     }
 
-    & .list-song-footer-length {
+    & .list-modal-footer-length {
       font-weight: bold;
     }
   }
   
-  & .list-song-bar {
+  & .list-modal-bar {
     height: 2px;
     width: 100%;
     background-color: var(--color-main-gray1);

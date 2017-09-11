@@ -1,14 +1,12 @@
-import { all, fork } from 'redux-saga/effects';
-import { watchGetList, watchGetSong, nextPlayFlow, watchPlaySong } from '../List/ListSaga';
-import { watchScroll, watchSearch } from '../Header/HeaderSaga';
+import { all } from 'redux-saga/effects';
+import { listSaga } from '../List/ListSaga';
+import { headerSaga } from '../Header/HeaderSaga';
+import { playerSaga } from '../Player/PlayerSaga';
 
 export default function* rootSaga() {
   yield all([
-    fork(watchGetList),
-    fork(watchGetSong),
-    fork(watchScroll),
-    fork(watchSearch),
-    fork(nextPlayFlow),
-    fork(watchPlaySong)
+    ...listSaga,
+    ...headerSaga,
+    ...playerSaga
   ]);
 }
