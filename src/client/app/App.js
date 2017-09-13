@@ -4,6 +4,7 @@ import List from '../List/List';
 import Header from '../Header/Header';
 import Player from '../Player/Player';
 import Video from '../Video/Video';
+import Auth from '../Auth/Auth';
 import store from './store';
 import './App.css';
 
@@ -16,6 +17,7 @@ class App extends React.Component {
           <List />
           <Player />
           <Video />
+          <Auth />
         </div>
       </Provider>
     );

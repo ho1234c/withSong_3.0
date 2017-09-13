@@ -33,8 +33,9 @@ class PlayerListItem extends Component {
     const bodyClass = `player-song-component${(this.state.isHover ? ' hover' : '')}`;
 
     return (
-      <div className={`${bodyClass}${song.isNowPlaying ? ' nowSelected' : ''}`}
-        onClick={() => this.handleClick(song.id, song.key)}>
+      <div className={`${bodyClass}${song.isNowPlaying ? ' nowPlaying' : ''}`}
+        onClick={() => this.handleClick(song.videoId, song.key)}
+        onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
         <div className="player-song-thumbnail">
           <img src={song.snippet.thumbnails.default.url} />
         </div>

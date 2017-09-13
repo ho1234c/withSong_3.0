@@ -81,8 +81,8 @@ export default (state = initialState, action) => {
           key: data.key
         },
         song: {
-          ...state.modal,
-          songs: changeState(state.modal.songs, 'songInfo',
+          ...state.song,
+          songs: changeState(state.song.songs, 'songInfo',
             (song, key) => (
               { ...song,
                 key,
@@ -95,6 +95,12 @@ export default (state = initialState, action) => {
     case ActionTypes.PLAY_STOP:
       return {
         ...state,
+        song: {
+          ...state.song,
+          songs: changeState(state.song.songs, 'songInfo',
+            (song, key) => ({ ...song, key, isNowPlaying: false })
+          )
+        },
         play: initialState.play
       };
     default:

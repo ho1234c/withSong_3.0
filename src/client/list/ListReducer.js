@@ -1,6 +1,5 @@
 import * as ActionTypes from './ListActions';
 import changeState from '../utils/changeState';
-
 /* 
 For highlighting and find next playing video, I need a unique value to distinguish the data.
 'key' property is for guarantee of songs data integrity. 

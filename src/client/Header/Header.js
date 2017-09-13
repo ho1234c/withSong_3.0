@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { header, changeSearchInput } from './HeaderActions';
 import { playerModal } from '../Player/PlayerActions';
+import { authModal } from '../Auth/AuthActions';
 import './Header.css';
 
 class Header extends Component {
@@ -11,7 +12,8 @@ class Header extends Component {
     this.tranStyle = { background: '#111' };
 
     this.search = this.search.bind(this);
-    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleOpenPlayerModal = this.handleOpenPlayerModal.bind(this);
+    this.handleOpenAuthModal = this.handleOpenAuthModal.bind(this);
   }
 
   componentDidMount() {
@@ -31,8 +33,12 @@ class Header extends Component {
     this.lastPos = currentPos;
   }
 
-  handleOpenModal() {
+  handleOpenPlayerModal() {
     this.props.playerModalOpen();
+  }
+
+  handleOpenAuthModal() {
+    this.props.authModalOpen();
   }
 
   search(e) {
@@ -50,8 +56,10 @@ class Header extends Component {
           <input name="search" placeholder="검색하기" onChange={this.search} />
         </div>
         <div id="header-button">
-          <i className="fa fa-user-circle" aria-hidden="true"></i>
-          <i className="fa fa-outdent" aria-hidden="true" onClick={this.handleOpenModal}></i>
+          <i className="fa fa-user-circle" aria-hidden="true"
+            onClick={this.handleOpenAuthModal}></i>
+          <i className="fa fa-outdent" aria-hidden="true"
+            onClick={this.handleOpenPlayerModal}></i>
         </div>
       </div>
     );
@@ -65,6 +73,7 @@ export default connect(
   dispatch => ({
     scroll: direction => dispatch(header.scroll(direction)),
     changeSearchInput: word => dispatch(changeSearchInput(word)),
-    playerModalOpen: () => dispatch(playerModal.open())
+    playerModalOpen: () => dispatch(playerModal.open()),
+    authModalOpen: () => dispatch(authModal.open())
   })
 )(Header);

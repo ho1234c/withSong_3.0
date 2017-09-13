@@ -10,7 +10,7 @@ class PlayerSong extends Component {
     this.handlePlay = this.handlePlay.bind(this);
   }
 
-  handlePlay(params) {
+  handlePlay(...params) {
     const { songs, playSong } = this.props;
 
     playSong(...params, songs.id);

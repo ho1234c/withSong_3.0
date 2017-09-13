@@ -1,0 +1,96 @@
+@import 'config.css';
+
+.auth {
+  flex-direction: column;
+  width: 400px;
+  min-height: 300px;
+
+  & .auth-header {
+    height: 50px;
+    flex-direction: row;
+
+    & .auth-left-button {
+      width: 50%;
+      height: 50px;
+      position: absolute;
+      left: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    & .auth-right-button {
+      width: 50%;
+      height: 50px;
+      position: absolute;
+      right: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    & .active {
+      
+      &::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: var(--color-main-theme);
+        margin-top: auto;
+      }
+    }
+  }
+  & .auth-bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--color-main-gray1);
+  }
+
+  & .auth-body {
+    padding: 20px;
+    
+    & .sign-in-form {
+      width: 100%;
+      flex-direction: column;
+
+      & > * {
+        margin: 5px 0;
+      }
+
+      & input {
+        height: 30px;
+      }
+    }
+
+    & .join-form {
+      width: 100%;      
+      flex-direction: column;
+
+      & > * {
+        margin: 10px 0;
+      }
+
+      & input {
+        height: 30px;
+      }
+    }
+  }
+}
+
+.auth-modal {
+  position: absolute;
+  z-index: 30;
+  top: 150px;
+  width: 400px;
+  min-height: 300px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  outline: none;
+  justify-content: center;
+}
