@@ -30,12 +30,13 @@
     }
 
     & .active {
-      
+      color: var(--color-main-theme);
+
       &::after {
         content: " ";
         position: absolute;
-        bottom: 0;
-        height: 2px;
+        bottom: -2px;
+        height: 3px;
         width: 100%;
         background-color: var(--color-main-theme);
         margin-top: auto;

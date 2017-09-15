@@ -1,6 +1,8 @@
+require('dotenv').config({ path: './config/.env' });
+
 const { env } = process;
 
-const INFO = {
+const APP = {
   PORT: env.PORT || 8000,
   ENV: env.NODE_ENV,
   CWD: process.cwd(),
@@ -12,15 +14,15 @@ const INFO = {
 
 const DATABASE = {
   POSTGRES: {
-    DB_HOST: env.DB_HOST,
-    POSTGRES_PORT: env.POSTGRES_PORT,
-    POSTGRES_DB: env.POSTGRES_DB,
-    POSTGRES_USER: env.POSTGRES_USER,
-    POSTGRES_PASSWORD: env.POSTGRES_PASSWORD
+    HOST: env.DB_HOST,
+    PORT: env.POSTGRES_PORT,
+    DB_NAME: env.POSTGRES_DB,
+    USER: env.POSTGRES_USER,
+    PASSWORD: env.POSTGRES_PASSWORD
   },
   REDIS: {
-    REDIS_SECRETKEY: env.REDIS_SECRETKEY,
-    REDIS_HOST: env.REDIS_HOST,
+    SECRETKEY: env.REDIS_SECRETKEY,
+    HOST: env.REDIS_HOST,
     PORT: env.REDIS_PORT
   }
 };
@@ -36,6 +38,4 @@ const API = {
   }
 };
 
-const config = { INFO, DATABASE, API };
-
-module.exports = config;
+module.exports = { APP, DATABASE, API };

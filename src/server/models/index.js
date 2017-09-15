@@ -1,17 +1,15 @@
 const Sequelize = require('sequelize');
 const path = require('path');
 const fs = require('fs');
-const config = require('../config');
-
-const { DATABASE } = config;
+const { DATABASE } = require('../config');
 
 const sequelize = new Sequelize(
-  DATABASE.POSTGRES.POSTGRES_DB,
-  DATABASE.POSTGRES.POSTGRES_USER,
-  DATABASE.POSTGRES.POSTGRES_PASSWORD,
+  DATABASE.POSTGRES.DB_NAME,
+  DATABASE.POSTGRES.USER,
+  DATABASE.POSTGRES.PASSWORD,
   {
-    host: DATABASE.POSTGRES.DB_HOST,
-    port: DATABASE.POSTGRES.POSTGRES_PORT,
+    host: DATABASE.POSTGRES.HOST,
+    port: DATABASE.POSTGRES.PORT,
     dialect: 'postgres',
     logging: false
   },

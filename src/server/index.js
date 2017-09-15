@@ -1,25 +1,16 @@
 const Koa = require('koa');
-require('dotenv').config({ path: './config/.env' });
-const logger = require('koa-morgan');
-const serve = require('koa-static');
 const router = require('./api');
-const CONFIG = require('./config');
+const { APP } = require('./config');
 const db = require('./models');
+const expressConfig = require('./middleware/express');
 
 const app = new Koa();
+expressConfig(app);
 
-app.use(logger('dev'));
-app.use(serve('public'));
-
-/* app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  ctx.set('X-Response-Time', `${ms}ms`);
-}); */
-
+// routing
 app.use(router.routes(), router.allowedMethods());
 
+// DB sync
 (async () => {
   try {
     await db.sequelize.sync();
@@ -29,6 +20,6 @@ app.use(router.routes(), router.allowedMethods());
   }
 })();
 
-app.listen(CONFIG.INFO.PORT, () => { console.log(`server start on ${CONFIG.INFO.PORT} port.`); });
+app.listen(APP.PORT, () => { console.log(`server start on ${APP.PORT} port.`); });
 
 module.exports = app;

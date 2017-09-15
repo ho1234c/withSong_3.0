@@ -24,16 +24,19 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.List, { foreignKey: 'makerId' });
     User.hasMany(models.Comment, { foreignKey: 'writerId' });
   };
-  User.prototype.authenticate = (password, callback) => {
-    bcrypt.compare(password, this.password_hash,
-      (err, isMatch) => {
-        if(err) {
-          callback(err);
-        }else {
-          callback(null, isMatch);
-        }
-      });
+
+  User.prototype.authenticate = function authenticate(password) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, this.password_hash,
+        (err, isMatch) => {
+          if(err) {
+            return reject(err);
+          }
+          return resolve(isMatch);
+        });
+    });
   };
+
   return User;
 };
 
@@ -54,8 +57,8 @@ async function hashPasswordHook(userList, options) {
 async function hashPromise(password, salt = 10) {
   return new Promise((resolve, reject) => {
     bcrypt.hash(password, salt, (err, hash) => {
-      if(err) return reject(err);
-      return resolve(hash);
+      if(err) reject(err);
+      resolve(hash);
     });
   });
 }
