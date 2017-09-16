@@ -25,6 +25,16 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Comment, { foreignKey: 'writerId' });
   };
 
+  User.prototype.serialize = function serialize() {
+    return {
+      id: this.id,
+      nickname: this.nickname,
+      email: this.email,
+      list: this.listFavor,
+      comment: this.commentFavor
+    };
+  };
+
   User.prototype.authenticate = function authenticate(password) {
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, this.password_hash,

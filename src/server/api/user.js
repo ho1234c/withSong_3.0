@@ -6,47 +6,43 @@ const router = Router({
   prefix: '/user'
 });
 
-router.get('/create', async ctx => {
-  let res;
+router.post('/create', async ctx => {
+  const { email, password, nickname } = ctx.request.body;
 
   try {
-    res = await db.User.create({ email: 'test@test.com', nickname: 'test', password: 'test' });
-    console.log('test');
+    const isDuplicate = !!(await db.User.count({ where: { email } }));
+
+    if(isDuplicate > 0) {
+      ctx.status = 409;
+      ctx.body = { error: 'duplicate email' };
+      return;
+    }
+    const user = await db.User.create({ email, password, nickname });
+
+    ctx.logIn(user);
+    ctx.body = { user: user.serialize() };
   }catch(error) {
-    console.log(error);
+    ctx.throw(500);
   }
-  ctx.body = res;
 });
 
-router.post('/login', (ctx, next) => passport.authenticate('local', async (err, user, info, status) => {
-  if(err) {
-    return next(err);
-  }
-  if(!user || info) {
-    ctx.status = 400;
-    ctx.body = { error: info };
-  }
-  const userData = {
-    id: user.id,
-    nickname: user.nickname,
-    email: user.email,
-    list: user.listFavor,
-    comment: user.commentFavor
-  };
-  ctx.logIn(userData);
-  ctx.body = { user: userData };
-})(ctx, next));
+router.post('/login', (ctx, next) =>
+  passport.authenticate('local', async (err, user, info, status) => {
+    if(err) {
+      return next(err);
+    }
+    if(!user || info) {
+      ctx.body = { error: info };
+      ctx.throw(401);
+    }
 
-router.get('/destroy', async ctx => {
-  let res;
-  try {
-    const user = await db.User.find({ email: 'test@test.com' });
-    await user.destroy();
-  }catch(error) {
-    res = error;
-  }
+    ctx.body = { user: user.serialize() };
+    return ctx.logIn(user);
+  })(ctx, next)
+);
 
-  ctx.body = res;
+router.get('/logout', ctx => {
+  ctx.logout();
 });
 
 module.exports = router;
