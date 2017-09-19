@@ -2,7 +2,8 @@ import * as ActionTypes from './AuthActions';
 // import changeState from '../utils/changeState';
 
 const initialState = {
-  isOpen: false
+  isOpen: false,
+  user: ''
 };
 
 export default (state = initialState, action) => {

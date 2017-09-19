@@ -11,10 +11,17 @@ const resource = {
   }
 };
 
-export function fetchList(params) {
-  return resource.get('/api/list', params);
+export function fetchList({ word, num }) {
+  return resource.get('/api/list', { word, num });
 }
 
-export function fetchSong(params) {
-  return resource.get('/api/list/song', params);
+export function fetchSong({ id }) {
+  return resource.get('/api/list/song', { id });
+}
+
+export const auth = {
+  login: ({ email, password }) => resource.post('/api/user/login', { email, password }),
+  logout: () => resource.post('/api/user/logout'),
+  register: ({ email, password, nickname }) =>
+    resource.post('/api/user/create', { email, password, nickname })
 }
