@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { authModal } from './AuthActions';
+import Spinner from 'react-spinkit';
+import { authModal, signIn, join, logout } from './AuthActions';
 import AuthSignInForm from './AuthSignInForm';
 import AuthJoinForm from './AuthJoinForm';
 import './Auth.css';
@@ -11,7 +12,7 @@ class Auth extends Component {
     super(props);
 
     this.state = {
-      active: 'left'
+      active: 'signIn'
     };
     this.changeTab = this.changeTab.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -28,23 +29,26 @@ class Auth extends Component {
   }
 
   render() {
-    const { isOpen } = this.props.auth;
+    const { isOpen, isLoading } = this.props.auth;
+    const { signInRequest, joinRequest } = this.props;
     const { active } = this.state;
-    const form = active === 'left' ? <AuthSignInForm/> : <AuthJoinForm/>;
+    const form = active === 'signIn' ?
+      <AuthSignInForm signIn={signInRequest}/> : <AuthJoinForm join={joinRequest}/>;
     const modalContent =
     <div className="auth">
       <div className="auth-header">
-        <div className={`auth-left-button ${active === 'left' ? 'active' : ''}`}
-          onClick={() => this.changeTab('left')}>
+        <div className={`auth-left-button ${active === 'signIn' ? 'active' : ''}`}
+          onClick={() => this.changeTab('signIn')}>
           <div className="sign-in">로그인</div>
         </div>
-        <div className={`auth-right-button ${active === 'right' ? 'active' : ''}`}
-          onClick={() => this.changeTab('right')}>
+        <div className={`auth-right-button ${active === 'join' ? 'active' : ''}`}
+          onClick={() => this.changeTab('join')}>
           <div className="join">회원가입</div>
         </div>
       </div>
       <div className="auth-bar"></div>
       <div className="auth-body">
+        {isLoading ? <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="auth-spinner" /> : ''}
         {form}
       </div>
     </div>;
@@ -63,6 +67,9 @@ export default connect(
     auth: state.auth
   }),
   dispatch => ({
-    authModalClose: () => dispatch(authModal.close())
+    authModalClose: () => dispatch(authModal.close()),
+    signInRequest: user => dispatch(signIn.request(user)),
+    joinRequest: user => dispatch(join.request(user)),
+    logoutRequest: () => dispatch(logout.request())
   })
 )(Auth);

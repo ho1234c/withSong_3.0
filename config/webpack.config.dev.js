@@ -28,6 +28,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: "eslint-loader",
         options: {
+          fix: true,
           failOnWarning: true,
           failOnError: true,
           configFile: require.resolve('./.eslintrc'),

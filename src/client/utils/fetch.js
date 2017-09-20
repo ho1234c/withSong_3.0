@@ -21,7 +21,7 @@ export function fetchSong({ id }) {
 
 export const auth = {
   login: ({ email, password }) => resource.post('/api/user/login', { email, password }),
-  logout: () => resource.post('/api/user/logout'),
+  logout: () => resource.get('/api/user/logout'),
   register: ({ email, password, nickname }) =>
     resource.post('/api/user/create', { email, password, nickname })
-}
+};

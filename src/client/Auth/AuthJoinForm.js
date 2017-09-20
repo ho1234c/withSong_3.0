@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AuthJoinForm extends Component {
   constructor(props) {
@@ -10,12 +11,17 @@ class AuthJoinForm extends Component {
       nickname: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  handleSubmit() {
+    this.props.join(this.state);
   }
 
   render() {
@@ -26,11 +32,15 @@ class AuthJoinForm extends Component {
         <input type="password" name="password-retype" placeholder="비밀번호 확인"
           onChange={this.handleChange}/>
         <input type="text" name="nickname" placeholder="닉네임" onChange={this.handleChange}/>
-        <button type="button" className="join-submit-btn">가입</button>
+        <button type="button" className="join-submit-btn" onClick={this.handleSubmit}>가입</button>
         <button type="button" className="facebook-join-btn">페이스북으로 가입</button>
       </div>
     );
   }
 }
+
+AuthJoinForm.propTypes = {
+  join: PropTypes.func
+};
 
 export default AuthJoinForm;

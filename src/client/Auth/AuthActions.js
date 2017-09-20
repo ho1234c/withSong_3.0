@@ -26,3 +26,9 @@ export const join = {
   success: response => createActions(AUTH_JOIN_SUCCESS, { response }),
   failure: error => createActions(AUTH_REQUEST_FAILURE, { error })
 };
+
+export const logout = {
+  request: () => createActions(AUTH_LOGOUT_REQUEST),
+  success: () => createActions(AUTH_LOGOUT_SUCCESS),
+  failure: error => createActions(AUTH_REQUEST_FAILURE, { error })
+};
