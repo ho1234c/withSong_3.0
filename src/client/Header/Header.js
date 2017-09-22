@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { header, changeSearchInput } from './HeaderActions';
+import { headerMenu, changeSearchInput } from './HeaderActions';
 import { playerModal } from '../Player/PlayerActions';
-import { authModal } from '../Auth/AuthActions';
+import { authModal, logout } from '../Auth/AuthActions';
 import './Header.css';
 
 class Header extends Component {
@@ -12,8 +12,6 @@ class Header extends Component {
     this.tranStyle = { background: '#111' };
 
     this.search = this.search.bind(this);
-    this.handleOpenPlayerModal = this.handleOpenPlayerModal.bind(this);
-    this.handleOpenAuthModal = this.handleOpenAuthModal.bind(this);
   }
 
   componentDidMount() {
@@ -33,33 +31,29 @@ class Header extends Component {
     this.lastPos = currentPos;
   }
 
-  handleOpenPlayerModal() {
-    this.props.playerModalOpen();
-  }
-
-  handleOpenAuthModal() {
-    this.props.authModalOpen();
-  }
-
   search(e) {
     this.props.changeSearchInput(e.target.value);
   }
 
   render() {
-    const { isShow } = this.props.header;
+    const { header, isAuth, playerModalOpen, authModalOpen, logoutRequest } = this.props;
+    const authBtn = isAuth ?
+      <i className="fa fa-sign-out" aria-hidden="true" onClick={logoutRequest}></i> :
+      <i className="fa fa-user-circle" aria-hidden="true" onClick={authModalOpen}></i>;
+    const playerBtn = process.env.NODE_ENV !== 'production' || isAuth ?
+      <i className="fa fa-outdent" aria-hidden="true" onClick={playerModalOpen}></i> : '';
+
 
     return (
-      <div id="header" style={{ transform: isShow ? 'translateY(0)' : 'translateY(-100%)' }}>
+      <div id="header" style={{ transform: header.isShow ? 'translateY(0)' : 'translateY(-100%)' }}>
         <div id="header-logo">로고</div>
         <div id="header-search">
           <i className="fa fa-search" aria-hidden="true"></i>
           <input name="search" placeholder="검색하기" onChange={this.search} />
         </div>
         <div id="header-button">
-          <i className="fa fa-user-circle" aria-hidden="true"
-            onClick={this.handleOpenAuthModal}></i>
-          <i className="fa fa-outdent" aria-hidden="true"
-            onClick={this.handleOpenPlayerModal}></i>
+          {authBtn}
+          {playerBtn}
         </div>
       </div>
     );
@@ -68,12 +62,14 @@ class Header extends Component {
 
 export default connect(
   state => ({
-    header: state.header
+    header: state.header,
+    isAuth: state.auth.isAuth
   }),
   dispatch => ({
-    scroll: direction => dispatch(header.scroll(direction)),
+    scroll: direction => dispatch(headerMenu.scroll(direction)),
     changeSearchInput: word => dispatch(changeSearchInput(word)),
     playerModalOpen: () => dispatch(playerModal.open()),
-    authModalOpen: () => dispatch(authModal.open())
+    authModalOpen: () => dispatch(authModal.open()),
+    logoutRequest: () => dispatch(logout.request())
   })
 )(Header);

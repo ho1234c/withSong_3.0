@@ -7,7 +7,9 @@ class PlayerHeader extends Component {
 
     return (
       <div className="player-header">
-        <div className="player-header-name">Music Player</div>
+        <div className="player-header-playerBtn">Player</div>
+        <div className="player-header-createBtn">Create list</div>
+        <div className="player-header-underbar"></div>
         <div className="player-header-close" onClick={handleCloseModal}>
           <i className="fa fa-times" aria-hidden="true" />
         </div>

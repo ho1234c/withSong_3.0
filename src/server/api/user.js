@@ -31,11 +31,8 @@ router.post('/login', (ctx, next) =>
     if(err) {
       return next(err);
     }
-    console.log(user);
-    console.log(info);
     if(!user || info) {
-      ctx.body = { error: info };
-      ctx.throw(401);
+      ctx.throw(401, info);
     }
 
     ctx.body = { user: user.serialize() };
@@ -45,7 +42,6 @@ router.post('/login', (ctx, next) =>
 
 router.get('/logout', ctx => {
   ctx.logout();
-  ctx.status = 200;
 });
 
 module.exports = router;

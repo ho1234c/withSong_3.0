@@ -30,7 +30,7 @@ class PlayerListItem extends Component {
   }
 
   render() {
-    const { list } = this.props;
+    const { list, ckey } = this.props;
     const bodyClass = `player-list-component${(this.state.isHover ? ' hover' : '')}`;
     const thumbnail = JSON.parse(list.thumbnail);
 
@@ -38,6 +38,7 @@ class PlayerListItem extends Component {
       <div className={`${bodyClass}${list.select ? ' nowSelected' : ''}`}
         onClick={() => this.handleClick(list.id)}
         onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+        <div className="player-list-id">{ckey}</div>
         <div className="player-list-thumbnail">
           <img src={path.join('thumbnails', thumbnail.src)} />
         </div>

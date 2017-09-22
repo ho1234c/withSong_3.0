@@ -38,6 +38,6 @@ export const playerModal = {
 };
 
 export const play = {
-  start: (videoId, key) => createActions(PLAY_START, { videoId, key }),
+  start: (videoId, key, listId) => createActions(PLAY_START, { videoId, key, listId }),
   stop: () => createActions(PLAY_STOP)
 };

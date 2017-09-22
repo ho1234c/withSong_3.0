@@ -4,6 +4,7 @@ import * as ActionTypes from './AuthActions';
 const initialState = {
   isOpen: false,
   isLoading: false,
+  isAuth: false,
   user: {}
 };
 
@@ -31,6 +32,7 @@ export default (state = initialState, action) => {
     case ActionTypes.AUTH_JOIN_SUCCESS:
       return {
         ...initialState,
+        isAuth: true,
         user: data.response
       };
     case ActionTypes.AUTH_REQUEST_FAILURE:
@@ -38,6 +40,8 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false
       };
+    case ActionTypes.AUTH_LOGOUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

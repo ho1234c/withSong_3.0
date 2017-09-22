@@ -34,6 +34,7 @@ class Player extends Component {
     const modalContent =
     <div className="player">
       <Header handleCloseModal={this.handleCloseModal} />
+      <div className="player-bar"></div>
       <div className="player-body-container">
         <div className="player-body-left"><List lists={lists} getSong={this.getSong}/></div>
         <div className="player-body-right"><Song songs={song.songs} playSong={playSong}/></div>
@@ -57,7 +58,7 @@ export default connect(
   dispatch => ({
     getListRequest: id => dispatch(getList.request(id)),
     getSongRequest: id => dispatch(getSong.request(id)),
-    playSong: (videoId, key) => dispatch(play.start(videoId, key)),
+    playSong: (videoId, key, listId) => dispatch(play.start(videoId, key, listId)),
     playerModalClose: () => dispatch(playerModal.close())
   })
 )(Player);

@@ -5,9 +5,9 @@ import { getList } from '../List/ListActions';
 
 function* toggle(action) {
   if(action.payload.direction === 'down') {
-    yield put(actions.header.show());
+    yield put(actions.headerMenu.show());
   }else {
-    yield put(actions.header.hide());
+    yield put(actions.headerMenu.hide());
   }
 }
 

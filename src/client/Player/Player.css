@@ -6,20 +6,44 @@
   height: 700px;
 
   & .player-header {
-  padding: 5px 10px;
-  align-items: center;
+    min-height: 50px;
+    position: relative;
+    align-items: center;
 
-  & .player-header-name {
-      font-size: 1.2rem;
-      font-weight: bold;
+    & .player-header-playerBtn {
+        font-size: 1.1rem;
+        font-weight: bold;
+        width: 150px;
+        justify-content: center;
     }
 
-  & .player-header-close {
-      font-size: 2rem;
-      margin: 0 0 0 auto;
-      cursor: pointer;
-      color: var(--color-main-gray1);
+    & .player-header-createBtn {
+        font-size: 1.1rem;
+        font-weight: bold;
+        width: 150px;
+        justify-content: center;
     }
+
+    & .player-header-underbar {
+      width: 150px;
+      position: absolute;
+      height: 2px;
+      bottom: 0;
+      background-color: var(--color-main-theme);
+    }
+
+    & .player-header-close {
+        font-size: 2rem;
+        margin: 0 10px 0 auto;
+        cursor: pointer;
+        color: var(--color-main-gray1);
+      }
+  }
+
+  & .player-bar {
+    height: 2px;
+    width: 100%;
+    background-color: var(--color-main-gray1);
   }
 
   & .player-body-container {
@@ -32,11 +56,16 @@
         flex-direction: column;
         overflow: auto;
         width: 400px;
-        max-height: 300px;
 
         & .player-list-component {
           min-height: 70px;
           align-items: center;
+
+          & .player-list-id {
+            padding: 8px;
+            font-size: 0.9rem;
+            color: var(--color-main-gray2);
+          }
 
           & .player-list-thumbnail {
 
@@ -65,13 +94,15 @@
     }
 
     & .player-body-right {
-      
+
         & .player-song {
           flex-direction: column;
+          overflow: auto;
 
           & .player-song-component {
             min-height: 70px;
             align-items: center;
+            padding: 0px 10px;
 
             & .player-song-thumbnail {
 
