@@ -5,7 +5,7 @@ import * as videoActions from '../Video/VideoActions';
 import { play as playerPlay } from '../Player/PlayerActions';
 import { list, player } from '../utils/selector';
 
-function* getList(action) {
+export function* getList(action) {
   try {
     const response = yield call(fetchList, action.payload);
 
@@ -15,7 +15,7 @@ function* getList(action) {
   }
 }
 
-function* getSong(action) {
+export function* getSong(action) {
   const playingVideo = yield select(list.getPlayingVideo);
   const isRetain = playingVideo.listId === action.payload.id ? playingVideo : '';
 
@@ -28,7 +28,7 @@ function* getSong(action) {
   }
 }
 
-function* playSong(action) {
+export function* playSong(action) {
   const isPlaying = yield select(player.isPlaying);
 
   if(isPlaying) {
@@ -37,7 +37,7 @@ function* playSong(action) {
   yield put(videoActions.video.change(action.payload.videoId));
 }
 
-function* nextPlayFlow() {
+export function* nextPlayFlow() {
   while(true) {
     yield take(videoActions.VIDEO_END);
     const isPlaying = yield select(list.isPlaying);
@@ -55,15 +55,15 @@ function* nextPlayFlow() {
   }
 }
 
-function* watchGetList() {
+export function* watchGetList() {
   yield takeEvery(listActions.LIST_REQUEST, getList);
 }
 
-function* watchGetSong() {
+export function* watchGetSong() {
   yield takeEvery(listActions.SONG_REQUEST, getSong);
 }
 
-function* watchPlaySong() {
+export function* watchPlaySong() {
   yield takeEvery(listActions.PLAY_START, playSong);
 }
 

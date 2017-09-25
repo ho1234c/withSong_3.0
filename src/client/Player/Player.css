@@ -12,16 +12,24 @@
 
     & .player-header-playerBtn {
         font-size: 1.1rem;
-        font-weight: bold;
         width: 150px;
         justify-content: center;
+        align-items: center;
+        & > i {
+          font-size: 1.5rem;
+          margin: 0 5px;
+        }
     }
 
     & .player-header-createBtn {
         font-size: 1.1rem;
-        font-weight: bold;
         width: 150px;
         justify-content: center;
+        align-items: center;
+        & > i {
+          font-size: 1.4rem;
+          margin: 0 5px;
+        }
     }
 
     & .player-header-underbar {

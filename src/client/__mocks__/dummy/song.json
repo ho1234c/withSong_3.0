@@ -1,0 +1,120 @@
+{
+    "id": 28,
+    "songInfo": [
+        {
+            "videoId": "jy_UiIQn_d0",
+            "snippet": {
+                "publishedAt": "2017-06-28T11:00:28.000Z",
+                "channelId": "UCtCiO5t2voB14CmZKTkIzPQ",
+                "title": "[세로라이브] 윤종신 - 좋니",
+                "description": "안녕하세요 Dingo music(딩고뮤직) 입니다. 이번 영상은 윤종신의 '좋니' 세로라이브 영상! 함께 볼까요? - Dingo Music 구독하기 - https://www.youtube.com/channel ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/jy_UiIQn_d0/default.jpg",
+                        "width": "120",
+                        "height": "90"
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/jy_UiIQn_d0/mqdefault.jpg",
+                        "width": "320",
+                        "height": "180"
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/jy_UiIQn_d0/hqdefault.jpg",
+                        "width": "480",
+                        "height": "360"
+                    }
+                },
+                "channelTitle": "딩고 뮤직",
+                "liveBroadcastContent": "none"
+            }
+        },
+        {
+            "videoId": "b1kQvZhQ6_M",
+            "snippet": {
+                "publishedAt": "2017-06-22T03:00:00.000Z",
+                "channelId": "UCweOkPb1wVVH0Q0Tlj4a5Pw",
+                "title": "[MV] Jong Shin Yoon(윤종신) _ Like it(좋니)",
+                "description": "[MV] Jong Shin Yoon(윤종신) _ Like it(좋니) *English subtitles are now available. :D (Please click on 'CC' button or activate 'Interactive Transcript' function) ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/b1kQvZhQ6_M/default.jpg",
+                        "width": "120",
+                        "height": "90"
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/b1kQvZhQ6_M/mqdefault.jpg",
+                        "width": "320",
+                        "height": "180"
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/b1kQvZhQ6_M/hqdefault.jpg",
+                        "width": "480",
+                        "height": "360"
+                    }
+                },
+                "channelTitle": "1theK (원더케이)",
+                "liveBroadcastContent": "none"
+            }
+        },
+        {
+            "videoId": "i0EGhaA4ayI",
+            "snippet": {
+                "publishedAt": "2017-06-27T04:00:36.000Z",
+                "channelId": "UC_pwIXKXNm5KGhdEVzmY60A",
+                "title": "2017 월간 윤종신 6월호 윤종신 (Jong Shin Yoon) - 끝 무렵 (Forgetful) MV",
+                "description": "2017 [월간 윤종신] 6월호 '끝 무렵' 2017 월간 윤종신 6월호 '끝 무렵'은 냉소적인 발라드이다. 우리가 이별을 예감할 때 내보이는 양면적인 감정을...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/i0EGhaA4ayI/default.jpg",
+                        "width": "120",
+                        "height": "90"
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/i0EGhaA4ayI/mqdefault.jpg",
+                        "width": "320",
+                        "height": "180"
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/i0EGhaA4ayI/hqdefault.jpg",
+                        "width": "480",
+                        "height": "360"
+                    }
+                },
+                "channelTitle": "CJENMMUSIC Official",
+                "liveBroadcastContent": "none"
+            }
+        },
+        {
+            "videoId": "YRRcJFa4oDU",
+            "snippet": {
+                "publishedAt": "2017-08-17T03:37:25.000Z",
+                "channelId": "UC4UqcHiuMVMtmerrSayWIQA",
+                "title": "미교 - 좋니/윤종신 (Yoon Jong Shin) (여자 답가ver.) 커버cover",
+                "description": "안녕하세요~^^ 가수 미교 입니다 윤종신 선배님의 '좋니'의 여자 답가 버전입니다~! 원곡 '좋니' 가사와 비교해서 들어주세요! 여자는 남자가 알고...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/YRRcJFa4oDU/default.jpg",
+                        "width": "120",
+                        "height": "90"
+                    },
+                    "medium": {
+                        "url": "https://i.ytimg.com/vi/YRRcJFa4oDU/mqdefault.jpg",
+                        "width": "320",
+                        "height": "180"
+                    },
+                    "high": {
+                        "url": "https://i.ytimg.com/vi/YRRcJFa4oDU/hqdefault.jpg",
+                        "width": "480",
+                        "height": "360"
+                    }
+                },
+                "channelTitle": "쩐미교",
+                "liveBroadcastContent": "none"
+            }
+        }
+    ],
+    "like": 0,
+    "name": "윤종신",
+    "createdAt": "2017-08-24T05:45:35.972Z"
+}

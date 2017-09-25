@@ -12,6 +12,7 @@ const resource = {
 };
 
 export function fetchList({ word, num }) {
+  console.log(resource.get('/api/list', { word, num }));
   return resource.get('/api/list', { word, num });
 }
 

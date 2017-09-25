@@ -1,0 +1,9 @@
+{
+  "user": {
+      "id": 9,
+      "nickname": "test2",
+      "email": "test2@test.com",
+      "list": [],
+      "comment": []
+  }
+}

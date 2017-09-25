@@ -36,10 +36,10 @@ class List extends Component {
   }
 
   render() {
-    const { list, isLoadingBySearch, playSong } = this.props;
+    const { list, header, playSong } = this.props;
     const { songs, isOpen, isLoading } = list.modal;
 
-    if(isLoadingBySearch) {
+    if(header.isLoading) {
       return <section>
         <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="list-spinner" />
       </section>;
@@ -74,7 +74,7 @@ class List extends Component {
 export default connect(
   state => ({
     list: state.list,
-    isLoadingBySearch: state.header.isLoading
+    header: state.header
   }),
   dispatch => ({
     getListRequest: (word, num) => dispatch(getList.request(word, num)),

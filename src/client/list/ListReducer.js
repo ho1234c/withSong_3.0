@@ -21,7 +21,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  const data = action.payload;
+  const data = action ? action.payload : '';
 
   switch(action.type) {
     case ActionTypes.LIST_REQUEST:
