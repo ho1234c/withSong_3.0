@@ -16,10 +16,9 @@ export function* getList(action) {
 }
 
 export function* getSong(action) {
-  const playingVideo = yield select(list.getPlayingVideo);
-  const isRetain = playingVideo.listId === action.payload.id ? playingVideo : '';
-
   try {
+    const playingVideo = yield select(list.getPlayingVideo);
+    const isRetain = playingVideo && playingVideo.listId === action.payload.id ? playingVideo : false;
     const response = yield call(fetchSong, action.payload);
 
     yield put(listActions.getSong.success(response.data, isRetain));
