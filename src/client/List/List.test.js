@@ -25,7 +25,6 @@ describe('ListSaga - getList', () => {
   });
 
   it('put a action for success of list request', () => {
-
     expect(gen.next({ data: fakeResource }).value)
       .toEqual(put(listActions.getList.success(fakeResource)));
   });
@@ -91,6 +90,49 @@ describe('ListSaga - playSong', () => {
   })
 
   it('done', () => {
-    expect(gen.next().done).toBe(true)
+    expect(gen.next().done).toBe(true);
   });
 })
+
+describe('ListSaga - nextPlayFlow', () => {
+  const data = {}
+  data.gen = cloneableGenerator(listSaga.nextPlayFlow)();
+
+  it('takes Video end action', () => {
+    expect(data.gen.next().value)
+      .toEqual(take(videoActions.VIDEO_END))
+  })
+
+  it('select whether "List" is currently playing', () => {
+    expect(data.gen.next().value)
+      .toEqual(select(list.isPlaying));
+  })
+
+  it('if state of "List" is not playing, return to waiting for the video action.', () => {
+    data.clone = data.gen.clone(); // branching to what is playing
+    expect(data.clone.next(false).value)
+      .toEqual(take(videoActions.VIDEO_END));
+  })
+
+  it('if state of "List" is playing, following are performed.', () => {
+    data.clone = data.gen.clone(); // branching to last video
+    expect(data.gen.next(true).value)
+      .toEqual(select(list.getNextVideo));
+  })
+
+  it('if this video is not last, start next video', () => {
+    const fakeData = { videoId: true, key: true }
+    
+    expect(data.gen.next(fakeData).value)
+    .toEqual(put(listActions.play.start(true, true)));
+    expect(data.gen.next().value)
+    .toEqual(put(videoActions.video.change(true)));
+  })
+
+  it('done, waiting for the video action', () => {
+    expect(data.clone.next().value)
+      .toEqual(take(videoActions.VIDEO_END));
+    expect(data.gen.next().value)
+      .toEqual(take(videoActions.VIDEO_END));
+  });
+})  
