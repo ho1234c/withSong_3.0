@@ -6,7 +6,7 @@ class PlayerList extends Component {
   render() {
     const { lists, getSong } = this.props;
     const components = lists.map((list, key) =>
-      <PlayerListItem key={key} ckey={key} list={list} getSong={getSong} />);
+      <PlayerListItem key={key} ckey={key + 1} list={list} getSong={getSong} />);
 
     return (
       <div className="player-list">

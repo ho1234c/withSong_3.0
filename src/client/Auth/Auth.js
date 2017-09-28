@@ -11,16 +11,20 @@ class Auth extends Component {
   constructor(props) {
     super(props);
 
+    this.MODE = {
+      SIGNIN: 'signIn',
+      JOIN: 'join'
+    };
     this.state = {
-      active: 'signIn'
+      active: this.MODE.SIGNIN
     };
     this.changeTab = this.changeTab.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-  changeTab(direction) {
+  changeTab(mode) {
     this.setState({
-      active: direction
+      active: mode
     });
   }
 
@@ -32,17 +36,18 @@ class Auth extends Component {
     const { isOpen, isLoading } = this.props.auth;
     const { signInRequest, joinRequest } = this.props;
     const { active } = this.state;
-    const form = active === 'signIn' ?
+    const { MODE } = this;
+    const form = active === MODE.SIGNIN ?
       <AuthSignInForm signIn={signInRequest}/> : <AuthJoinForm join={joinRequest}/>;
     const modalContent =
     <div className="auth">
       <div className="auth-header">
-        <div className={`auth-header-leftBtn ${active === 'signIn' ? 'active' : ''}`}
-          onClick={() => this.changeTab('signIn')}>
+        <div className={`auth-header-leftBtn ${active === MODE.SIGNIN ? 'active' : ''}`}
+          onClick={() => this.changeTab(MODE.SIGNIN)}>
           <div className="sign-in">로그인</div>
         </div>
-        <div className={`auth-header-rightBtn ${active === 'join' ? 'active' : ''}`}
-          onClick={() => this.changeTab('join')}>
+        <div className={`auth-header-rightBtn ${active === MODE.JOIN ? 'active' : ''}`}
+          onClick={() => this.changeTab(MODE.JOIN)}>
           <div className="join">회원가입</div>
         </div>
         <div className={`auth-header-underbar ${active}`}></div>

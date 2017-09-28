@@ -14,6 +14,16 @@ const initialState = {
     videoId: '',
     listId: '',
     key: ''
+  },
+  create: {
+    isLoading: false,
+    searchSong: {},
+    form: {
+      name: '',
+      detail: '',
+      songInfo: {},
+      thumbnail: {}
+    }
   }
 };
 
