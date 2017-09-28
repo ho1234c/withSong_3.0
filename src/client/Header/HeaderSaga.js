@@ -3,7 +3,7 @@ import { take, call, put, takeLatest, fork } from 'redux-saga/effects';
 import * as actions from './HeaderActions';
 import { getList } from '../List/ListActions';
 
-function* toggle(action) {
+export function* toggle(action) {
   if(action.payload.direction === 'down') {
     yield put(actions.headerMenu.show());
   }else {
@@ -11,14 +11,14 @@ function* toggle(action) {
   }
 }
 
-function* search(action) {
+export function* search(action) {
   yield delay(1000); // pending for user input
   yield put(actions.search.start());
   yield put(getList.request(action.payload.word));
   yield put(actions.search.end());
 }
 
-function* watchScroll() {
+export function* watchScroll() {
   while(true) {
     const action = yield take(actions.HEADER_SCROLL);
     /* blocking */
@@ -26,11 +26,11 @@ function* watchScroll() {
   }
 }
 
-function* watchSearch() {
+export function* watchSearch() {
   yield takeLatest(actions.CHANGE_SEARCH_INPUT, search);
 }
 
-export const headerSaga = [
+export default [
   fork(watchScroll),
   fork(watchSearch)
 ];

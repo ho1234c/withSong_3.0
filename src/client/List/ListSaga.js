@@ -18,7 +18,8 @@ export function* getList(action) {
 export function* getSong(action) {
   try {
     const playingVideo = yield select(list.getPlayingVideo);
-    const isRetain = playingVideo && playingVideo.listId === action.payload.id ? playingVideo : false;
+    const isRetain = playingVideo && playingVideo.listId === action.payload.id ?
+      playingVideo : false;
     const response = yield call(fetchSong, action.payload);
 
     yield put(listActions.getSong.success(response.data, isRetain));
@@ -66,7 +67,7 @@ export function* watchPlaySong() {
   yield takeEvery(listActions.PLAY_START, playSong);
 }
 
-export const listSaga = [
+export default [
   fork(watchGetList),
   fork(watchGetSong),
   fork(watchPlaySong),

@@ -68,7 +68,7 @@ function* watchPlaySong() {
   yield takeEvery(playerActions.PLAY_START, playSong);
 }
 
-export const playerSaga = [
+export default [
   fork(watchGetList),
   fork(watchGetSong),
   fork(watchPlaySong),

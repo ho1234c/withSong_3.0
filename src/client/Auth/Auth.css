@@ -8,8 +8,10 @@
   & .auth-header {
     height: 50px;
     flex-direction: row;
+    position: relative;
+    cursor: pointer;
 
-    & .auth-left-button {
+    & .auth-header-leftBtn {
       width: 50%;
       height: 50px;
       position: absolute;
@@ -19,7 +21,7 @@
       align-items: center;
     }
 
-    & .auth-right-button {
+    & .auth-header-rightBtn {
       width: 50%;
       height: 50px;
       position: absolute;
@@ -31,16 +33,24 @@
 
     & .active {
       color: var(--color-main-theme);
+    }
 
-      &::after {
-        content: " ";
-        position: absolute;
-        bottom: -2px;
-        height: 3px;
-        width: 100%;
-        background-color: var(--color-main-theme);
-        margin-top: auto;
-      }
+    & .auth-header-underbar {
+      width: 200px;
+      position: absolute;
+      height: 3px;
+      bottom: -1px;
+      background-color: var(--color-main-theme);
+      transition: all 0.3s ease-out;
+      left: 0;
+    }
+
+    & .signIn {
+      left: 0;
+    }
+
+    & .join {
+      left: 200px;
     }
   }
   & .auth-bar {
@@ -90,10 +100,12 @@
 
       & .email-login-btn {
         background-color:  var(--color-main-gray2);
+        cursor: pointer;
       }
 
       & .facebook-login-btn {
         background-color: var(--color-facebook);
+        cursor: pointer;        
       }
     }
 
@@ -132,11 +144,13 @@
       }
 
       & .join-submit-btn {
-        background-color:  var(--color-main-gray2);        
+        background-color:  var(--color-main-gray2);
+        cursor: pointer;
       }
 
       & .facebook-join-btn {
         background-color: var(--color-facebook);
+        cursor: pointer;        
       }
     }
   }

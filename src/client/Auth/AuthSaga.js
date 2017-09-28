@@ -2,7 +2,7 @@ import { call, put, take, fork, race } from 'redux-saga/effects';
 import * as AuthActions from './AuthActions';
 import { auth } from '../utils/fetch';
 
-function* signIn(user) {
+export function* signIn(user) {
   try {
     return yield call(auth.login, user);
   }catch(error) {
@@ -11,7 +11,7 @@ function* signIn(user) {
   }
 }
 
-function* loginFlow() {
+export function* loginFlow() {
   while(true) {
     const request = yield take(AuthActions.AUTH_SIGN_IN_REQUEST);
     const { email, password } = request.payload.user;
@@ -27,7 +27,7 @@ function* loginFlow() {
   }
 }
 
-function* join(user) {
+export function* join(user) {
   try {
     return yield call(auth.register, user);
   }catch(error) {
@@ -35,7 +35,7 @@ function* join(user) {
   }
 }
 
-function* joinFlow() {
+export function* joinFlow() {
   while(true) {
     const request = yield take(AuthActions.AUTH_JOIN_REQUEST);
     const { email, password, nickname } = request.payload.user;
@@ -63,7 +63,7 @@ export function* logoutFlow() {
   }
 }
 
-export const authSaga = [
+export default [
   fork(loginFlow),
   fork(joinFlow),
   fork(logoutFlow)

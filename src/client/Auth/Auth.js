@@ -37,14 +37,15 @@ class Auth extends Component {
     const modalContent =
     <div className="auth">
       <div className="auth-header">
-        <div className={`auth-left-button ${active === 'signIn' ? 'active' : ''}`}
+        <div className={`auth-header-leftBtn ${active === 'signIn' ? 'active' : ''}`}
           onClick={() => this.changeTab('signIn')}>
           <div className="sign-in">로그인</div>
         </div>
-        <div className={`auth-right-button ${active === 'join' ? 'active' : ''}`}
+        <div className={`auth-header-rightBtn ${active === 'join' ? 'active' : ''}`}
           onClick={() => this.changeTab('join')}>
           <div className="join">회원가입</div>
         </div>
+        <div className={`auth-header-underbar ${active}`}></div>
       </div>
       <div className="auth-bar"></div>
       <div className="auth-body">
