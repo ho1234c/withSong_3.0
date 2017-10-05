@@ -9,6 +9,30 @@
   background-color: var(--color-black);
   border-radius: 3px;
   z-index: 30;
+  flex-direction: column;
+
+  & .video-header {
+    color: var(--color-white);
+    height: 40px;
+    align-items: center;
+
+    & .layout-controller {
+      font-size: 2rem;
+      margin: 10px;
+    }
+
+    & .volume-controller {
+      width: 90px;
+      align-items: center;      
+      margin-left: 10px;
+      margin-left: auto;
+      font-size: 1.2rem;
+
+      & .slider {
+        margin: 10px;
+      }
+    }
+  }
 
   & .youtube {
     margin-top: auto;

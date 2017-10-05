@@ -63,7 +63,7 @@ class Player extends Component {
             tabToCreate={() => this.changeTab(MODE.CREATE)}/>
           <div className="player-bar"></div>
           {this.state.active === MODE.PLAYER ? playerBody : createBody}
-        </div>;
+        </div>
       </Modal>
     );
   }
