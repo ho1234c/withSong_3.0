@@ -13,12 +13,14 @@ class Video extends Component {
     this.state = {
       player: null,
       volume: 50,
-      isMuted: false
+      isMuted: false,
+      isHide: false
     };
 
     this.onReady = this.onReady.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onMute = this.onMute.bind(this);
+    this.hideToggle = this.hideToggle.bind(this);
   }
 
   onReady(event) {
@@ -51,6 +53,12 @@ class Video extends Component {
     });
   }
 
+  hideToggle() {
+    this.setState({
+      isHide: !this.state.isHide
+    });
+  }
+
   render() {
     const opts = {
       width: '240',
@@ -60,9 +68,13 @@ class Video extends Component {
       }
     };
     const { videoId, videoEnd } = this.props;
+    const { isHide, isMuted, volume } = this.state;
     const volumeBtn = this.state.isMuted ?
       <i className="fa fa-volume-off" aria-hidden="true" onClick={this.onMute}></i> :
       <i className="fa fa-volume-up" aria-hidden="true" onClick={this.onMute}></i>;
+    const hideBtn = this.state.isHide ?
+      <i className="fa fa-caret-up" aria-hidden="true"></i> :
+      <i className="fa fa-caret-down" aria-hidden="true"></i>;
     const handleStyle = {
       border: false,
       height: 12,
@@ -76,14 +88,14 @@ class Video extends Component {
     }
 
     return (
-      <div id="video-container">
+      <div className={`video-container ${isHide ? 'hide' : ''}`}>
         <div className="video-header">
-          <div className="layout-controller">
-            <i className="fa fa-caret-down" aria-hidden="true"></i>
+          <div className="layout-controller" onClick={this.hideToggle}>
+            {hideBtn}
           </div>
           <div className="volume-controller">
             {volumeBtn}
-            <Slider className="slider" value={this.state.isMuted ? 0 : this.state.volume}
+            <Slider className="slider" value={isMuted ? 0 : volume}
               onChange={this.onChange} min={0} max={100} handleStyle={handleStyle}/>
           </div>
         </div>

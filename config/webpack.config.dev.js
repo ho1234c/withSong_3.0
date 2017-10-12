@@ -11,13 +11,13 @@ module.exports = {
   devServer: {
     filename: 'bundle.js',
     port: 8080,
-    // publicPath: path.resolve('public'),
     contentBase: path.resolve('public'),
     proxy: {
       "/api": "http://localhost:8000"
     },
     watchOptions: {
-      ignore: path.resolve("src/server/*.js")
+      ignore: path.resolve("src/server/*.js"),
+      aggregateTimeout: 300
     }
   },
   module: {
@@ -84,14 +84,5 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     })
-    // new webpack.optimize.UglifyJsPlugin({
-    //   ecma: 8,
-    //   sourceMap: true,
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: "vendor",
-    //   filename: "vendor.js",
-    //   minChunks: module => module.context && module.context.indexOf("node_modules") !== -1
-    // })
   ]
 }

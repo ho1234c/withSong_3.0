@@ -1,6 +1,6 @@
 @import 'config.css';
 
-#video-container{
+.video-container{
   position: fixed;
   right: 0;
   bottom: 0;
@@ -10,6 +10,7 @@
   border-radius: 3px;
   z-index: 30;
   flex-direction: column;
+  transition: all 0.5s ease-out;
 
   & .video-header {
     color: var(--color-white);
@@ -37,4 +38,8 @@
   & .youtube {
     margin-top: auto;
   }
+}
+
+.hide {
+  bottom: -180px;  
 }
