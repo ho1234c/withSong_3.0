@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const List = sequelize.define('List',
+  const List = sequelize.define(
+    'List',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       name: { type: DataTypes.STRING, allowNull: false },
@@ -10,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  List.associate = models => {
+  List.associate = (models) => {
     List.belongsTo(models.User, { foreignKey: 'makerId', as: 'maker' });
     List.belongsToMany(models.User, { as: 'favor', through: 'UserListFavor' });
     List.hasMany(models.Comment, { foreignKey: 'listId' });

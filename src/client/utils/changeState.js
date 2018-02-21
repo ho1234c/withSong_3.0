@@ -1,5 +1,5 @@
 export default function changeState(item, changedItemKey, update) {
-  if(Object.prototype.hasOwnProperty.call(item, changedItemKey)) {
+  if (Object.prototype.hasOwnProperty.call(item, changedItemKey)) {
     return {
       ...item,
       [changedItemKey]: typeof update === 'function' ?

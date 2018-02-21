@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Comment = sequelize.define('Comment',
+  const Comment = sequelize.define(
+    'Comment',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       content: { type: DataTypes.STRING, allowNull: false },
@@ -7,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Comment.associate = models => {
+  Comment.associate = (models) => {
     Comment.belongsTo(models.User, { foreignKey: 'writerId' });
     Comment.belongsTo(models.List, { foreignKey: 'listId' });
     Comment.belongsToMany(models.User, { as: 'userFavor', through: 'UserCommentFavor' });

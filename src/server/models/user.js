@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User',
+  const User = sequelize.define(
+    'User',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       email: { type: DataTypes.STRING, allowNull: false },
@@ -18,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   );
 
-  User.associate = models => {
+  User.associate = (models) => {
     User.belongsToMany(models.List, { as: 'listFavor', through: 'UserListFavor' });
     User.belongsToMany(models.Comment, { as: 'commentFavor', through: 'UserCommentFavor' });
     User.hasMany(models.List, { foreignKey: 'makerId' });
@@ -37,13 +38,15 @@ module.exports = (sequelize, DataTypes) => {
 
   User.prototype.authenticate = function authenticate(password) {
     return new Promise((resolve, reject) => {
-      bcrypt.compare(password, this.password_hash,
+      bcrypt.compare(
+        password, this.password_hash,
         (err, isMatch) => {
-          if(err) {
+          if (err) {
             return reject(err);
           }
           return resolve(isMatch);
-        });
+        }
+      );
     });
   };
 
@@ -53,11 +56,11 @@ module.exports = (sequelize, DataTypes) => {
 async function hashPasswordHook(userList, options) {
   userList = Array.isArray(userList) ? userList : [userList];
 
-  await Promise.all(userList.map(async user => {
+  await Promise.all(userList.map(async (user) => {
     const pwd = user.get('password');
     let hash = null;
 
-    if(pwd) {
+    if (pwd) {
       hash = await hashPromise(pwd, 10);
     }
     user.set('password_hash', hash);
@@ -67,7 +70,7 @@ async function hashPasswordHook(userList, options) {
 async function hashPromise(password, salt = 10) {
   return new Promise((resolve, reject) => {
     bcrypt.hash(password, salt, (err, hash) => {
-      if(err) reject(err);
+      if (err) reject(err);
       resolve(hash);
     });
   });

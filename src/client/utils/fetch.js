@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { URL } from '../config';
 
-const resource = {
+const fetch = {
   get: async (url, params) => {
     const res = await axios({ method: 'get', params, url });
     return res;
@@ -11,17 +12,13 @@ const resource = {
   }
 };
 
-export function fetchList({ word, num }) {
-  return resource.get('/api/list', { word, num });
-}
-
-export function fetchSong({ id }) {
-  return resource.get('/api/list/song', { id });
-}
+export const resource = {
+  getList: ({ word, num }) => fetch.get(URL.GET_LIST, { word, num }),
+  getSong: ({ id }) => fetch.get(URL.GET_SONG, { id })
+};
 
 export const auth = {
-  login: ({ email, password }) => resource.post('/api/user/login', { email, password }),
-  logout: () => resource.get('/api/user/logout'),
-  register: ({ email, password, nickname }) =>
-    resource.post('/api/user/create', { email, password, nickname })
+  login: ({ email, password }) => fetch.post(URL.LOGIN, { email, password }),
+  logout: () => fetch.get(URL.LOGOUT),
+  register: ({ email, password, nickname }) => fetch.post(URL.REGISTER, { email, password, nickname })
 };

@@ -6,13 +6,13 @@ const router = Router({
   prefix: '/user'
 });
 
-router.post('/create', async ctx => {
+router.post('/create', async (ctx) => {
   const { email, password, nickname } = ctx.request.body;
 
   try {
     const isDuplicate = !!(await db.User.count({ where: { email } }));
 
-    if(isDuplicate > 0) {
+    if (isDuplicate > 0) {
       ctx.status = 409;
       ctx.body = { error: 'duplicate email' };
       return;
@@ -21,26 +21,25 @@ router.post('/create', async ctx => {
 
     ctx.logIn(user);
     ctx.body = { user: user.serialize() };
-  }catch(error) {
+  } catch (error) {
     ctx.throw(500);
   }
 });
 
 router.post('/login', (ctx, next) =>
   passport.authenticate('local', async (err, user, info, status) => {
-    if(err) {
+    if (err) {
       return next(err);
     }
-    if(!user || info) {
+    if (!user || info) {
       ctx.throw(401, info);
     }
 
     ctx.body = { user: user.serialize() };
     return ctx.logIn(user);
-  })(ctx, next)
-);
+  })(ctx, next));
 
-router.get('/logout', ctx => {
+router.get('/logout', (ctx) => {
   ctx.logout();
 });
 

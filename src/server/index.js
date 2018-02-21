@@ -15,7 +15,7 @@ app.use(router.routes(), router.allowedMethods());
   try {
     await db.sequelize.sync();
     console.log('Success to database syncronize');
-  }catch(err) {
+  } catch (err) {
     console.log('Fail to database syncronize \n', `${err.name} : ${err.message}`);
   }
 })();

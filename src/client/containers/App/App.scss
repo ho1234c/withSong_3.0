@@ -1,0 +1,39 @@
+@import '../../config.scss';
+
+html {
+  font-size: var(--font-root-size);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+
+  * {
+    box-sizing: border-box;
+    display: flex;
+  }
+}
+
+#container {
+  flex-direction: column;
+  flex: 1;
+}
+
+.modal-spinner {
+  align-items: center;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.75);
+}
