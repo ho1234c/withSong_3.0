@@ -1,11 +1,11 @@
-import { call, put, select, take, takeEvery, fork } from 'redux-saga/effects';
-import { fetchList, fetchSong } from '../utils/fetch';
-import * as listActions from './ListActions';
-import * as videoActions from '../Video/VideoActions';
-import { play as playerPlay } from '../Player/PlayerActions';
-import { list, player } from '../utils/selector';
-import * as listSaga from './ListSaga';
+import { call, put, select, take, takeEvery } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
+import { fetchList, fetchSong } from '../../utils/fetch';
+import * as listActions from './actions';
+import * as videoActions from '../Video/actions';
+import { play as playerPlay } from '../Player/actions';
+import { list, player } from '../../utils/selector';
+import * as listSaga from './saga';
 
 const fakeResource = { resource: '' };
 
@@ -33,7 +33,7 @@ describe('ListSaga', () => {
     it('done', () => {
       expect(gen.next().done).toBe(true);
     });
-  })
+  });
 
   describe('when getSong request event occurs, song is retrieved from server', () => {
     const fakeAction = listActions.getSong.request();
@@ -63,7 +63,7 @@ describe('ListSaga', () => {
     it('done', () => {
       expect(gen.next().done).toBe(true);
     });
-  })
+  });
 
   describe('when playSong event occurs, play song', () => {
     const fakeAction = listActions.play.start();
@@ -93,7 +93,7 @@ describe('ListSaga', () => {
     it('done', () => {
       expect(gen.next().done).toBe(true);
     });
-  })
+  });
 
   describe('when VideoEnd event occurs, play next song in list', () => {
     const data = {}
