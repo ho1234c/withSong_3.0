@@ -1,5 +1,5 @@
 import { call, put, select, take, takeEvery, fork } from 'redux-saga/effects';
-import { fetchList, fetchSong } from '../../utils/fetch';
+import { resource } from '../../utils/fetch';
 import { player, list } from '../../utils/selector';
 import * as playerActions from './actions';
 import * as videoActions from '../Video/actions';
@@ -8,7 +8,7 @@ import * as listActions from '../List/actions';
 /* todo: get list from session */
 function* getList(action) {
   try {
-    const response = yield call(fetchList, action.payload);
+    const response = yield call(resource.getList, action.payload);
 
     yield put(playerActions.getList.success(response.data));
   } catch (error) {
@@ -21,7 +21,7 @@ function* getSong(action) {
   const isRetain = playingVideo.listId === action.payload.id ? playingVideo : '';
 
   try {
-    const response = yield call(fetchSong, action.payload);
+    const response = yield call(resource.getSong, action.payload);
 
     yield put(playerActions.getSong.success(response.data, isRetain));
   } catch (error) {

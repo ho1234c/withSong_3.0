@@ -7,7 +7,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.VIDEO_CHANGE:
-      console.log(action);
       return {
         videoId: action.payload.videoId
       };

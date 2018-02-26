@@ -15,6 +15,8 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:8000'
     },
+    stats: { colors: true },
+    open: 'http://localhost:8080',
     watchOptions: {
       ignore: path.resolve('src/server/*.js'),
       aggregateTimeout: 300

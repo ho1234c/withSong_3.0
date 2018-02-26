@@ -2,7 +2,8 @@
 
 .list-modal {
   flex-direction: column;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 
   .list-modal-header {
     padding: 5px 10px;

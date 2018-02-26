@@ -6,10 +6,10 @@
   "scripts": {
     "prestart": "webpack --config ./config/webpack.config.prod.js",
     "start": "node ./src/server/index.js",
-    "lint": "./node_modules/.bin/eslint -c ./.eslintrc ./src/ --fix",
+    "lint": "./node_modules/.bin/eslint -c ./.eslintrc ./src/",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:client": "webpack-dev-server --config ./config/webpack.config.dev.js",
-    "prenodemon": "./node_modules/.bin/eslint -c ./.eslintrc ./src/server --fix",
+    "dev:client": "webpack-dev-server --hot --inline --config ./config/webpack.config.dev.js",
+    "prenodemon": "./node_modules/.bin/eslint -c ./.eslintrc ./src/server",
     "nodemon": "node ./src/server/index.js",
     "dev:server": "nodemon -x npm run nodemon --watch src/server",
     "db": "node ./scripts/database.js",
