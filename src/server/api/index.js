@@ -1,3 +1,6 @@
+/* eslint global-require: "off" */
+/* eslint import/no-dynamic-require: "off" */
+
 const fs = require('fs');
 const path = require('path');
 const Router = require('koa-router');

@@ -27,7 +27,7 @@ router.post('/create', async (ctx) => {
 });
 
 router.post('/login', (ctx, next) =>
-  passport.authenticate('local', async (err, user, info, status) => {
+  passport.authenticate('local', async (err, user, info) => {
     if (err) {
       return next(err);
     }

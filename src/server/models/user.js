@@ -1,5 +1,28 @@
 const bcrypt = require('bcrypt');
 
+async function hashPromise(password, salt = 10) {
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      if (err) reject(err);
+      resolve(hash);
+    });
+  });
+}
+
+async function hashPasswordHook(userList) {
+  const list = Array.isArray(userList) ? userList : [userList];
+
+  await Promise.all(list.map(async (user) => {
+    const pwd = user.get('password');
+    let hash = null;
+
+    if (pwd) {
+      hash = await hashPromise(pwd, 10);
+    }
+    user.set('password_hash', hash);
+  }));
+}
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
@@ -53,25 +76,3 @@ module.exports = (sequelize, DataTypes) => {
   return User;
 };
 
-async function hashPasswordHook(userList, options) {
-  userList = Array.isArray(userList) ? userList : [userList];
-
-  await Promise.all(userList.map(async (user) => {
-    const pwd = user.get('password');
-    let hash = null;
-
-    if (pwd) {
-      hash = await hashPromise(pwd, 10);
-    }
-    user.set('password_hash', hash);
-  }));
-}
-
-async function hashPromise(password, salt = 10) {
-  return new Promise((resolve, reject) => {
-    bcrypt.hash(password, salt, (err, hash) => {
-      if (err) reject(err);
-      resolve(hash);
-    });
-  });
-}
