@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Modal from 'react-modal';
+import { getSong } from '../actions';
 import ListModalHeader from './ListModalHeader';
 import ListModalBody from './ListModalBody';
 import ListModalFooter from './ListModalFooter';
@@ -11,6 +14,12 @@ class ListModal extends Component {
     this.handlePlay = this.handlePlay.bind(this);
   }
 
+  componentDidMount() {
+    console.log(this.props);
+    // this.props.getSongRequest();
+  }
+
+
   handlePlay(...params) {
     const { list, playSong } = this.props;
 
@@ -18,19 +27,24 @@ class ListModal extends Component {
   }
 
   render() {
-    const {
-      name, createdAt, like, songInfo
-    } = this.props.list;
-    const { handleCloseModal } = this.props;
-
     return (
-      <div className="list-modal">
-        <ListModalHeader name={name} createdAt={createdAt} handleCloseModal={handleCloseModal} />
-        <div className="list-modal-bar" />
-        <ListModalBody songInfo={songInfo} handlePlay={this.handlePlay} />
-        <ListModalFooter like={like} length={songInfo.length} />
-        <div className="list-modal-comment" />
-      </div>
+      <Modal
+        isOpen
+        shouldCloseOnOverlayClick
+        contentLabel="Modal"
+        className="song-modal"
+        overlayClassName="overlay"
+      >
+        <div className="list-modal">
+        MODAL
+          {/* <ListModalHeader name={name} createdAt={createdAt} />
+          <div className="list-modal-bar" />
+          <ListModalBody songInfo={songInfo} handlePlay={this.handlePlay} />
+          <ListModalFooter like={like} length={songInfo.length} />
+          <div className="list-modal-comment" /> */}
+        </div>
+      </Modal>
+
     );
   }
 }
@@ -38,7 +52,14 @@ class ListModal extends Component {
 ListModal.propTypes = {
   list: PropTypes.object.isRequired,
   playSong: PropTypes.func.isRequired,
-  handleCloseModal: PropTypes.func.isRequired
 };
 
-export default ListModal;
+export default connect(
+  state => ({
+    modal: state.list.modal,
+  }),
+  dispatch => ({
+    getSongRequest: id => dispatch(getSong.request(id)),
+  })
+)(ListModal);
+

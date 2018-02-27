@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import List from '../List/List';
 import Header from '../Header/Header';
 import Player from '../Player/Player';
@@ -12,13 +13,15 @@ class App extends React.PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <div id="container">
-          <Header />
-          <List />
-          <Player />
-          <Video />
-          <Auth />
-        </div>
+        <Router>
+          <div id="container">
+            <Header />
+            <List />
+            <Player />
+            <Video />
+            <Auth />
+          </div>
+        </Router>
       </Provider>
     );
   }

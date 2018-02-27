@@ -4,23 +4,14 @@ import moment from 'moment';
 import './ListItem.scss';
 
 class ListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.props.getSong(this.props.song.id);
-  }
-
   render() {
-    const { song } = this.props;
+    const { song, openModal } = this.props;
     const { name, detail, maker } = song;
     const thumbnail = JSON.parse(song.thumbnail);
     const createdAt = moment(song.createdAt).format('ll');
 
     return (
-      <div className="masonry-item" onClick={this.handleClick}>
+      <div className="masonry-item" onClick={() => openModal(song.id)}>
         <div className="thumbnail">
           <img src={path.join('thumbnails', thumbnail.src)} alt="thumbnail" />
         </div>

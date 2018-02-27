@@ -15,7 +15,6 @@ const initialState = {
     key: ''
   },
   modal: {
-    isOpen: false,
     isLoading: false,
     songs: {}
   }
@@ -46,7 +45,6 @@ export default (state = initialState, action) => {
         ...state,
         modal: {
           ...state.modal,
-          isOpen: true,
           isLoading: true
         }
       };
@@ -110,7 +108,6 @@ export default (state = initialState, action) => {
         ...state,
         modal: {
           ...state.modal,
-          isOpen: false
         }
       };
     default:

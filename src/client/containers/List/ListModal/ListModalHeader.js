@@ -4,13 +4,13 @@ import moment from 'moment';
 
 class ListModalHeader extends Component {
   render() {
-    const { name, createdAt, handleCloseModal } = this.props;
+    const { name, createdAt } = this.props;
 
     return (
       <div className="list-modal-header">
         <div className="list-modal-header-name">{name}</div>
         <div className="list-modal-header-created">{moment(createdAt).format('ll')}</div>
-        <div className="list-modal-header-close" onClick={handleCloseModal}>
+        <div className="list-modal-header-close">
           <i className="fa fa-times" aria-hidden="true" />
         </div>
       </div>
@@ -21,7 +21,6 @@ class ListModalHeader extends Component {
 ListModalHeader.propTypes = {
   name: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  handleCloseModal: PropTypes.func.isRequired
 };
 
 export default ListModalHeader;
