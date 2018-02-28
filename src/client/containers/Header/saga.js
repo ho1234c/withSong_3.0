@@ -1,33 +1,33 @@
 import { delay } from 'redux-saga';
 import { take, call, put, takeLatest, fork } from 'redux-saga/effects';
-import * as listActions from './actions';
-import { getList } from '../List/actions';
+import * as headerActions from './actions';
+import { getAlbum } from '../AlbumList/actions';
 
 export function* toggle(action) {
   if (action.payload.direction === 'down') {
-    yield put(listActions.headerMenu.show());
+    yield put(headerActions.headerMenu.show());
   } else {
-    yield put(listActions.headerMenu.hide());
+    yield put(headerActions.headerMenu.hide());
   }
 }
 
 export function* search(action) {
   yield delay(1000); // pending for user input
-  yield put(listActions.search.start());
-  yield put(getList.request(action.payload.word));
-  yield put(listActions.search.end());
+  yield put(headerActions.search.start());
+  yield put(getAlbum.request(action.payload.word));
+  yield put(headerActions.search.end());
 }
 
 export function* watchScroll() {
   while (true) {
-    const action = yield take(listActions.HEADER_SCROLL);
+    const action = yield take(headerActions.HEADER_SCROLL);
     /* blocking */
     yield call(toggle, action);
   }
 }
 
 export function* watchSearch() {
-  yield takeLatest(listActions.CHANGE_SEARCH_INPUT, search);
+  yield takeLatest(headerActions.CHANGE_SEARCH_INPUT, search);
 }
 
 export default [

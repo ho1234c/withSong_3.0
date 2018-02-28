@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class ListModalBodyItem extends Component {
+class AlbumModalBodyItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +30,7 @@ class ListModalBodyItem extends Component {
 
   render() {
     const { song } = this.props;
-    const bodyClass = `list-modal-body-component${(this.state.isHover ? ' hover' : '')}`;
+    const bodyClass = `album-modal-body-component${(this.state.isHover ? ' hover' : '')}`;
 
     return (
       <div
@@ -39,10 +39,10 @@ class ListModalBodyItem extends Component {
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-        <div className="list-modal-body-thumbnail">
+        <div className="album-modal-body-thumbnail">
           <img src={song.snippet.thumbnails.default.url} alt="thumbnail" />
         </div>
-        <div className="list-modal-body-title">
+        <div className="album-modal-body-title">
           {song.snippet.title}
         </div>
       </div>
@@ -50,9 +50,9 @@ class ListModalBodyItem extends Component {
   }
 }
 
-ListModalBodyItem.propTypes = {
+AlbumModalBodyItem.propTypes = {
   song: PropTypes.object.isRequired,
   handlePlay: PropTypes.func.isRequired
 };
 
-export default ListModalBodyItem;
+export default AlbumModalBodyItem;

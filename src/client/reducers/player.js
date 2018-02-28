@@ -4,15 +4,15 @@ import changeState from '../utils/changeState';
 const initialState = {
   isOpen: false,
   isLoading: false,
-  lists: [],
+  albumList: [],
   song: {
     isLoading: false,
-    songs: {}
+    album: {}
   },
   play: {
     isPlaying: false,
     videoId: '',
-    listId: '',
+    albumId: '',
     key: ''
   },
   create: {
@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        lists: data.response
+        list: data.response
       };
     case ActionTypes.LIST_FAILURE:
       return {
@@ -54,7 +54,7 @@ export default (state = initialState, action) => {
     case ActionTypes.SONG_REQUEST:
       return {
         ...state,
-        lists: state.lists.map(list => ({ ...list, select: list.id === data.id })),
+        list: state.list.map(album => ({ ...album, select: album.id === data.id })),
         song: {
           ...state.song,
           isLoading: true
@@ -65,8 +65,8 @@ export default (state = initialState, action) => {
         ...state,
         song: {
           isLoading: false,
-          songs: changeState(
-            data.response, 'songInfo',
+          album: changeState(
+            data.response, 'contents',
             (song, key) => (
               {
                 ...song,
@@ -88,8 +88,8 @@ export default (state = initialState, action) => {
         },
         song: {
           ...state.song,
-          songs: changeState(
-            state.song.songs, 'songInfo',
+          album: changeState(
+            state.song.album, 'contents',
             (song, key) => (
               {
                 ...song,
@@ -105,8 +105,8 @@ export default (state = initialState, action) => {
         ...state,
         song: {
           ...state.song,
-          songs: changeState(
-            state.song.songs, 'songInfo',
+          album: changeState(
+            state.song.album, 'contents',
             (song, key) => ({ ...song, key, isNowPlaying: false })
           )
         },

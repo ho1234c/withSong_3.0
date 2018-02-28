@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 // import Spinner from 'react-spinkit';
-import { getSong, playerModal, getList, play } from './actions';
+import { getSong, playerModal, getAlbum, play } from './actions';
 import Header from './PlayerComponents/PlayerHeader';
-import List from './PlayerComponents/PlayerList';
-import Song from './PlayerComponents/PlayerSong';
+import PlayerAlbumList from './PlayerComponents/PlayerAlbumList';
+import PlayerSongList from './PlayerComponents/PlayerSongList';
 import './Player.scss';
 
 class Player extends Component {
@@ -25,7 +25,7 @@ class Player extends Component {
 
   componentDidMount() {
     // todo: get list from user session
-    this.props.getListRequest('');
+    this.props.getAlbumRequest('');
   }
 
   changeTab(mode) {
@@ -44,15 +44,15 @@ class Player extends Component {
 
   render() {
     const { playSong } = this.props;
-    const { isOpen, lists, song } = this.props.player;
+    const { isOpen, albumList, song } = this.props.player;
     const { MODE } = this;
     const playerBody = (
       <div className="player-body-container">
         <div className="player-body-left">
-          <List lists={lists} getSong={this.getSong} />
+          <PlayerAlbumList albumList={albumList} getSong={this.getSong} />
         </div>
         <div className="player-body-right">
-          <Song songs={song.songs} playSong={playSong} />
+          <PlayerSongList album={song.album} playSong={playSong} />
         </div>
       </div>);
     const createBody = <div className="create-body-container" />;
@@ -87,7 +87,7 @@ export default connect(
     player: state.player
   }),
   dispatch => ({
-    getListRequest: id => dispatch(getList.request(id)),
+    getAlbumRequest: id => dispatch(getAlbum.request(id)),
     getSongRequest: id => dispatch(getSong.request(id)),
     playSong: (videoId, key, listId) => dispatch(play.start(videoId, key, listId)),
     playerModalClose: () => dispatch(playerModal.close())

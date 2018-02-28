@@ -3,6 +3,7 @@ const router = require('./api');
 const { APP } = require('./config');
 const db = require('./models');
 const expressConfig = require('./middleware/express');
+/* eslint no-console: "off" */
 
 const app = new Koa();
 expressConfig(app);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import List from '../List/List';
+import AlbumList from '../AlbumList/AlbumList';
 import Header from '../Header/Header';
 import Player from '../Player/Player';
 import Video from '../Video/Video';
@@ -16,7 +16,7 @@ class App extends React.PureComponent {
         <Router>
           <div id="container">
             <Header />
-            <List />
+            <AlbumList />
             <Player />
             <Video />
             <Auth />

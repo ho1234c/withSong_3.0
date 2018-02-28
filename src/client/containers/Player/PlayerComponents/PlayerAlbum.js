@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import path from 'path';
 
-class PlayerListItem extends Component {
+class PlayerAlbum extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,14 +30,14 @@ class PlayerListItem extends Component {
   }
 
   render() {
-    const { list, ckey } = this.props;
+    const { album, ckey } = this.props;
     const bodyClass = `player-list-component${(this.state.isHover ? ' hover' : '')}`;
-    const thumbnail = JSON.parse(list.thumbnail);
+    const thumbnail = JSON.parse(album.thumbnail);
 
     return (
       <div
-        className={`${bodyClass}${list.select ? ' nowSelected' : ''}`}
-        onClick={() => this.handleClick(list.id)}
+        className={`${bodyClass}${album.select ? ' nowSelected' : ''}`}
+        onClick={() => this.handleClick(album.id)}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -46,16 +46,16 @@ class PlayerListItem extends Component {
           <img src={path.join('thumbnails', thumbnail.src)} alt="thumbnail" />
         </div>
         <div className="player-list-title">
-          {list.name}
+          {album.name}
         </div>
       </div>
     );
   }
 }
 
-PlayerListItem.propTypes = {
-  list: PropTypes.object.isRequired,
+PlayerAlbum.propTypes = {
+  album: PropTypes.object.isRequired,
   getSong: PropTypes.func.isRequired
 };
 
-export default PlayerListItem;
+export default PlayerAlbum;

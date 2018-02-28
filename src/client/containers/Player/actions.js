@@ -1,8 +1,8 @@
 import createActions from '../../utils/createAction';
 
-export const LIST_REQUEST = 'player/LIST_REQUEST';
-export const LIST_SUCCESS = 'player/LIST_SUCCESS';
-export const LIST_FAILURE = 'player/LIST_FAILURE';
+export const ALBUM_REQUEST = 'player/ALBUM_REQUEST';
+export const ALBUM_SUCCESS = 'player/ALBUM_SUCCESS';
+export const ALBUM_FAILURE = 'player/ALBUM_FAILURE';
 export const SONG_REQUEST = 'player/SONG_REQUEST';
 export const SONG_SUCCESS = 'player/SONG_SUCCESS';
 export const SONG_FAILURE = 'player/SONG_FAILURE';
@@ -13,17 +13,17 @@ export const PLAYER_OPEN = 'player/PLAYER_OPEN';
 export const PLAYER_CLOSE = 'player/PLAYER_CLOSE';
 export const PLAY_START = 'player/PLAY_START';
 export const PLAY_STOP = 'player/PLAY_STOP';
-export const CREATE_LIST_REQUEST = 'player/CREATE_LIST_REQUEST';
-export const CREATE_LIST_SUCCESS = 'player/CREATE_LIST_SUCCESS';
-export const CREATE_LIST_FAILURE = 'player/CREATE_LIST_FAILURE';
+export const CREATE_ALBUM_REQUEST = 'player/CREATE_ALBUM_REQUEST';
+export const CREATE_ALBUM_SUCCESS = 'player/CREATE_ALBUM_SUCCESS';
+export const CREATE_ALBUM_FAILURE = 'player/CREATE_ALBUM_FAILURE';
 export const SEARCH_SONG_REQUEST = 'player/SEARCH_SONG_REQUEST';
 export const SEARCH_SONG_SUCCESS = 'player/SEARCH_SONG_SUCCESS';
 export const SEARCH_SONG_FAILURE = 'player/SEARCH_SONG_FAILURE';
 
-export const getList = {
-  request: userId => createActions(LIST_REQUEST, { userId }),
-  success: response => createActions(LIST_SUCCESS, { response }),
-  failure: error => createActions(LIST_FAILURE, { error })
+export const getAlbum = {
+  request: userId => createActions(ALBUM_REQUEST, { userId }),
+  success: response => createActions(ALBUM_SUCCESS, { response }),
+  failure: error => createActions(ALBUM_FAILURE, { error })
 };
 
 export const getSong = {
@@ -44,6 +44,6 @@ export const playerModal = {
 };
 
 export const play = {
-  start: (videoId, key, listId) => createActions(PLAY_START, { videoId, key, listId }),
+  start: (videoId, key, albumId) => createActions(PLAY_START, { videoId, key, albumId }),
   stop: () => createActions(PLAY_STOP)
 };

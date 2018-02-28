@@ -3,16 +3,16 @@ import { resource } from '../../utils/fetch';
 import { player, list } from '../../utils/selector';
 import * as playerActions from './actions';
 import * as videoActions from '../Video/actions';
-import * as listActions from '../List/actions';
+import * as albumListActions from '../AlbumList/actions';
 
 /* todo: get list from session */
-function* getList(action) {
+function* getAlbum(action) {
   try {
-    const response = yield call(resource.getList, action.payload);
+    const response = yield call(resource.getAlbum, action.payload);
 
-    yield put(playerActions.getList.success(response.data));
+    yield put(playerActions.getAlbum.success(response.data));
   } catch (error) {
-    yield put(playerActions.getList.failure(error));
+    yield put(playerActions.getAlbum.failure(error));
   }
 }
 
@@ -33,7 +33,7 @@ function* playSong(action) {
   const isPlaying = yield select(list.isPlaying);
 
   if (isPlaying) {
-    yield put(listActions.play.stop());
+    yield put(albumListActions.play.stop());
   }
   yield put(videoActions.video.change(action.payload.videoId));
 }
@@ -56,8 +56,8 @@ function* nextPlayFlow() {
   }
 }
 
-export function* watchGetList() {
-  yield takeEvery(playerActions.LIST_REQUEST, getList);
+export function* watchGetAlbum() {
+  yield takeEvery(playerActions.ALBUM_REQUEST, getAlbum);
 }
 
 export function* watchGetSong() {
@@ -69,7 +69,7 @@ function* watchPlaySong() {
 }
 
 export default [
-  fork(watchGetList),
+  fork(watchGetAlbum),
   fork(watchGetSong),
   fork(watchPlaySong),
   fork(nextPlayFlow)

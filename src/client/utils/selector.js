@@ -1,16 +1,16 @@
-export const list = {
-  isPlaying: state => state.list.play.isPlaying,
-  getPlayingVideo: state => state.list.play,
+export const album = {
+  isPlaying: state => state.album.play.isPlaying,
+  getPlayingVideo: state => state.album.play,
   getNextVideo: (state) => {
-    const { play, modal } = state.list;
+    const { play, modal } = state.album;
     const preKey = play.key;
-    const { songInfo } = modal.songs;
+    const { contents } = modal.album;
 
-    if (preKey === songInfo.length - 1) {
+    if (preKey === contents.length - 1) {
       return false;
     }
 
-    return songInfo.find(data => data.key === preKey + 1);
+    return contents.find(data => data.key === preKey + 1);
   }
 };
 
@@ -20,12 +20,12 @@ export const player = {
   getNextVideo: (state) => {
     const { play, song } = state.player;
     const preKey = play.key;
-    const { songInfo } = song.songs;
+    const { contents } = song.album;
 
-    if (preKey === songInfo.length - 1) {
+    if (preKey === contents.length - 1) {
       return false;
     }
 
-    return songInfo.find(data => data.key === preKey + 1);
+    return contents.find(data => data.key === preKey + 1);
   }
 };

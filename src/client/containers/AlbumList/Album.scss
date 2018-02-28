@@ -14,7 +14,7 @@
     cursor: pointer;
   }
 
-  .list-header {
+  .album-header {
     padding: 5px;
     justify-content: space-between;
 
@@ -30,12 +30,12 @@
     }
   }
 
-  .list-body {
+  .album-body {
     padding: 5px 13px;
     font-size: 0.8rem;
   }
 
-  .list-footer {
+  .album-footer {
     font-size: 0.8rem;
     padding: 5px 13px;
     color: var(--color-main-gray2);   

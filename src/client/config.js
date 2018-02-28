@@ -1,6 +1,6 @@
 export const URL = {
-  GET_LIST: '/api/list',
-  GET_SONG: '/api/list/song',
+  GET_ALBUM: '/api/album',
+  GET_SONG: '/api/album/song',
   LOGIN: '/api/user/login',
   LOGOUT: '/api/user/logout',
   REGISTER: '/api/user/create'

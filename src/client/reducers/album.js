@@ -1,22 +1,22 @@
 
-import * as ActionTypes from '../containers/List/actions';
+import * as ActionTypes from '../containers/AlbumList/actions';
 import changeState from '../utils/changeState';
 /*
 For highlighting and find next playing video, need a unique value to distinguish data from other one.
-'key' property is for guarantee of songs data integrity.
+'key' property is for guarantee of album data integrity.
 */
 const initialState = {
-  lists: [],
+  list: [],
   isLoading: false,
   play: {
     isPlaying: false,
     videoId: '',
-    listId: '',
+    albumId: '',
     key: ''
   },
-  modal: {
+  selected: {
     isLoading: false,
-    songs: {}
+    contents: {}
   }
 };
 
@@ -24,18 +24,18 @@ export default (state = initialState, action) => {
   const data = action ? action.payload : '';
 
   switch (action.type) {
-    case ActionTypes.LIST_REQUEST:
+    case ActionTypes.ALBUM_REQUEST:
       return {
         ...state,
         isLoading: true
       };
-    case ActionTypes.LIST_SUCCESS:
+    case ActionTypes.ALBUM_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        lists: data.response
+        list: data.response
       };
-    case ActionTypes.LIST_FAILURE:
+    case ActionTypes.ALBUM_FAILURE:
       return {
         ...state,
         isLoading: false
@@ -43,19 +43,19 @@ export default (state = initialState, action) => {
     case ActionTypes.SONG_REQUEST:
       return {
         ...state,
-        modal: {
-          ...state.modal,
+        selected: {
+          ...state.selected,
           isLoading: true
         }
       };
     case ActionTypes.SONG_SUCCESS:
       return {
         ...state,
-        modal: {
-          ...state.modal,
+        selected: {
+          ...state.selected,
           isLoading: false,
-          songs: changeState(
-            data.response, 'songInfo',
+          album: changeState(
+            data.response, 'contents',
             (song, key) => (
               {
                 ...song,
@@ -69,9 +69,9 @@ export default (state = initialState, action) => {
     case ActionTypes.SONG_FAILURE:
       return {
         ...state,
-        modal: {
-          ...state.modal,
-          songs: [],
+        selected: {
+          ...state.selected,
+          album: [],
           isLoading: false
         }
       };
@@ -84,10 +84,10 @@ export default (state = initialState, action) => {
           listId: data.listId || state.play.listId, // if play in same list, don't change it.
           key: data.key
         },
-        modal: {
-          ...state.modal,
-          songs: changeState(
-            state.modal.songs, 'songInfo',
+        selected: {
+          ...state.selected,
+          album: changeState(
+            state.selected.album, 'contents',
             (song, key) => (
               {
                 ...song,
@@ -106,8 +106,8 @@ export default (state = initialState, action) => {
     case ActionTypes.LIST_CLOSE:
       return {
         ...state,
-        modal: {
-          ...state.modal,
+        selected: {
+          ...state.selected,
         }
       };
     default:

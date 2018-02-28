@@ -1,30 +1,30 @@
 import { call, put, select, take, takeEvery, fork } from 'redux-saga/effects';
 import { resource } from '../../utils/fetch';
-import { list, player } from '../../utils/selector';
-import * as listActions from './actions';
+import { album, player } from '../../utils/selector';
+import * as albumActions from './actions';
 import * as videoActions from '../Video/actions';
 import { play as playerPlay } from '../Player/actions';
 
-export function* getList(action) {
+export function* getAlbum(action) {
   try {
-    const response = yield call(resource.getList, action.payload);
+    const response = yield call(resource.getAlbum, action.payload);
 
-    yield put(listActions.getList.success(response.data));
+    yield put(albumActions.getAlbum.success(response.data));
   } catch (error) {
-    yield put(listActions.getList.failure(error));
+    yield put(albumActions.getAlbum.failure(error));
   }
 }
 
 export function* getSong(action) {
   try {
-    const playingVideo = yield select(list.getPlayingVideo);
-    const isRetain = playingVideo && playingVideo.listId === action.payload.id ?
+    const playingVideo = yield select(album.getPlayingVideo);
+    const isRetain = playingVideo && playingVideo.albumId === action.payload.id ?
       playingVideo : false;
     const response = yield call(resource.getSong, action.payload);
 
-    yield put(listActions.getSong.success(response.data, isRetain));
+    yield put(albumActions.getSong.success(response.data, isRetain));
   } catch (error) {
-    yield put(listActions.getSong.failure(error));
+    yield put(albumActions.getSong.failure(error));
   }
 }
 
@@ -40,35 +40,35 @@ export function* playSong(action) {
 export function* nextPlayFlow() {
   while (true) {
     yield take(videoActions.VIDEO_END);
-    const isPlaying = yield select(list.isPlaying);
+    const isPlaying = yield select(album.isPlaying);
 
     if (isPlaying) {
-      const { videoId, key } = yield select(list.getNextVideo);
+      const { videoId, key } = yield select(album.getNextVideo);
 
       if (videoId && key) {
-        yield put(listActions.play.start(videoId, key));
+        yield put(albumActions.play.start(videoId, key));
         yield put(videoActions.video.change(videoId));
       } else {
-        yield put(listActions.play.stop());
+        yield put(albumActions.play.stop());
       }
     }
   }
 }
 
-export function* watchGetList() {
-  yield takeEvery(listActions.LIST_REQUEST, getList);
+export function* watchGetAlbum() {
+  yield takeEvery(albumActions.ALBUM_REQUEST, getAlbum);
 }
 
 export function* watchGetSong() {
-  yield takeEvery(listActions.SONG_REQUEST, getSong);
+  yield takeEvery(albumActions.SONG_REQUEST, getSong);
 }
 
 export function* watchPlaySong() {
-  yield takeEvery(listActions.PLAY_START, playSong);
+  yield takeEvery(albumActions.PLAY_START, playSong);
 }
 
 export default [
-  fork(watchGetList),
+  fork(watchGetAlbum),
   fork(watchGetSong),
   fork(watchPlaySong),
   fork(nextPlayFlow)

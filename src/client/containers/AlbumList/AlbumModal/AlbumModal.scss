@@ -1,38 +1,38 @@
 @import '../../../config.scss';
 
-.list-modal {
+.album-modal {
   flex-direction: column;
 
-  .list-modal-header {
+  .album-modal-header {
     padding: 5px 10px;
     align-items: center;
 
-    .list-modal-header-name {
+    .album-modal-header-name {
       font-size: 1.2rem;
       font-weight: bold;
     }
 
-    .list-modal-header-created {
+    .album-modal-header-created {
       margin: 0 20px 0 auto;
     }
 
-    .list-modal-header-close {
+    .album-modal-header-close {
       font-size: 2rem;
       cursor: pointer;
       color: var(--color-main-gray1);
     }
   }
 
-  .list-modal-body {
+  .album-modal-body {
     flex-direction: column;
     max-height: 400px;
     overflow: auto;
 
-    .list-modal-body-component {
+    .album-modal-body-component {
       padding: 5px 10px;
       flex-shrink: 0;
 
-      .list-modal-body-thumbnail {
+      .album-modal-body-thumbnail {
         border-radius: 4px;
         flex-shrink: 0;
         overflow: hidden;
@@ -43,7 +43,7 @@
         }
       }
 
-      .list-modal-body-title {
+      .album-modal-body-title {
         width: 100%;
         padding: 10px;
         align-items: center;
@@ -60,27 +60,27 @@
     }
   }
 
-  .list-modal-footer {
+  .album-modal-footer {
     padding: 10px;
     margin-top: auto;
     align-items: center;
 
-    .list-modal-footer-like {
+    .album-modal-footer-like {
       margin-left: auto;
       margin-right: auto;
     }
 
-    .list-modal-footer-favorite {
+    .album-modal-footer-favorite {
       color: var(--color-main-theme);
       font-weight: bold;
     }
 
-    .list-modal-footer-length {
+    .album-modal-footer-length {
       font-weight: bold;
     }
   }
   
-  .list-modal-bar {
+  .album-modal-bar {
     height: 2px;
     width: 100%;
     background-color: var(--color-main-gray1);

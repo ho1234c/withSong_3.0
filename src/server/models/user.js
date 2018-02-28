@@ -43,9 +43,9 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = (models) => {
-    User.belongsToMany(models.List, { as: 'listFavor', through: 'UserListFavor' });
+    User.belongsToMany(models.Album, { as: 'albumFavor', through: 'UserAlbumFavor' });
     User.belongsToMany(models.Comment, { as: 'commentFavor', through: 'UserCommentFavor' });
-    User.hasMany(models.List, { foreignKey: 'makerId' });
+    User.hasMany(models.Album, { foreignKey: 'makerId' });
     User.hasMany(models.Comment, { foreignKey: 'writerId' });
   };
 
@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       id: this.id,
       nickname: this.nickname,
       email: this.email,
-      list: this.listFavor,
+      album: this.albumFavor,
       comment: this.commentFavor
     };
   };

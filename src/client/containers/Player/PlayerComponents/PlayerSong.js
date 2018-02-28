@@ -1,37 +1,58 @@
 import React, { Component } from 'react';
-import isEmpty from 'lodash-es/isEmpty';
 import PropTypes from 'prop-types';
-import PlayerSongItem from './PlayerSongItem';
 
 class PlayerSong extends Component {
   constructor(props) {
     super(props);
-
-    this.handlePlay = this.handlePlay.bind(this);
+    this.state = {
+      isHover: ''
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  handlePlay(...params) {
-    const { songs, playSong } = this.props;
+  handleClick(videoId, key) {
+    this.props.handlePlay(videoId, key);
+  }
 
-    playSong(...params, songs.id);
+  handleMouseEnter() {
+    this.setState({
+      isHover: true
+    });
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      isHover: false
+    });
   }
 
   render() {
-    const { songs } = this.props;
-    const components = isEmpty(songs) ? '' : songs.songInfo.map((song, key) =>
-      <PlayerSongItem key={key} song={song} handlePlay={this.handlePlay} />);
+    const { song } = this.props;
+    const bodyClass = `player-song-component${(this.state.isHover ? ' hover' : '')}`;
 
     return (
-      <div className="player-song">
-        {components}
+      <div
+        className={`${bodyClass}${song.isNowPlaying ? ' nowPlaying' : ''}`}
+        onClick={() => this.handleClick(song.videoId, song.key)}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+      >
+        <div className="player-song-thumbnail">
+          <img src={song.snippet.thumbnails.default.url} alt="thumbnail" />
+        </div>
+        <div className="player-song-title">
+          {song.snippet.title}
+        </div>
       </div>
     );
   }
 }
 
 PlayerSong.propTypes = {
-  songs: PropTypes.object.isRequired,
-  playSong: PropTypes.func.isRequired
+  song: PropTypes.objectOf(PropTypes.string).isRequired,
+  handlePlay: PropTypes.func.isRequired
 };
 
 export default PlayerSong;

@@ -1,5 +1,10 @@
+POST http://localhost:8000/api/album HTTP/1.1
+content-type: application/json
+
 {
-    "id": 28,
+    "name": "테스트",
+    "detail": "test detail",
+    "makerId": 5
     "contents": [
         {
             "videoId": "jy_UiIQn_d0",
@@ -113,8 +118,7 @@
                 "liveBroadcastContent": "none"
             }
         }
-    ],
-    "like": 0,
-    "name": "윤종신",
-    "createdAt": "2017-08-24T05:45:35.972Z"
+    ]
 }
+
+###

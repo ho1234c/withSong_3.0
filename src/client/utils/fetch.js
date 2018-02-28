@@ -13,7 +13,7 @@ const fetch = {
 };
 
 export const resource = {
-  getList: ({ word, num }) => fetch.get(URL.GET_LIST, { word, num }),
+  getAlbum: ({ word, num }) => fetch.get(URL.GET_ALBUM, { word, num }),
   getSong: ({ id }) => fetch.get(URL.GET_SONG, { id })
 };
 
