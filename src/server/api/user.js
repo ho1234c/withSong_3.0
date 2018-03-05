@@ -2,9 +2,7 @@ const Router = require('koa-router');
 const passport = require('koa-passport');
 const db = require('../models');
 
-const router = Router({
-  prefix: '/user'
-});
+const router = Router({ prefix: '/api/user' });
 
 router.post('/create', async (ctx) => {
   const { email, password, nickname } = ctx.request.body;

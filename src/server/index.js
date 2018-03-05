@@ -1,15 +1,19 @@
+/* eslint no-console: "off" */
 const Koa = require('koa');
 const router = require('./api');
 const { APP } = require('./config');
 const db = require('./models');
-const expressConfig = require('./middleware/express');
-/* eslint no-console: "off" */
+const koaConfig = require('./middleware/koa');
+const catchError = require('./middleware/catchError');
 
 const app = new Koa();
-expressConfig(app);
+koaConfig(app);
+
+// error handling
+app.use(catchError);
 
 // routing
-app.use(router.routes(), router.allowedMethods());
+app.use(router.routes());
 
 // DB sync
 (async () => {

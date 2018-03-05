@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
-import { getSong } from '../actions';
+import { getSong, play } from '../actions';
 import AlbumModalHeader from './AlbumModalHeader';
 import AlbumModalBody from './AlbumModalBody';
 import AlbumModalFooter from './AlbumModalFooter';
@@ -18,7 +19,7 @@ class AlbumModal extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
+    // const { id } = this.props.match.params;
 
     console.log(this.props);
     // this.props.getSongRequest();
@@ -54,17 +55,18 @@ class AlbumModal extends Component {
   }
 }
 
-AlbumModal.propTypes = {
-  album: PropTypes.object.isRequired,
-  playSong: PropTypes.func.isRequired,
-};
+// AlbumModal.propTypes = {
+//   album: PropTypes.object.isRequired,
+//   playSong: PropTypes.func.isRequired,
+// };
 
-export default connect(
+export default withRouter(connect(
   state => ({
     selected: state.album.selected,
   }),
   dispatch => ({
     getSongRequest: id => dispatch(getSong.request(id)),
+    playStart: (videoId, key, albumId) => dispatch(play.start(videoId, key, albumId))
   })
-)(AlbumModal);
+)(AlbumModal));
 

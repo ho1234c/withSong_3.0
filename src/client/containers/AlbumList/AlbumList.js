@@ -3,10 +3,36 @@ import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Masonry from 'react-masonry-component';
 import Spinner from 'react-spinkit';
+import moment from 'moment';
+import path from 'path';
 import { getAlbum, getSong, play } from './actions';
-import Album from './Album';
 import AlbumModal from './AlbumModal';
 import './AlbumList.scss';
+
+
+const Album = ({ album, openModal }) => {
+  const { name, detail, maker } = album;
+  const thumbnail = JSON.parse(album.thumbnail);
+  const createdAt = moment(album.createdAt).format('ll');
+
+  return (
+    <div className="masonry-item" onClick={() => openModal(album)}>
+      <div className="thumbnail">
+        <img src={path.join('thumbnails', thumbnail.src)} alt="thumbnail" />
+      </div>
+      <div className="album-header">
+        <div className="name">{name}</div>
+        <div className="created">{createdAt}</div>
+      </div>
+      <div className="album-body">
+        <div className="detail">{detail}</div>
+      </div>
+      <div className="album-footer">
+        <div className="maker">{maker.nickname}</div>
+      </div>
+    </div>
+  );
+};
 
 class AlbumList extends Component {
   constructor(props) {
@@ -33,7 +59,7 @@ class AlbumList extends Component {
   }
 
   render() {
-    const { album, header, playSong, getSongRequest } = this.props;
+    const { album, header, getSongRequest } = this.props;
     const { contents, isLoading } = album.selected;
 
     if (header.isLoading) {
@@ -72,7 +98,6 @@ export default withRouter(connect(
     header: state.header
   }),
   dispatch => ({
-    getAlbumRequest: (word, num) => dispatch(getAlbum.request(word, num)),
-    playSong: (videoId, key, albumId) => dispatch(play.start(videoId, key, albumId)),
+    getAlbumRequest: (word, num) => dispatch(getAlbum.request(word, num))
   })
 )(AlbumList));

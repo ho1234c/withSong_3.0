@@ -3,9 +3,7 @@ const db = require('../models');
 const multerConfig = require('../middleware/multer');
 // const fs = require('fs');
 
-const router = Router({
-  prefix: '/album'
-});
+const router = Router({ prefix: '/api/album' });
 
 router.get('/', async (ctx) => {
   const {

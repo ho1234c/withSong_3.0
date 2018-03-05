@@ -8,11 +8,11 @@ const path = require('path');
 const passportConfig = require('./passport');
 const { DATABASE } = require('../config');
 
-function expressConfig(app) {
+function koaConfig(app) {
   app.use(logger('dev'));
   app.use(serve('public'));
 
-  app.use(bodyParser()); // Default encoding is utf-8
+  app.use(bodyParser({ enableTypes: ['json'] })); // Default encoding is utf-8
   app.use(favicon(path.join('public', 'favicon.ico')));
 
   // set session
@@ -26,4 +26,4 @@ function expressConfig(app) {
   passportConfig(app);
 }
 
-module.exports = expressConfig;
+module.exports = koaConfig;
