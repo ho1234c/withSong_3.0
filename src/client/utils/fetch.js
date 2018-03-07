@@ -12,9 +12,23 @@ const fetch = {
   }
 };
 
+function fetchCreator(url) {
+  return ({ ...params }) => fetch.get(url, { ...params });
+}
+
+/**
+ * getAlbum
+ * @param {number} id
+ * @param {string} word
+ * getSong
+ * @param  {number} id
+ * like
+ * @param  {number} id
+ */
 export const resource = {
-  getAlbum: ({ word, num }) => fetch.get(URL.GET_ALBUM, { word, num }),
-  getSong: ({ id }) => fetch.get(URL.GET_SONG, { id })
+  getAlbum: fetchCreator(URL.GET_ALBUM),
+  getSong: fetchCreator(URL.GET_SONG),
+  like: fetchCreator(URL.LIKE)
 };
 
 export const auth = {

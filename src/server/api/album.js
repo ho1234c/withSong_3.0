@@ -62,4 +62,8 @@ router.get('/song', async (ctx) => {
   ctx.body = song;
 });
 
+router.get('/like', async (ctx) => {
+  console.log(ctx.state);
+});
+
 module.exports = router;

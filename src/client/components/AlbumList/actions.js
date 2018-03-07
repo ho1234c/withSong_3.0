@@ -6,6 +6,9 @@ export const ALBUM_FAILURE = 'album/ALBUM_FAILURE';
 export const SONG_REQUEST = 'album/SONG_REQUEST';
 export const SONG_SUCCESS = 'album/SONG_SUCCESS';
 export const SONG_FAILURE = 'album/SONG_FAILURE';
+export const LIKE_REQUEST = 'album/LIKE_REQUEST';
+export const LIKE_SUCCESS = 'album/LIKE_SUCCESS';
+export const LIKE_FAILURE = 'album/LIKE_FAILURE';
 export const PLAY_START = 'album/PLAY_START';
 export const PLAY_STOP = 'album/PLAY_STOP';
 
@@ -19,6 +22,12 @@ export const getSong = {
   request: id => createActions(SONG_REQUEST, { id }),
   success: (response, isRetain) => createActions(SONG_SUCCESS, { response, isRetain }),
   failure: error => createActions(SONG_FAILURE, { error })
+};
+
+export const like = {
+  request: id => createActions(LIKE_REQUEST, { id }),
+  success: () => createActions(LIKE_SUCCESS),
+  failure: error => createActions(LIKE_FAILURE, { error })
 };
 
 export const play = {
