@@ -1,10 +1,10 @@
-export const album = {
+export const albumList = {
   isPlaying: state => state.album.play.isPlaying,
   getPlayingVideo: state => state.album.play,
   getNextVideo: (state) => {
-    const { play, modal } = state.album;
+    const { play, selected } = state.album;
     const preKey = play.key;
-    const { contents } = modal.album;
+    const { contents } = selected.album;
 
     if (preKey === contents.length - 1) {
       return false;

@@ -5,7 +5,7 @@ import Masonry from 'react-masonry-component';
 import Spinner from 'react-spinkit';
 import moment from 'moment';
 import path from 'path';
-import { getAlbum, getSong, play } from './actions';
+import { getAlbum } from './actions';
 import AlbumModal from './AlbumModal';
 import './AlbumList.scss';
 
@@ -59,8 +59,7 @@ class AlbumList extends Component {
   }
 
   render() {
-    const { album, header, getSongRequest } = this.props;
-    const { contents, isLoading } = album.selected;
+    const { albums, header } = this.props;
 
     if (header.isLoading) {
       return (
@@ -69,7 +68,7 @@ class AlbumList extends Component {
         </section>);
     }
 
-    if (album.list.length === 0) {
+    if (albums.length === 0) {
       return (
         <section>
           <div className="notfound">검색 결과가 없습니다.</div>
@@ -79,7 +78,7 @@ class AlbumList extends Component {
     return (
       <section>
         <Masonry className="masonry-container" options={this.state.masonryOptions}>
-          {album.list.map((e, key) => (
+          {albums.map((e, key) => (
             <Album
               key={key}
               album={e}
@@ -94,7 +93,7 @@ class AlbumList extends Component {
 
 export default withRouter(connect(
   state => ({
-    album: state.album,
+    albums: state.album.list,
     header: state.header
   }),
   dispatch => ({

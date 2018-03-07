@@ -1,11 +1,11 @@
 import { call, put, select, take, takeEvery, fork } from 'redux-saga/effects';
-import { resource } from '../../utils/fetch';
-import { player, list } from '../../utils/selector';
+import { resource, auth } from '../../utils/fetch';
+import { player, albumList } from '../../utils/selector';
 import * as playerActions from './actions';
 import * as videoActions from '../Video/actions';
 import * as albumListActions from '../AlbumList/actions';
 
-/* todo: get list from session */
+/* todo: get album from session */
 function* getAlbum(action) {
   try {
     const response = yield call(resource.getAlbum, action.payload);
@@ -30,7 +30,7 @@ function* getSong(action) {
 }
 
 function* playSong(action) {
-  const isPlaying = yield select(list.isPlaying);
+  const isPlaying = yield select(albumList.isPlaying);
 
   if (isPlaying) {
     yield put(albumListActions.play.stop());

@@ -1,5 +1,5 @@
 
-import * as ActionTypes from '../containers/AlbumList/actions';
+import * as ActionTypes from '../components/AlbumList/actions';
 import changeState from '../utils/changeState';
 /*
 For highlighting and find next playing video, need a unique value to distinguish data from other one.
@@ -16,7 +16,7 @@ const initialState = {
   },
   selected: {
     isLoading: false,
-    contents: {}
+    album: {}
   }
 };
 

@@ -1,10 +1,10 @@
-import * as ActionTypes from '../containers/Player/actions';
+import * as ActionTypes from '../components/Player/actions';
 import changeState from '../utils/changeState';
 
 const initialState = {
   isOpen: false,
   isLoading: false,
-  albumList: [],
+  list: [],
   song: {
     isLoading: false,
     album: {}

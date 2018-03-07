@@ -1,6 +1,6 @@
 import { call, put, select, take, takeEvery, fork } from 'redux-saga/effects';
 import { resource } from '../../utils/fetch';
-import { album, player } from '../../utils/selector';
+import { albumList, player } from '../../utils/selector';
 import * as albumActions from './actions';
 import * as videoActions from '../Video/actions';
 import { play as playerPlay } from '../Player/actions';
@@ -17,7 +17,7 @@ export function* getAlbum(action) {
 
 export function* getSong(action) {
   try {
-    const playingVideo = yield select(album.getPlayingVideo);
+    const playingVideo = yield select(albumList.getPlayingVideo);
     const isRetain = playingVideo && playingVideo.albumId === action.payload.id ?
       playingVideo : false;
     const response = yield call(resource.getSong, action.payload);
@@ -40,10 +40,10 @@ export function* playSong(action) {
 export function* nextPlayFlow() {
   while (true) {
     yield take(videoActions.VIDEO_END);
-    const isPlaying = yield select(album.isPlaying);
+    const isPlaying = yield select(albumList.isPlaying);
 
     if (isPlaying) {
-      const { videoId, key } = yield select(album.getNextVideo);
+      const { videoId, key } = yield select(albumList.getNextVideo);
 
       if (videoId && key) {
         yield put(albumActions.play.start(videoId, key));

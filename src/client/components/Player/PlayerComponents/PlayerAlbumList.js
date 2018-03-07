@@ -4,8 +4,8 @@ import PlayerAlbum from './PlayerAlbum';
 
 class PlayerAlbumList extends Component {
   render() {
-    const { albumList, getSong } = this.props;
-    const components = albumList.map((album, key) =>
+    const { list, getSong } = this.props;
+    const components = list.map((album, key) =>
       <PlayerAlbum key={key} ckey={key + 1} album={album} getSong={getSong} />);
 
     return (
@@ -17,7 +17,7 @@ class PlayerAlbumList extends Component {
 }
 
 PlayerAlbumList.propTypes = {
-  albumList: PropTypes.array.isRequired,
+  list: PropTypes.array.isRequired,
   getSong: PropTypes.func.isRequired
 };
 

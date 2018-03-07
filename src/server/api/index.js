@@ -20,4 +20,9 @@ router.get('/', async (ctx) => {
   ctx.body = indexPage;
 });
 
+router.get('/session', async (ctx) => {
+  /* todo: return user session */
+  ctx.body = '';
+});
+
 module.exports = router;

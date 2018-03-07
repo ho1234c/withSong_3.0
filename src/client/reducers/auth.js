@@ -1,4 +1,4 @@
-import * as ActionTypes from '../containers/Auth/actions';
+import * as ActionTypes from '../components/Auth/actions';
 // import changeState from '../utils/changeState';
 
 const initialState = {

@@ -1,4 +1,4 @@
-import * as ActionTypes from '../containers/Header/actions';
+import * as ActionTypes from '../components/Header/actions';
 
 const initialState = {
   isShow: true,

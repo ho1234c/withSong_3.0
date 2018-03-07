@@ -9,6 +9,7 @@ class AuthSignInForm extends Component {
       password: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -18,6 +19,12 @@ class AuthSignInForm extends Component {
     });
   }
 
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.handleSubmit();
+    }
+  }
+
   handleSubmit() {
     this.props.signIn(this.state);
   }
@@ -25,8 +32,8 @@ class AuthSignInForm extends Component {
   render() {
     return (
       <div className="sign-in-form">
-        <input type="text" placeholder="이메일" name="email" onChange={this.handleChange} />
-        <input type="password" placeholder="비밀번호" name="password" onChange={this.handleChange} />
+        <input type="text" placeholder="이메일" name="email" onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
+        <input type="password" placeholder="비밀번호" name="password" onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
         <button type="button" className="email-login-btn" onClick={this.handleSubmit}>
           이메일로 로그인
         </button>

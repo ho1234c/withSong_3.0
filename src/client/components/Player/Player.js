@@ -25,7 +25,7 @@ class Player extends Component {
 
   componentDidMount() {
     // todo: get list from user session
-    this.props.getAlbumRequest('');
+    this.props.getAlbumRequest();
   }
 
   changeTab(mode) {
@@ -44,12 +44,12 @@ class Player extends Component {
 
   render() {
     const { playSong } = this.props;
-    const { isOpen, albumList, song } = this.props.player;
+    const { isOpen, list, song } = this.props.player;
     const { MODE } = this;
     const playerBody = (
       <div className="player-body-container">
         <div className="player-body-left">
-          <PlayerAlbumList albumList={albumList} getSong={this.getSong} />
+          <PlayerAlbumList list={list} getSong={this.getSong} />
         </div>
         <div className="player-body-right">
           <PlayerSongList album={song.album} playSong={playSong} />
@@ -62,6 +62,7 @@ class Player extends Component {
       <Modal
         isOpen={isOpen}
         shouldCloseOnOverlayClick
+        ariaHideApp={false}
         onRequestClose={this.handleCloseModal}
         contentLabel="Modal"
         className="player-modal"

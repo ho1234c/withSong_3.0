@@ -7,13 +7,8 @@ class AlbumModalBodyItem extends Component {
     this.state = {
       isHover: false
     };
-    this.handleClick = this.handleClick.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
-  }
-
-  handleClick(videoId, key) {
-    this.props.handlePlay(videoId, key);
   }
 
   handleMouseEnter() {
@@ -29,13 +24,13 @@ class AlbumModalBodyItem extends Component {
   }
 
   render() {
-    const { song } = this.props;
+    const { song, handlePlay } = this.props;
     const bodyClass = `album-modal-body-component${(this.state.isHover ? ' hover' : '')}`;
 
     return (
       <div
         className={`${bodyClass}${song.isNowPlaying ? ' nowPlaying' : ''}`}
-        onClick={() => this.handleClick(song.videoId, song.key)}
+        onClick={() => handlePlay(song.videoId, song.key)}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >

@@ -1,4 +1,4 @@
-import * as ActionTypes from '../containers/Video/actions';
+import * as ActionTypes from '../components/Video/actions';
 
 const initialState = {
   videoId: ''

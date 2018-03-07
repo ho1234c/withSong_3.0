@@ -69,13 +69,13 @@
       width: 100%;
       flex-direction: column;
 
-      &* {
+      > * {
         margin: 5px 0;
         border-radius: 4px;
       }
 
       input {
-        height: 30px;
+        height: 40px;
         padding-left: 5px;
         border: 1px solid var(--color-main-gray1);
 
@@ -120,7 +120,7 @@
       }
 
       input {
-        height: 30px;
+        height: 40px;
         padding-left: 5px;
         border: 1px solid var(--color-main-gray1);
 

@@ -67,6 +67,7 @@ class Auth extends Component {
       <Modal
         isOpen={isOpen}
         shouldCloseOnOverlayClick
+        ariaHideApp={false}
         onRequestClose={this.handleCloseModal}
         contentLabel="Modal"
         className="auth-modal"
