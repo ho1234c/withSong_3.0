@@ -5,7 +5,7 @@ import Spinner from 'react-spinkit';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import moment from 'moment';
-import { getSong, play } from '../actions';
+import { getSong, play, likeToggle } from '../actions';
 import AlbumModalSong from './AlbumModalSong';
 import './AlbumModal.scss';
 
@@ -14,6 +14,7 @@ class AlbumModal extends Component {
     super(props);
     this.handlePlay = this.handlePlay.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleLikeToggle = this.handleLikeToggle.bind(this);
   }
 
   componentDidMount() {
@@ -21,7 +22,6 @@ class AlbumModal extends Component {
 
     this.props.getSongRequest(id);
   }
-
 
   handlePlay(...params) {
     const { selected, playStart } = this.props;
@@ -33,9 +33,13 @@ class AlbumModal extends Component {
     this.props.history.goBack();
   }
 
+  handleLikeToggle(id) {
+    this.props.likeToggle.likeRequest(id);
+  }
+
   render() {
     const { selected } = this.props;
-    const { name, createdAt, contents = [], like } = selected.album;
+    const { id, name, createdAt, contents = [], like } = selected.album;
     const LoadingComponent = <Spinner name="line-scale-pulse-out-rapid" fadeIn="none" className="modal-spinner" />;
 
     const ModalComponent = (
@@ -53,7 +57,7 @@ class AlbumModal extends Component {
         <div className="album-modal-footer">
           <div className="album-modal-footer-length">{contents.length}곡</div>
           <div className="album-modal-footer-like">{like}명이 좋아합니다</div>
-          <div className="album-modal-footer-favorite">
+          <div className="album-modal-footer-favorite" onClick={() => this.handleLikeToggle(id)}>
             <i className="fa fa-heart-o" aria-hidden="true" />ADD TO LIST
           </div>
         </div>
@@ -89,7 +93,11 @@ export default withRouter(connect(
   }),
   dispatch => ({
     getSongRequest: id => dispatch(getSong.request(id)),
-    playStart: (videoId, key, albumId) => dispatch(play.start(videoId, key, albumId))
+    playStart: (videoId, key, albumId) => dispatch(play.start(videoId, key, albumId)),
+    likeToggle: {
+      likeRequest: id => dispatch(likeToggle.likeRequest(id)),
+      unlikeRequest: id => dispatch(likeToggle.unlikeRequest(id))
+    }
   })
 )(AlbumModal));
 

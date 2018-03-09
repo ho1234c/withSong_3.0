@@ -55,6 +55,16 @@ export function* nextPlayFlow() {
   }
 }
 
+export function* addLike(action) {
+  try {
+    const response = yield call(resource.like, action.payload);
+
+    yield put(albumActions.likeToggle.likeSuccess(response.data));
+  } catch (error) {
+    yield put(albumActions.likeToggle.likeFailure(error));
+  }
+}
+
 export function* watchGetAlbum() {
   yield takeEvery(albumActions.ALBUM_REQUEST, getAlbum);
 }
@@ -67,9 +77,14 @@ export function* watchPlaySong() {
   yield takeEvery(albumActions.PLAY_START, playSong);
 }
 
+export function* watchAddLike() {
+  yield takeEvery(albumActions.LIKE_REQUEST, addLike);
+}
+
 export default [
   fork(watchGetAlbum),
   fork(watchGetSong),
   fork(watchPlaySong),
+  fork(watchAddLike),
   fork(nextPlayFlow)
 ];

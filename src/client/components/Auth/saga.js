@@ -1,4 +1,4 @@
-import { call, put, take, fork, race } from 'redux-saga/effects';
+import { call, put, take, fork, race, takeEvery } from 'redux-saga/effects';
 import * as AuthActions from './actions';
 import { auth } from '../../utils/fetch';
 
@@ -24,6 +24,20 @@ export function* loginFlow() {
     if (winner.signIn) {
       yield put(AuthActions.signIn.success(winner.signIn.data.user));
     }
+  }
+}
+
+export function* session() {
+  try {
+    const response = yield call(auth.session);
+    console.log(response);
+    if (response.data) {
+      yield put(AuthActions.session.success(response.data));
+    } else {
+      throw new Error('have no session');
+    }
+  } catch (error) {
+    yield put(AuthActions.session.failure(error));
   }
 }
 
@@ -63,8 +77,13 @@ export function* logoutFlow() {
   }
 }
 
+export function* watchSession() {
+  yield takeEvery(AuthActions.GET_SESSION_REQUEST, session);
+}
+
 export default [
   fork(loginFlow),
   fork(joinFlow),
-  fork(logoutFlow)
+  fork(logoutFlow),
+  fork(watchSession)
 ];

@@ -29,3 +29,8 @@ export const player = {
     return contents.find(data => data.key === preKey + 1);
   }
 };
+
+export const auth = {
+  user: state => state.auth.user,
+  isAuth: state => state.auth.isAuth
+};

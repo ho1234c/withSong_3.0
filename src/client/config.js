@@ -3,5 +3,7 @@ export const URL = {
   GET_SONG: '/api/album/song',
   LOGIN: '/api/user/login',
   LOGOUT: '/api/user/logout',
-  REGISTER: '/api/user/create'
+  REGISTER: '/api/user/create',
+  LIKE: '/api/album/like',
+  SESSION: '/api/session'
 };

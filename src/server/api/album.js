@@ -63,7 +63,20 @@ router.get('/song', async (ctx) => {
 });
 
 router.get('/like', async (ctx) => {
-  console.log(ctx.state);
+  Promise.all([db.Album.findOne({ where: { id: ctx.query.id } }), db.User.findOne({ where: { id: ctx.state.user.id } })])
+    .then((data) => {
+      Promise.all([data[0].increment('like'), data[1].addAlbumFavor(data[0])]);
+    })
+    .then(() => {
+      ctx.body = 'OK';
+    })
+    .catch((err) => {
+      ctx.throw(500);
+    });
+});
+
+router.get('/unlike', async (ctx) => {
+
 });
 
 module.exports = router;

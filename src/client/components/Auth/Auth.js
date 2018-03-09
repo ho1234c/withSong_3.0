@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import Spinner from 'react-spinkit';
-import { authModal, signIn, join, logout } from './actions';
+import { authModal, signIn, join, logout, session } from './actions';
 import AuthSignInForm from './AuthSignInForm';
 import AuthJoinForm from './AuthJoinForm';
 import './Auth.scss';
@@ -20,6 +20,10 @@ class Auth extends Component {
     };
     this.changeTab = this.changeTab.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getSession();
   }
 
   changeTab(mode) {
@@ -87,6 +91,7 @@ export default connect(
     authModalClose: () => dispatch(authModal.close()),
     signInRequest: user => dispatch(signIn.request(user)),
     joinRequest: user => dispatch(join.request(user)),
-    logoutRequest: () => dispatch(logout.request())
+    logoutRequest: () => dispatch(logout.request()),
+    getSession: () => dispatch(session.request())
   })
 )(Auth);

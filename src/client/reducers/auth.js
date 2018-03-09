@@ -1,5 +1,4 @@
 import * as ActionTypes from '../components/Auth/actions';
-// import changeState from '../utils/changeState';
 
 const initialState = {
   isOpen: false,
@@ -22,12 +21,14 @@ export default (state = initialState, action) => {
         ...state,
         isOpen: false
       };
+    case ActionTypes.GET_SESSION_REQUEST:
     case ActionTypes.AUTH_SIGN_IN_REQUEST:
     case ActionTypes.AUTH_JOIN_REQUEST:
       return {
         ...state,
         isLoading: true
       };
+    case ActionTypes.GET_SESSION_SUCCESS:
     case ActionTypes.AUTH_SIGN_IN_SUCCESS:
     case ActionTypes.AUTH_JOIN_SUCCESS:
       return {

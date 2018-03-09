@@ -20,9 +20,10 @@ router.get('/', async (ctx) => {
   ctx.body = indexPage;
 });
 
-router.get('/session', async (ctx) => {
-  /* todo: return user session */
-  ctx.body = '';
+router.get('/api/session', async (ctx) => {
+  const { user } = ctx.state;
+
+  ctx.body = user ? { ...user } : '';
 });
 
 module.exports = router;
