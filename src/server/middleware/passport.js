@@ -17,7 +17,7 @@ function passportConfig(app) {
       const user = await db.User.findOne({
         where: { email },
         include: [
-          { model: db.Album, as: 'albumFavor', attributes: ['id', 'name'] },
+          { model: db.Album, as: 'albumFavor', attributes: ['id', 'name', 'thumbnail'] },
           { model: db.Comment, as: 'commentFavor', attributes: ['id'] }
         ]
       });

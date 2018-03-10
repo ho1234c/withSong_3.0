@@ -18,7 +18,7 @@ router.post('/create', async (ctx) => {
     const user = await db.User.create({ email, password, nickname });
 
     ctx.logIn(user);
-    ctx.body = { user: user.serialize() };
+    ctx.body = { user };
   } catch (error) {
     ctx.throw(500);
   }
@@ -33,7 +33,7 @@ router.post('/login', (ctx, next) =>
       ctx.throw(401, info);
     }
 
-    ctx.body = { user: user.serialize() };
+    ctx.body = { user };
     return ctx.logIn(user);
   })(ctx, next));
 

@@ -7,6 +7,17 @@ const initialState = {
   user: {}
 };
 
+function userObjectParser(user) {
+  return {
+    ...user,
+    albumFavor: user.albumFavor.reduce((acc, cur) => {
+      const { name, thumbnail } = cur;
+      acc[cur.id] = { name, thumbnail };
+      return acc;
+    }, {})
+  };
+}
+
 export default (state = initialState, action) => {
   const data = action.payload;
 
@@ -34,7 +45,7 @@ export default (state = initialState, action) => {
       return {
         ...initialState,
         isAuth: true,
-        user: data.response
+        user: userObjectParser(data.response)
       };
     case ActionTypes.AUTH_REQUEST_FAILURE:
       return {
