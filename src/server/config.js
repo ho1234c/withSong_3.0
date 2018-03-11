@@ -38,4 +38,11 @@ const API = {
   }
 };
 
-module.exports = { APP, DATABASE, API };
+const ERROR = {
+  AUTH: {
+    NOT_EXIST_EMAIL: 'NOT_EXIST_EMAIL',
+    NOT_MATCH_PASSWORD: 'NOT_MATCH_PASSWORD'
+  }
+};
+
+module.exports = { APP, DATABASE, API, ERROR };

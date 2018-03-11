@@ -39,6 +39,7 @@ router.post('/login', (ctx, next) =>
 
 router.get('/logout', (ctx) => {
   ctx.logout();
+  ctx.body = 'OK';
 });
 
 module.exports = router;
